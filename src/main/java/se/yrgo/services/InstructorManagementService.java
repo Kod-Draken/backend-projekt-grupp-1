@@ -1,10 +1,14 @@
 package se.yrgo.services;
 
+import org.springframework.stereotype.Service;
 import se.yrgo.domain.GymClass;
 import se.yrgo.domain.Instructor;
 
 import java.util.List;
 
+/**
+ * @author Najib Bardash
+ */
 public interface InstructorManagementService {
     public void newInstructor(Instructor instructor);
     public void editInstructor(Instructor changedInstructor);

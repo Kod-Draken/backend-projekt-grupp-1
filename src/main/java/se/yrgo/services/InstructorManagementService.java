@@ -1,5 +1,6 @@
 package se.yrgo.services;
 
+import org.springframework.stereotype.Service;
 import se.yrgo.domain.GymClass;
 import se.yrgo.domain.Instructor;
 

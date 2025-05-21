@@ -1,4 +1,4 @@
-package se.yrgo.projekt_grupp_1;
+package se.yrgo.client;
 
 public class Main {
     public static void main(String[] args) {

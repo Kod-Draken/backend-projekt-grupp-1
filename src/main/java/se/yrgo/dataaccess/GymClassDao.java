@@ -12,6 +12,7 @@ public interface GymClassDao {
     public void updateGymClass(GymClass gymClass);
     public void deleteGymClass(GymClass gymClass);
     public GymClass getGymClassesByName(String name);
+    public GymClass getGymClassById(int id);
     public GymClass getGymClassesByInstructor(String instructorId);
     public List<GymClass> getAllGymClasses();
 

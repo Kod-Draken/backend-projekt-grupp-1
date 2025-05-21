@@ -4,6 +4,9 @@ import se.yrgo.domain.GymClass;
 
 import java.util.List;
 
+/**
+ * @author Mattiass
+ */
 public interface GymClassManagementService {
 
     public void newGymClass(GymClass newClass);

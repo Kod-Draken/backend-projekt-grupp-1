@@ -60,9 +60,6 @@ public class GymClass {
         return scheduledAt;
     }
 
-    public Instructor getInstructor() {
-        return instructor;
-    }
 
     public Set<Member> getSubjectsToTeach() {
         return subjectsToTeach;

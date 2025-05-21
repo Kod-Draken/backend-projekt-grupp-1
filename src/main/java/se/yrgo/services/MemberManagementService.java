@@ -1,4 +1,4 @@
-package se.yrgo.service;
+package se.yrgo.services;
 
 import se.yrgo.domain.Member;
 

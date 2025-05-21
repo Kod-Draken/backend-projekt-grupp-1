@@ -1,5 +1,6 @@
 package se.yrgo.domain;
 
+import javax.persistence.Id;
 import java.util.List;
 
 public class Instructor {

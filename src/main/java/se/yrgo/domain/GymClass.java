@@ -22,8 +22,6 @@ public class GymClass {
 
     private LocalDateTime scheduledAt;
 
-    private Instructor instructor;
-
     @ManyToMany(mappedBy = "bookedClasses")
     private Set<Member> subjectsToTeach = new HashSet<>();
 

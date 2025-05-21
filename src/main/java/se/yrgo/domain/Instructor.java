@@ -36,6 +36,22 @@ public class Instructor {
         this.gymClasses = new HashSet<>();
     }
 
+    public String getInstructorId() {
+        return instructorId;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public int getNumberOfClasses() {
+        return numberOfClasses;
+    }
+
     public void addGymClassToInstructorSchedule(GymClass gymclass) {
         this.gymClasses.add(gymclass);
     }
@@ -43,5 +59,4 @@ public class Instructor {
     public Set<GymClass> getInstructorGymClasses() {
         return Collections.unmodifiableSet(this.gymClasses);
     }
-
 }

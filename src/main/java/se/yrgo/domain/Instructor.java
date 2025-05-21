@@ -49,7 +49,7 @@ public class Instructor {
     }
 
     public int getNumberOfClasses() {
-        return numberOfClasses;
+        return this.gymClasses.size();
     }
 
     public void addGymClassToInstructorSchedule(GymClass gymclass) {

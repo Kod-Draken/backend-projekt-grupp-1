@@ -12,7 +12,7 @@ public interface MemberManagementService {
 
     public void deleteMember(Member deletedMember);
 
-    public Member getMemberById(String id) throws Exception;
+    public Member findMemberById(String id) throws Exception;
 
     public List<Member> getAllMembers();
 

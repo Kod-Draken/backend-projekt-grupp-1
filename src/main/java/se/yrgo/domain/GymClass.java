@@ -35,8 +35,7 @@ public class GymClass {
                 + name
                 + ", description="
                 + description
-                + ", instructor="
-                + instructor
+                + ", instructor= PLACEHOLDER"
                 + ", scheduledAt="
                 + scheduledAt;
     }

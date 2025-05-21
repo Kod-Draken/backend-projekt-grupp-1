@@ -23,7 +23,7 @@ public class GymClass {
     private LocalDateTime scheduledAt;
 
     @ManyToMany(mappedBy = "bookedClasses")
-    private Set<Member> subjectsToTeach = new HashSet<>();
+    private Set<Member> classesToInstruct = new HashSet<>();
 
 
     public GymClass() {}
@@ -61,7 +61,7 @@ public class GymClass {
     }
 
 
-    public Set<Member> getSubjectsToTeach() {
-        return subjectsToTeach;
+    public Set<Member> getClassesToInstruct() {
+        return classesToInstruct;
     }
 }

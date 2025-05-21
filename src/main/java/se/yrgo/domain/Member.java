@@ -7,16 +7,19 @@ import java.util.Set;
 public class Member {
 
     @Id
-    private int memberId;
-
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int id;
+    @Column(length = 20)
+    private String memberId;
+    @Column(length = 20)
     private String name;
-
+    @Column(length = 20)
     private String phone;
 
     @ManyToMany
     private Set<Member> BookedClasses;
 
-    public Member(int memberId, String name, String phone){
+    public Member(String memberId, String name, String phone){
         this.memberId = memberId;
         this.name = name;
         this.phone = phone;
@@ -26,7 +29,7 @@ public class Member {
     public String toString(){
         return this.memberId + ": " + this.name + " " + this.phone;
     }
-    public int getMemberId(){
+    public String getMemberId(){
         return this.memberId;
     }
     public String getName(){
@@ -41,5 +44,4 @@ public class Member {
     public void setPhone(String newPhone){
         this.phone = newPhone;
     }
-
 }

@@ -10,9 +10,13 @@ public class Member {
 
     @Id
     private String memberId;
+
     private String name;
+
     private String email;
+
     private String phone;
+
     private String address;
 
     public Member() {}

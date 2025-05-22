@@ -9,16 +9,16 @@ import java.util.List;
  */
 public interface GymClassManagementService {
 
-    public void newGymClass(GymClass newClass);
+    public void createNewGymClass(GymClass newClass);
 
-    public GymClass getGymClassWithName(String gymClassName);
+    public List<GymClass> getClassesByName(String gymClassName);
 
-    public GymClass getGymClassWithId(int gymClassId);
+    public GymClass getClassById(int gymClassId);
 
-    public void changeGymClass(GymClass changedClass);
+    public void editGymClass(GymClass changedClass);
 
     public void deleteGymClass(GymClass gymClassName);
 
-    public List<GymClass> getAllGymClasses();
+    public List<GymClass> getAllClasses();
 
 }

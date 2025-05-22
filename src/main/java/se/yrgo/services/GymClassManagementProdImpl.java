@@ -12,7 +12,7 @@ import java.util.List;
  */
 @Service
 public class GymClassManagementProdImpl implements GymClassManagementService{
-    private GymClassDao gymClassDao;
+    private final GymClassDao gymClassDao;
 
     @Autowired
     public GymClassManagementProdImpl(GymClassDao gymClassDao) {

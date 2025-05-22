@@ -15,11 +15,9 @@ public interface GymClassManagementService {
 
     public GymClass getClassById(int gymClassId);
 
-//    public void editGymClass(GymClass changedClass);
+    public void editGymClass(GymClass changedClass);
 
-
-
-    public void deleteGymClass(GymClass gymClassName);
+    public void deleteGymClass(GymClass gymClass);
 
     public List<GymClass> getAllClasses();
 

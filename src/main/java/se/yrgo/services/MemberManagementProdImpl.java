@@ -1,14 +1,17 @@
 package se.yrgo.services;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import se.yrgo.domain.Member;
 import se.yrgo.dataaccess.MemberDao;
 import java.util.List;
-
+@Service
 public class MemberManagementProdImpl implements MemberManagementService{
     private final MemberDao memDao;
 
-    public MemberManagementProdImpl(MemberDao dao) {
-        this.memDao = dao;
+    @Autowired
+    public MemberManagementProdImpl(MemberDao memDao) {
+        this.memDao = memDao;
     }
 
     @Override

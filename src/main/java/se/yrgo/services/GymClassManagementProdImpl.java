@@ -3,10 +3,7 @@ package se.yrgo.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import se.yrgo.dataaccess.GymClassDao;
-import se.yrgo.dataaccess.MemberDao;
-import se.yrgo.dataaccess.MemberDaoImpl;
 import se.yrgo.domain.GymClass;
-import se.yrgo.domain.Member;
 
 import java.util.List;
 
@@ -16,7 +13,6 @@ import java.util.List;
 @Service
 public class GymClassManagementProdImpl implements GymClassManagementService{
     private GymClassDao gymClassDao;
-    private MemberDao memberDao;
 
     @Autowired
     public GymClassManagementProdImpl(GymClassDao gymClassDao) {
@@ -54,20 +50,20 @@ public class GymClassManagementProdImpl implements GymClassManagementService{
 
     /**
      * Send updated information of an existing gymClass to the DAO
-     * @param changedClass A gymClass that has been modified
+     * @param updatedClass A gymClass that has been modified
      */
     @Override
-    public void editGymClass(GymClass changedClass) {
-        gymClassDao.updateGymClass(changedClass);
+    public void editGymClass(GymClass updatedClass) {
+        gymClassDao.updateGymClass(updatedClass);
     }
 
     /**
      * Remove a gymClass from the database
-     * @param gymClass is the gymClass to be deleted
+     * @param gymClassToDelete is the gymClass to be deleted
      */
     @Override
-    public void deleteGymClass(GymClass gymClass) {
-        gymClassDao.deleteGymClass(gymClass);
+    public void deleteGymClass(GymClass gymClassToDelete) {
+        gymClassDao.deleteGymClass(gymClassToDelete);
     }
 
     /**

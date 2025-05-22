@@ -1,7 +1,60 @@
 package se.yrgo.dataaccess;
 
-/**
- * @author Najib Bardash
- */
-public class InstructorDaoJpaImpl {
+import org.springframework.stereotype.Repository;
+import se.yrgo.domain.GymClass;
+import se.yrgo.domain.Instructor;
+
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import java.util.List;
+
+@Repository
+public class InstructorDaoJpaImpl implements InstructorDao {
+    @PersistenceContext
+    private EntityManager em;
+
+    @Override
+    public void addInstructor(Instructor instructor) {
+        em.persist(instructor);
+    }
+
+    @Override
+    public void modifyInstructor(Instructor changedInstructor) {
+        em.merge(changedInstructor);
+    }
+
+    @Override
+    public void removeInstructor(Instructor deletedInstructor) {
+        Instructor instructor = em.find(Instructor.class, deletedInstructor.getInstructorId());
+        em.remove(instructor);
+    }
+
+    @Override
+    public Instructor getInstructorById(String id) throws Exception {
+        return em.createQuery("select i from Instructor as i where i.instructorId =:id", Instructor.class)
+                .setParameter("id", id)
+                .getSingleResult();
+    }
+
+    @Override
+    public List<Instructor> getAllInstructors() {
+        return em.createQuery("select i from Instructor as i", Instructor.class).getResultList();
+    }
+
+    @Override
+    public List<Instructor> getInstructorsByName(String name) {
+        return em.createQuery("select i from Instructor as i where i.name =:name", Instructor.class)
+                .setParameter("name", name)
+                .getResultList();
+    }
+
+    @Override
+    public List<GymClass> getGymClasses(String id) {
+        return null;
+    }
+
+    @Override
+    public int getNumberOfClassesForInstructor(Instructor instructor) {
+        return 0;
+    }
 }

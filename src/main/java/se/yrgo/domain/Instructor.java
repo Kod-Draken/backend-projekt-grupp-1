@@ -15,7 +15,7 @@ public class Instructor {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
-    @Column(length = 20)
+    @Column(length = 20, unique = true, nullable = false)
     private String instructorId;
 
     @Column(length = 20)

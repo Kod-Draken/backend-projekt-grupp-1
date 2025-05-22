@@ -2,6 +2,7 @@ package se.yrgo.domain;
 
 import javax.persistence.*;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -45,4 +46,16 @@ public class Member {
     public void setBookedClasses(Set<GymClass> bookedClasses){this.bookedClasses = bookedClasses;}
     public void setName(String newName){this.name = newName;}
     public void setPhone(String newPhone){this.phone = newPhone;}
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        Member member = (Member) o;
+        return id == member.id && Objects.equals(memberId, member.memberId) && Objects.equals(name, member.name) && Objects.equals(phone, member.phone) && Objects.equals(bookedClasses, member.bookedClasses);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, memberId, name, phone, bookedClasses);
+    }
 }

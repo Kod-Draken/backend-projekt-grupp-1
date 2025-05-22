@@ -4,9 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import se.yrgo.dataaccess.GymClassDao;
 import se.yrgo.dataaccess.MemberDao;
-import se.yrgo.dataaccess.MemberDaoImpl;
 import se.yrgo.domain.GymClass;
-import se.yrgo.domain.Member;
 
 import java.util.List;
 

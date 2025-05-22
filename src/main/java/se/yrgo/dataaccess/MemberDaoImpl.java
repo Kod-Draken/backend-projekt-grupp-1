@@ -22,7 +22,7 @@ public class MemberDaoImpl implements MemberDao{
         em.remove(deleteMember);
     }
 
-    public Member getById(String id) throws Exception{
+    public Member getById(int id) throws Exception{
         return em.find(Member.class, id);
     }
 

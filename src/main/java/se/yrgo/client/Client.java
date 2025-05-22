@@ -13,7 +13,7 @@ public class Client {
 
     public static void main(String[] args) {
         setUpData();
-        container = new ClassPathXmlApplicationContext("application.xml");
+        container = new ClassPathXmlApplicationContext("production-application.xml");
 
 
 

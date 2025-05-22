@@ -4,6 +4,9 @@ import se.yrgo.domain.Member;
 
 import java.util.List;
 
+/**
+ * @author Alrik-Mark Brillantes
+ */
 public interface MemberDao {
     public void create(Member member);
 
@@ -11,7 +14,7 @@ public interface MemberDao {
 
     public void delete(Member deleteMember);
 
-    public Member getById(String id) throws Exception;
+    public Member getById(int id) throws Exception;
 
     public List<Member> getAll();
 

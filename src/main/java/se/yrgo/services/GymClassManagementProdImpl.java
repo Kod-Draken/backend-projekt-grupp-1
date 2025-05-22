@@ -29,6 +29,11 @@ public class GymClassManagementProdImpl implements GymClassManagementService{
         return gymClassDao.getGymClassesByName(gymClassName);
     }
 
+    /**
+     *
+     * @param gymClassId is a unique identifier that autogenerates
+     * @return a matching GymClass
+     */
     @Override
     public GymClass getClassById(int gymClassId) {
         return gymClassDao.getGymClassById(gymClassId);

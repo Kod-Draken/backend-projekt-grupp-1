@@ -6,10 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.transaction.annotation.Transactional;
-import se.yrgo.domain.GymClass;
 import se.yrgo.domain.Instructor;
-import se.yrgo.services.BookingManagementService;
-import se.yrgo.services.GymClassFullException;
 import se.yrgo.services.InstructorManagementService;
 
 import java.util.List;

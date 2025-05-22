@@ -11,11 +11,11 @@ import java.util.List;
  */
 public interface InstructorDao {
     public void addInstructor(Instructor instructor);
-    public void modifyInstructor(Instructor changedInstructor);
-    public void removeInstructor(Instructor deletedInstructor);
-    public Instructor getInstructorById(String id) throws Exception;
+    public void modifyInstructor(Instructor changedInstructor) throws InstructorNotFoundException;
+    public void removeInstructor(Instructor deletedInstructor) throws InstructorNotFoundException;
+    public Instructor getInstructorById(String id) throws InstructorNotFoundException;
     public List<Instructor> getAllInstructors();
     public List<Instructor> getInstructorsByName(String name);
-    public List<GymClass> getGymClasses(String id);
+    public List<GymClass> getGymClasses(String id) throws InstructorNotFoundException;
     public int getNumberOfClassesForInstructor(Instructor instructor);
 }

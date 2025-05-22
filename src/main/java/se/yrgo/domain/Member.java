@@ -1,6 +1,7 @@
 package se.yrgo.domain;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -17,18 +18,20 @@ public class Member {
     private String phone;
 
     @ManyToMany
-    private Set<Member> BookedClasses;
+    private Set<GymClass> bookedClasses;
 
     public Member(String memberId, String name, String phone){
         this.memberId = memberId;
         this.name = name;
         this.phone = phone;
+        this.bookedClasses = new HashSet<GymClass>();
     }
     public Member() {}
 
     public String toString(){
         return this.memberId + ": " + this.name + " " + this.phone;
     }
+    public int getId() {return this.id;}
     public String getMemberId(){
         return this.memberId;
     }
@@ -38,10 +41,8 @@ public class Member {
     public String getPhone(){
         return this.phone;
     }
-    public void setName(String newName){
-        this.name = newName;
-    }
-    public void setPhone(String newPhone){
-        this.phone = newPhone;
-    }
+    public Set<GymClass> getAllBookedClasses(){return this.bookedClasses;}
+    public void setBookedClasses(Set<GymClass> bookedClasses){this.bookedClasses = bookedClasses;}
+    public void setName(String newName){this.name = newName;}
+    public void setPhone(String newPhone){this.phone = newPhone;}
 }

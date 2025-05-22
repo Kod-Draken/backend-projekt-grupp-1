@@ -45,7 +45,7 @@ public class InstructorManagementServiceProductionImpl implements InstructorMana
     }
 
     @Override
-    public List<GymClass> getGymClasses(String id) {
+    public List<GymClass> getGymClassesForInstructor(String id) {
         return instructorDao.getGymClasses(id);
     }
 

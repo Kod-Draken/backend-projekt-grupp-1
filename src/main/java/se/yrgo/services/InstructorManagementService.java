@@ -16,6 +16,6 @@ public interface InstructorManagementService {
     public Instructor findInstructorById(String id) throws Exception;
     public List<Instructor> getAllInstructors();
     public List<Instructor> getInstructorsByName(String name);
-    public List<GymClass> getGymClasses(String id);
+    public List<GymClass> getGymClassesForInstructor(String id);
     public int getNumberOfClassesForInstructor(Instructor instructor);
 }

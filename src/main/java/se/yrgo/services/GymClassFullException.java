@@ -1,4 +1,4 @@
-package se.yrgo.dataaccess;
+package se.yrgo.services;
 
 public class GymClassFullException extends RuntimeException {
     public GymClassFullException(String message) {

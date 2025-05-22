@@ -7,6 +7,7 @@ import java.util.Set;
 
 /**
  * @author Mattias
+ * Represents a class at a gym, a certain timestamp it happens, attendants, an instructor, etc.
  */
 @Entity
 public class GymClass {
@@ -29,17 +30,20 @@ public class GymClass {
 
     private LocalDateTime scheduledAt;
 
+    private int capacity;
+
     @ManyToMany(mappedBy = "bookedClasses")
-    private Set<Member> members = new HashSet<>();
+    private Set<Member> attendants = new HashSet<>();
 
 
     public GymClass() {}
 
-    public GymClass(String name, String description, String roomName, LocalDateTime scheduledAt) {
+    public GymClass(String name, String description, String roomName, LocalDateTime scheduledAt, int capacity) {
         this.name = name;
         this.description = description;
         this.roomName = roomName;
         this.scheduledAt = scheduledAt;
+        this.capacity = capacity;
     }
 
     public String toString() {
@@ -73,12 +77,28 @@ public class GymClass {
         return instructor;
     }
 
-    public LocalDateTime getScheduledAt() {
+    public LocalDateTime getScheduledTime() {
         return scheduledAt;
     }
 
-
-    public Set<Member> getClassesToInstruct() {
-        return members;
+    public Set<Member> getAttendants() {
+        return attendants;
     }
+
+    public int getCapacity() {
+        return capacity;
+    }
+
+    public void addAttendant(Member attendant) {
+        attendants.add(attendant);
+    }
+
+    public void removeAttendant(Member attendant) {
+        attendants.remove(attendant);
+    }
+
+    public Boolean isFull(){
+        return attendants.size() >= capacity;
+    }
+
 }

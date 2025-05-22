@@ -13,7 +13,7 @@ import java.util.List;
 
 
 /**
- * @author Alrik, Mattias, Najib
+ * @author Najib
  * Does integration tests for the gym class bookings
  */
 @Transactional

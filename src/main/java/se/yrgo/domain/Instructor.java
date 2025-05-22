@@ -26,8 +26,7 @@ public class Instructor {
 
     private int numberOfClasses;
 
-    @OneToMany
-    @JoinColumn(name = "INSTRUCTOR_FK")
+    @OneToMany (mappedBy = "instructor")
     private Set<GymClass> gymClasses;
 
     public Instructor() {}

@@ -22,7 +22,7 @@ public class MemberManagementProdImpl implements MemberManagementService{
         memDao.delete(deletedMember);
     }
 
-    public Member findMemberById(String id) throws Exception{
+    public Member findMemberById(int id) throws Exception{
         return memDao.getById(id);
     }
 

@@ -1,12 +1,15 @@
 package se.yrgo.dataaccess;
 
+import org.springframework.stereotype.Repository;
 import se.yrgo.domain.GymClass;
 import se.yrgo.domain.Member;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.NoResultException;
 import java.util.List;
 
+@Repository
 public class MemberDaoImpl implements MemberDao{
     @PersistenceContext
     private EntityManager em;
@@ -23,8 +26,14 @@ public class MemberDaoImpl implements MemberDao{
         em.remove(deleteMember);
     }
     @Override
-    public Member getById(int id) throws MemberMissingException{
-        return em.find(Member.class, id);
+    public Member getById(String id) throws MemberMissingException{
+        try {
+            return em.find(Member.class, id);
+        }catch(NoResultException e){
+            System.out.println("Error: "+e.getMessage());
+            return null;
+        }
+
     }
     @Override
     public List<Member> getAll(){

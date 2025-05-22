@@ -13,7 +13,7 @@ public class Client {
 
     public static void main(String[] args) {
         setUpData();
-        container = new ClassPathXmlApplicationContext("application.xml");
+        container = new ClassPathXmlApplicationContext("production-application.xml");
 
 
 
@@ -25,7 +25,7 @@ public class Client {
      * Sets up the data with some instructors and gym classes to interact with
      */
     private static void setUpData() {
-        container = new ClassPathXmlApplicationContext("application.xml");
+        container = new ClassPathXmlApplicationContext("production-application.xml");
         InstructorManagementService is = container.getBean(InstructorManagementService.class);
 
         is.newInstructor(new Instructor("IN1", "Bosse Bredsladd", "031-777444"));

@@ -1,5 +1,6 @@
 package se.yrgo.services;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import se.yrgo.dataaccess.InstructorDao;
 import se.yrgo.domain.GymClass;
@@ -14,7 +15,12 @@ import java.util.List;
  */
 @Service
 public class InstructorManagementServiceProductionImpl implements InstructorManagementService {
-    private InstructorDao instructorDao;
+    private final InstructorDao instructorDao;
+
+    @Autowired
+    public InstructorManagementServiceProductionImpl(InstructorDao instructorDao) {
+        this.instructorDao = instructorDao;
+    }
 
     /**
      *

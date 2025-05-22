@@ -10,6 +10,7 @@ import java.util.Set;
  *
  * This class represents an instructor working at a gym
  */
+@SuppressWarnings("unused")
 @Entity
 public class Instructor {
 
@@ -74,10 +75,10 @@ public class Instructor {
 
     /**
      * Adds gym classes to the instructors schedule
-     * @param gymclass is the class that will be added
+     * @param gymClass is the class that will be added
      */
-    public void addGymClassToInstructorSchedule(GymClass gymclass) {
-        this.gymClasses.add(gymclass);
+    public void addGymClassToInstructorSchedule(GymClass gymClass) {
+        this.gymClasses.add(gymClass);
     }
 
     /**

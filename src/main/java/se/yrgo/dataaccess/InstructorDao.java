@@ -12,12 +12,12 @@ import java.util.List;
  * This interface is a Dao-layer for Instructor
  */
 public interface InstructorDao {
-    public void addInstructor(Instructor instructor);
-    public void modifyInstructor(Instructor changedInstructor) throws InstructorNotFoundException;
-    public void removeInstructor(Instructor deletedInstructor) throws InstructorNotFoundException;
-    public Instructor getInstructorById(String id) throws InstructorNotFoundException;
-    public List<Instructor> getAllInstructors();
-    public List<Instructor> getInstructorsByName(String name);
-    public List<GymClass> getGymClasses(String id) throws InstructorNotFoundException;
-    public int getNumberOfClassesForInstructor(Instructor instructor);
+    void addInstructor(Instructor instructor);
+    void modifyInstructor(Instructor changedInstructor) throws InstructorNotFoundException;
+    void removeInstructor(Instructor deletedInstructor) throws InstructorNotFoundException;
+    Instructor getInstructorById(String id) throws InstructorNotFoundException;
+    List<Instructor> getAllInstructors();
+    List<Instructor> getInstructorsByName(String name);
+    List<GymClass> getGymClasses(String id) throws InstructorNotFoundException;
+    int getNumberOfClassesForInstructor(Instructor instructor);
 }

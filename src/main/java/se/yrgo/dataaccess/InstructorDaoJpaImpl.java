@@ -50,11 +50,15 @@ public class InstructorDaoJpaImpl implements InstructorDao {
 
     @Override
     public List<GymClass> getGymClasses(String id) {
-        return null;
+        return em.createQuery("select g from GymClass as g where g.instructor.instructorId =:id", GymClass.class)
+                .setParameter("id", id)
+                .getResultList();
     }
 
     @Override
     public int getNumberOfClassesForInstructor(Instructor instructor) {
-        return 0;
+        return  (int) em.createQuery("select count(g) FROM GymClass as g WHERE g.instructor = :instructor")
+                .setParameter("instructor", instructor)
+                .getSingleResult();
     }
 }

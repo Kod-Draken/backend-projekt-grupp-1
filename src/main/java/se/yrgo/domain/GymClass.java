@@ -23,6 +23,10 @@ public class GymClass {
     @Column (length = 20)
     private String roomName;
 
+    @ManyToOne()
+    @JoinColumn(name = "GYMCLASS_FK")
+    private Instructor instructor;
+
     private LocalDateTime scheduledAt;
 
     @ManyToMany(mappedBy = "bookedClasses")

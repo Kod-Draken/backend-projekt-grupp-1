@@ -6,7 +6,7 @@ import se.yrgo.domain.GymClass;
 import java.util.List;
 
 /**
- * @author Mattiass
+ * @author Mattias
  */
 public class GymClassManagementProdImpl implements GymClassManagementService{
     private GymClassDao gymClassDao;

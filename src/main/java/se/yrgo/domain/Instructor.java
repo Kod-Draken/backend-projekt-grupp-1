@@ -3,6 +3,7 @@ package se.yrgo.domain;
 import javax.persistence.*;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 /**
@@ -87,5 +88,17 @@ public class Instructor {
      */
     public Set<GymClass> getInstructorGymClasses() {
         return Collections.unmodifiableSet(this.gymClasses);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        Instructor that = (Instructor) o;
+        return id == that.id && numberOfClasses == that.numberOfClasses && Objects.equals(instructorId, that.instructorId) && Objects.equals(name, that.name) && Objects.equals(phone, that.phone) && Objects.equals(gymClasses, that.gymClasses);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, instructorId, name, phone, numberOfClasses, gymClasses);
     }
 }

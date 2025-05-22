@@ -22,6 +22,14 @@
             <version>5.3.28</version>
         </dependency>
 
+        <!-- Spring - Test -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+            <version>5.3.24</version>
+            <scope>test</scope>
+        </dependency>
+
         <!-- Spring ORM (includes JPA-support -->
         <dependency>
             <groupId>org.springframework</groupId>

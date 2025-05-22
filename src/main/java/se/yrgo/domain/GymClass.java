@@ -60,25 +60,43 @@ public class GymClass {
     public int getId() {
         return id;
     }
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;
+    }
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getDescription() {
         return description;
     }
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
     public String getRoomName() {
         return roomName;
+    }
+    public void setRoomName(String roomName) {
+        this.roomName = roomName;
     }
 
     public Instructor getInstructor() {
         return instructor;
     }
+    public void setInstructor(Instructor instructor) {
+        this.instructor = instructor;
+    }
 
     public LocalDateTime getScheduledTime() {
         return scheduledAt;
+    }
+    public void setScheduledAt(LocalDateTime scheduledAt) {
+        this.scheduledAt = scheduledAt;
     }
 
     public Set<Member> getAttendants() {

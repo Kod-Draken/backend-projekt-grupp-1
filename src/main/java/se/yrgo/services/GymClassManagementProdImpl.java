@@ -39,27 +39,6 @@ public class GymClassManagementProdImpl implements GymClassManagementService{
 //        gymClassDao.updateGymClass(changedClass);
 //    }
 
-    @Override
-
-    public void addAttendantToClass(int gymClassId, int attendantId) throws GymClassFullException, AlreadyBookedToGymClassException {
-        GymClass gymClass = gymClassDao.getGymClassById(gymClassId);
-//        Member newAttendant =
-
-        if (gymClass.isFull()) {
-            throw new GymClassFullException("Sorry, class is fully booked!");
-        }
-
-//        gymClass.addAttendant();
-
-        System.out.println("this is a placeholder for adding a member");
-    }
-
-    @Override
-    public void removeAttendantFromClass(int gymClassId, int attendantId) {
-        GymClass gymClass = gymClassDao.getGymClassById(gymClassId);
-
-
-    }
 
     @Override
     public void deleteGymClass(GymClass gymClassName) {

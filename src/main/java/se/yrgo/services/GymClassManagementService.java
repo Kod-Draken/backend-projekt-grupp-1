@@ -17,9 +17,7 @@ public interface GymClassManagementService {
 
 //    public void editGymClass(GymClass changedClass);
 
-    public void addAttendantToClass(int gymClassId, int attendantId) throws GymClassFullException, AlreadyBookedToGymClassException;
 
-    public void removeAttendantFromClass(int gymClassId, int attendantId);
 
     public void deleteGymClass(GymClass gymClassName);
 

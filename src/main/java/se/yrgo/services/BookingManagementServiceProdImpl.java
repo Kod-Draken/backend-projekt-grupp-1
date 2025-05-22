@@ -21,7 +21,7 @@ public class BookingManagementServiceProdImpl implements BookingManagementServic
     }
 
     @Override
-    public void addAttendantToClass(String gymClassId, String attendantId) throws GymClassFullException,
+    public void addAttendantToClass(int gymClassId, String attendantId) throws GymClassFullException,
                                                                                 AlreadyBookedToGymClassException,
                                                                                 MemberIdNotFoundException {
         GymClass gymClass = gymClassDao.getGymClassById(gymClassId);
@@ -37,7 +37,7 @@ public class BookingManagementServiceProdImpl implements BookingManagementServic
     }
 
     @Override
-    public void removeAttendantFromClass(String gymClassId, String attendantId) {
+    public void removeAttendantFromClass(int gymClassId, String attendantId) {
         GymClass gymClass = gymClassDao.getGymClassById(gymClassId);
     }
 

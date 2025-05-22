@@ -7,6 +7,8 @@ import java.util.Set;
 
 /**
  * @author Najib Bardash
+ *
+ * This class represents an instructor working at a gym
  */
 @Entity
 public class Instructor {
@@ -38,26 +40,50 @@ public class Instructor {
         this.gymClasses = new HashSet<>();
     }
 
+    /**
+     *
+     * @return the id of the instructor
+     */
     public String getInstructorId() {
         return instructorId;
     }
 
+    /**
+     *
+     * @return the name of the instructor
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     *
+     * @return the phone number of the instructor
+     */
     public String getPhone() {
         return phone;
     }
 
+    /**
+     *
+     * @return the number of classes the instructor has
+     */
     public int getNumberOfClasses() {
         return this.gymClasses.size();
     }
 
+    /**
+     * Adds gym classes to the instructors schedule
+     * @param gymclass is the class that will be added
+     */
     public void addGymClassToInstructorSchedule(GymClass gymclass) {
         this.gymClasses.add(gymclass);
     }
 
+    /**
+     *
+     * @return the classes for the instructor
+     */
     public Set<GymClass> getInstructorGymClasses() {
         return Collections.unmodifiableSet(this.gymClasses);
     }

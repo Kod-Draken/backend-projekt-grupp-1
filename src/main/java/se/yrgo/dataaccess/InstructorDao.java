@@ -8,6 +8,8 @@ import java.util.List;
 
 /**
  * @author Najib Bardash
+ *
+ * This interface is a Dao-layer for Instructor
  */
 public interface InstructorDao {
     public void addInstructor(Instructor instructor);

@@ -1,5 +1,6 @@
 package se.yrgo.dataaccess;
 
+import se.yrgo.domain.GymClass;
 import se.yrgo.domain.Member;
 
 import java.util.List;
@@ -14,11 +15,15 @@ public interface MemberDao {
 
     public void delete(Member deleteMember);
 
-    public Member getById(int id) throws Exception;
+    public Member getById(int id) throws MemberMissingException;
 
     public List<Member> getAll();
 
     public List<Member> getByName(String name);
 
     public Member getFullDetail(String memberId);
+
+    public void addGymClass(String gymClass, String memberId);
+
+    public void deleteGymClass(String oldGymClass, String memberId);
 }

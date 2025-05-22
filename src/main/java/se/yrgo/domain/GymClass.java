@@ -24,26 +24,32 @@ public class GymClass {
     private String roomName;
 
     @ManyToOne()
-    @JoinColumn(name = "GYMCLASS_FK")
+    @JoinColumn(name = "instructor_id")
     private Instructor instructor;
 
     private LocalDateTime scheduledAt;
 
     @ManyToMany(mappedBy = "bookedClasses")
-    private Set<Member> classesToInstruct = new HashSet<>();
+    private Set<Member> members = new HashSet<>();
 
 
     public GymClass() {}
 
-    public GymClass(String name, String description, String roomName, LocalDateTime scheduledAt) {}
+    public GymClass(String name, String description, String roomName, LocalDateTime scheduledAt) {
+        this.name = name;
+        this.description = description;
+        this.roomName = roomName;
+        this.scheduledAt = scheduledAt;
+    }
 
     public String toString() {
-        return "GymClass [name="
+        return "GymClass \n Name = "
                 + name
-                + ", description="
+                + "\nDescription = "
                 + description
-                + ", instructor= PLACEHOLDER"
-                + ", scheduledAt="
+                + "\nInstructor = "
+                + instructor.getName()
+                + "\nScheduled At = "
                 + scheduledAt;
     }
 
@@ -63,12 +69,16 @@ public class GymClass {
         return roomName;
     }
 
+    public Instructor getInstructor() {
+        return instructor;
+    }
+
     public LocalDateTime getScheduledAt() {
         return scheduledAt;
     }
 
 
     public Set<Member> getClassesToInstruct() {
-        return classesToInstruct;
+        return members;
     }
 }

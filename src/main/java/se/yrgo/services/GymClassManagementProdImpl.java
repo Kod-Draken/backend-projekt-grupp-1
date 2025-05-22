@@ -16,22 +16,22 @@ public class GymClassManagementProdImpl implements GymClassManagementService{
     }
 
     @Override
-    public void newGymClass(GymClass newClass) {
+    public void createNewGymClass(GymClass newClass) {
         gymClassDao.createGymClass(newClass);
     }
 
     @Override
-    public GymClass getGymClassWithName(String gymClassName) {
+    public List<GymClass> getClassesByName(String gymClassName) {
         return gymClassDao.getGymClassesByName(gymClassName);
     }
 
     @Override
-    public GymClass getGymClassWithId(int gymClassId) {
+    public GymClass getClassById(int gymClassId) {
         return gymClassDao.getGymClassById(gymClassId);
     }
 
     @Override
-    public void changeGymClass(GymClass changedClass) {
+    public void editGymClass(GymClass changedClass) {
         gymClassDao.updateGymClass(changedClass);
     }
 
@@ -41,7 +41,7 @@ public class GymClassManagementProdImpl implements GymClassManagementService{
     }
 
     @Override
-    public List<GymClass> getAllGymClasses() {
+    public List<GymClass> getAllClasses() {
         return gymClassDao.getAllGymClasses();
     }
 }

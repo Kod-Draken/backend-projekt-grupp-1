@@ -24,7 +24,9 @@ public class MemberManagementProdImpl implements MemberManagementService{
         memDao.delete(deletedMember);
     }
     @Override
-    public Member findMemberById(int id) throws MemberIdNotFoundException{return memDao.getById(id);}
+    public Member findMemberById(String id) throws MemberIdNotFoundException{
+        return memDao.getById(id);
+    }
     @Override
     public List<Member> getAllMembers(){
         return memDao.getAll();
@@ -38,7 +40,11 @@ public class MemberManagementProdImpl implements MemberManagementService{
         return memDao.getFullDetail(memberId);
     }
     @Override
-    public void bookGymClass(String bookingGymClassName, String memberId){ memDao.addGymClass(bookingGymClassName, memberId);}
+    public void bookGymClass(String bookingGymClassName, String memberId){
+        memDao.addGymClass(bookingGymClassName, memberId);
+    }
     @Override
-    public void cancelBooking(String bookingGymClassName, String memberId){ memDao.deleteGymClass(bookingGymClassName, memberId);}
+    public void cancelBooking(String bookingGymClassName, String memberId){
+        memDao.deleteGymClass(bookingGymClassName, memberId);
+    }
 }

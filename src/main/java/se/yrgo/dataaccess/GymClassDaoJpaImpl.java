@@ -29,18 +29,24 @@ public class GymClassDaoJpaImpl implements GymClassDao {
     }
 
     @Override
-    public GymClass getGymClassById(int id) {
-        return em.find(GymClass.class, id);
+    public GymClass getGymClassById(String classId) {
+        return em.createQuery("select c from GymClass c where c.classId = :classId", GymClass.class)
+                .setParameter("classId", classId)
+                .getSingleResult();
     }
 
     @Override
     public List<GymClass> getGymClassesByName(String name) {
-        return em.createQuery("select c from GymClass c where c.name like %:name%", GymClass.class).getResultList();
+        return em.createQuery("select c from GymClass c where c.name like :name", GymClass.class)
+                .setParameter("name", "%" + name + "%")
+                .getResultList();
     }
 
     @Override
     public List<GymClass> getGymClassesByInstructor(String instructorId) {
-        return em.createQuery("select c from GymClass c where c.instructor.id = :instructorId", GymClass.class).getResultList();
+        return em.createQuery("select c from GymClass c where c.instructor.id = :instructorId", GymClass.class)
+                .setParameter("instructorId", instructorId)
+                .getResultList();
     }
 
     @Override

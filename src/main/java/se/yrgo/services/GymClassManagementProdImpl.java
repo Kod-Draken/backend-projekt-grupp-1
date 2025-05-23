@@ -46,7 +46,7 @@ public class GymClassManagementProdImpl implements GymClassManagementService{
      * @return a matching GymClass
      */
     @Override
-    public GymClass getClassById(int gymClassId) {
+    public GymClass getClassById(String gymClassId) {
         return gymClassDao.getGymClassById(gymClassId);
     }
 

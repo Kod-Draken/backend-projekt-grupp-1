@@ -7,7 +7,7 @@ package se.yrgo.services;
  */
 @SuppressWarnings("unused")
 public interface BookingManagementService {
-    void addAttendantToClass(int gymClassId, String attendantId) throws GymClassFullException;
-    void removeAttendantFromClass(int gymClassId, String attendantId);
-    void updateClassInstructor(int gymClassId, String instructorId);
+    void addAttendantToClass(String gymClassId, String attendantId) throws GymClassFullException;
+    void removeAttendantFromClass(String gymClassId, String attendantId);
+    void updateClassInstructor(String gymClassId, String instructorId);
 }

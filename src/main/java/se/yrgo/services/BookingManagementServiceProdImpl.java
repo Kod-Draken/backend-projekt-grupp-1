@@ -36,7 +36,7 @@ public class BookingManagementServiceProdImpl implements BookingManagementServic
      * @throws GymClassFullException is thrown if the class is full
      */
     @Override
-    public void addAttendantToClass(int gymClassId, String attendantId) throws GymClassFullException {
+    public void addAttendantToClass(String gymClassId, String attendantId) throws GymClassFullException {
         GymClass gymClass = gymClassDao.getGymClassById(gymClassId);
         Member newAttendant = memberDao.getById(attendantId);
 
@@ -55,7 +55,7 @@ public class BookingManagementServiceProdImpl implements BookingManagementServic
      * @param attendantId is the id of the member that will be removed
      */
     @Override
-    public void removeAttendantFromClass(int gymClassId, String attendantId) {
+    public void removeAttendantFromClass(String gymClassId, String attendantId) {
         GymClass gymClass = gymClassDao.getGymClassById(gymClassId);
         Member member = memberDao.getById(attendantId);
         gymClass.removeAttendant(member);
@@ -67,7 +67,7 @@ public class BookingManagementServiceProdImpl implements BookingManagementServic
      * @param newInstructorId is the id of the new instructor
      */
     @Override
-    public void updateClassInstructor(int gymClassId, String newInstructorId) {
+    public void updateClassInstructor(String gymClassId, String newInstructorId) {
         GymClass gymClass = gymClassDao.getGymClassById(gymClassId);
         Instructor newInstructor = instructorDao.getInstructorById(newInstructorId);
 

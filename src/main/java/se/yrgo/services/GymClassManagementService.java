@@ -13,7 +13,7 @@ public interface GymClassManagementService {
 
     public List<GymClass> getClassesByName(String gymClassName);
 
-    public GymClass getClassById(int gymClassId);
+    public GymClass getClassById(String gymClassId);
 
     public void editGymClass(GymClass changedClass);
 

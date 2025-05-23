@@ -118,8 +118,10 @@ public class InstructorDaoJpaImpl implements InstructorDao {
      */
     @Override
     public int getNumberOfClassesForInstructor(Instructor instructor) {
-        return (int) em.createQuery("select count(g) FROM GymClass as g WHERE g.instructor = :instructor")
+        Long count = (Long) em.createQuery("select count(g) FROM GymClass as g WHERE g.instructor = :instructor")
                 .setParameter("instructor", instructor)
                 .getSingleResult();
+
+        return count.intValue();
     }
 }

@@ -12,6 +12,7 @@ import se.yrgo.domain.Instructor;
 import se.yrgo.services.GymClassManagementService;
 import se.yrgo.services.InstructorManagementService;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -36,7 +37,6 @@ public class InstructorServiceTest {
     public void setUp() {
         Instructor testInstructor = new Instructor("IN1", "Bosse Bredsladd", "031-777444");
         is.newInstructor(testInstructor);
-
     }
 
     @Test
@@ -85,11 +85,20 @@ public class InstructorServiceTest {
 
     @Test
     public void testGetGymClassesForInstructor() {
+        Instructor existing = is.findInstructorById("IN1");
+        GymClass testGymclass = new GymClass("GC1", "Yoga", "Vinyasa Flow", "Rum 14", existing, LocalDateTime.now(), 10);
+        gcm.addNewGymClass(testGymclass);
 
+        assertEquals(1, is.getGymClassesForInstructor("IN1").size());
     }
 
     @Test
-    public void testGetGymClassForInstructor() {
+    public void testGetNumberOfClassesForInstructor() {
+        Instructor existing = is.findInstructorById("IN1");
+        GymClass testGymclass = new GymClass("GC1", "Yoga", "Vinyasa Flow", "Rum 14", existing, LocalDateTime.now(), 10);
+        gcm.addNewGymClass(testGymclass);
+        long numberOfClasses = is.getNumberOfClassesForInstructor(existing);
 
+        assertEquals(1, numberOfClasses);
     }
 }

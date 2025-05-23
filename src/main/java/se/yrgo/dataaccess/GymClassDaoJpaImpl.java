@@ -22,7 +22,7 @@ public class GymClassDaoJpaImpl implements GymClassDao {
 
     @Override
     public void updateGymClass(GymClass updatedGymClass) throws GymClassNotFoundException {
-        GymClass existing = em.find(GymClass.class, updatedGymClass.getClassId());
+        GymClass existing = em.find(GymClass.class, updatedGymClass.getId());
         if(existing == null){
             throw new GymClassNotFoundException("Gym class not found");
         }

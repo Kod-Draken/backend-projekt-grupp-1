@@ -63,6 +63,10 @@ public class GymClass {
                 + scheduledAt;
     }
 
+    public int getId() {
+        return id;
+    }
+
     public String getClassId() {
         return classId;
     }

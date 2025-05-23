@@ -2,6 +2,7 @@ package se.yrgo.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import se.yrgo.dataaccess.InstructorDao;
 import se.yrgo.domain.GymClass;
 import se.yrgo.domain.Instructor;
@@ -13,6 +14,7 @@ import java.util.List;
  *
  * This class is a production-implementation of the InstructorManagementService-interface
  */
+@Transactional
 @Service
 public class InstructorManagementServiceProductionImpl implements InstructorManagementService {
     private final InstructorDao instructorDao;

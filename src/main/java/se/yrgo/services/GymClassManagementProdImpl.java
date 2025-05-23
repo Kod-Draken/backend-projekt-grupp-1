@@ -2,6 +2,7 @@ package se.yrgo.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import se.yrgo.dataaccess.GymClassDao;
 import se.yrgo.domain.GymClass;
 
@@ -10,6 +11,7 @@ import java.util.List;
 /**
  * @author Mattias
  */
+@Transactional
 @Service
 public class GymClassManagementProdImpl implements GymClassManagementService{
     private final GymClassDao gymClassDao;

@@ -101,4 +101,13 @@ public class Instructor {
     public int hashCode() {
         return Objects.hash(id, instructorId, name, phone, numberOfClasses, gymClasses);
     }
+
+    @Override
+    public String toString() {
+        return "Instructor: " +
+                "instructorId='" + instructorId + '\'' +
+                ", name='" + name + '\'' +
+                ", phone='" + phone + '\'' +
+                ", numberOfClasses=" + numberOfClasses;
+    }
 }

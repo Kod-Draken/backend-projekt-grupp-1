@@ -2,6 +2,7 @@ package se.yrgo.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import se.yrgo.dataaccess.GymClassDao;
 import se.yrgo.dataaccess.InstructorDao;
 import se.yrgo.dataaccess.MemberDao;
@@ -14,6 +15,7 @@ import se.yrgo.domain.Member;
  *
  * This class represents a booking-service for gym classes
  */
+@Transactional
 @Service
 public class BookingManagementServiceProdImpl implements BookingManagementService {
     private final GymClassDao gymClassDao;

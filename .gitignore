@@ -38,3 +38,8 @@ build/
 
 ### Mac OS ###
 .DS_Store
+
+### Database ###
+database.dat.log
+database.dat.properties
+database.dat.script

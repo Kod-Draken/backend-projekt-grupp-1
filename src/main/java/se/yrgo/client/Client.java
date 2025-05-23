@@ -48,7 +48,7 @@ public class Client {
         Instructor instructor = new Instructor("IN1", "Bosse Bredsladd", "031-777444");
 
         is.newInstructor(instructor);
-        gm.addNewGymClass(new GymClass("Boxning", "Lätt boxningspass fokus på hög puls och förbättrad koordination", "Sal 3", instructor, LocalDateTime.now(), 20));
+        gm.addNewGymClass(new GymClass("BX0001","Boxning", "Lätt boxningspass fokus på hög puls och förbättrad koordination", "Sal 3", instructor, LocalDateTime.now(), 20));
         mm.newMember(new Member("S001","Janne Björnsson","0758293153"));
     }
 }

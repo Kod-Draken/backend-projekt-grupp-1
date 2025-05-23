@@ -15,6 +15,9 @@ public class GymClass {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
+    @Column (length = 20, unique = true, nullable = false)
+    private String classId;
+
     @Column (length = 20)
     private String name;
 
@@ -38,7 +41,8 @@ public class GymClass {
 
     public GymClass() {}
 
-    public GymClass(String name, String description, String roomName, Instructor instructor, LocalDateTime scheduledAt, int capacity) {
+    public GymClass(String classId, String name, String description, String roomName, Instructor instructor, LocalDateTime scheduledAt, int capacity) {
+        this.classId = classId;
         this.name = name;
         this.description = description;
         this.roomName = roomName;
@@ -58,11 +62,8 @@ public class GymClass {
                 + scheduledAt;
     }
 
-    public int getId() {
-        return id;
-    }
-    public void setId(int id) {
-        this.id = id;
+    public String getClassId() {
+        return classId;
     }
 
     public String getName() {

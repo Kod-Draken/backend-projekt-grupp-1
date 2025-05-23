@@ -104,7 +104,7 @@ public class Instructor {
 
     /**
      *
-     * @param phone is the new phonenumber
+     * @param phone is the new phone number
      */
     public void setPhone(String phone) {
         this.phone = phone;

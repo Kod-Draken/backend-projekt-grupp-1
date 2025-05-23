@@ -15,7 +15,7 @@ import se.yrgo.services.exceptions.GymClassFullException;
  */
 @Transactional
 @ExtendWith(SpringExtension.class)
-@ContextConfiguration( {"/other-tiers.xml", "/datasource-test.xml" } )
+@ContextConfiguration( {"/other-tiers-test.xml", "/datasource-test.xml" } )
 public class BookingServiceTest {
 
     @Autowired

@@ -16,7 +16,7 @@ import java.time.LocalDateTime;
  * @author Alrik, Mattias, Najib
  */
 public class Client {
-    private static final ClassPathXmlApplicationContext container = new ClassPathXmlApplicationContext("production-application.xml");;
+    private static final ClassPathXmlApplicationContext container = new ClassPathXmlApplicationContext("production-application.xml");
 
     public static void main(String[] args) {
         setUpData();

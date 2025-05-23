@@ -13,7 +13,6 @@ import se.yrgo.services.GymClassManagementService;
 import se.yrgo.services.InstructorManagementService;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -80,7 +79,7 @@ public class InstructorServiceTest {
     public void testGetInstructorByName() {
         for (Instructor i : is.getInstructorsByName("Bosse Bredsladd")) {
             assertEquals("Bosse Bredsladd", i.getName());
-        };
+        }
     }
 
     @Test

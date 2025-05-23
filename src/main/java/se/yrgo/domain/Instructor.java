@@ -42,6 +42,10 @@ public class Instructor {
         this.gymClasses = new HashSet<>();
     }
 
+    /**
+     *
+     * @return the instructors primary key (int)
+     */
     public int getId() {
         return id;
     }

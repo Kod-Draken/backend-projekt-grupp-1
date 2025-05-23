@@ -22,17 +22,17 @@ public class BookingServiceTest {
     private BookingManagementService bms;
 
     @Test
-    public void testAddAttendantToClass(int gymClassId, String attendantId) throws GymClassFullException {
+    public void testAddAttendantToClass() throws GymClassFullException {
 
     }
 
     @Test
-    public void testRemoveAttendantFromClass(int gymClassId, String attendantId) {
+    public void testRemoveAttendantFromClass() {
 
     }
 
     @Test
-    public void testUpdateClassInstructor(int gymClassId, String instructorId) {
+    public void testUpdateClassInstructor() {
 
     }
 

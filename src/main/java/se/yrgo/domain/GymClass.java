@@ -38,10 +38,11 @@ public class GymClass {
 
     public GymClass() {}
 
-    public GymClass(String name, String description, String roomName, LocalDateTime scheduledAt, int capacity) {
+    public GymClass(String name, String description, String roomName, Instructor instructor, LocalDateTime scheduledAt, int capacity) {
         this.name = name;
         this.description = description;
         this.roomName = roomName;
+        this.instructor = instructor;
         this.scheduledAt = scheduledAt;
         this.capacity = capacity;
     }

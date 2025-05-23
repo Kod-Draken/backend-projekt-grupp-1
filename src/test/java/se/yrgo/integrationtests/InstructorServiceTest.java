@@ -32,6 +32,9 @@ public class InstructorServiceTest {
     @Autowired
     private GymClassManagementService gcm;
 
+    /**
+     * Creates an instructor and saves it to the database
+     */
     @BeforeEach
     public void setUp() {
         Instructor testInstructor = new Instructor("IN1", "Bosse Bredsladd", "031-777444");

@@ -15,9 +15,9 @@ public interface InstructorDao {
     void addInstructor(Instructor instructor);
     void modifyInstructor(Instructor changedInstructor) throws InstructorNotFoundException;
     void removeInstructor(Instructor deletedInstructor) throws InstructorNotFoundException;
-    Instructor getInstructorById(String id) throws InstructorNotFoundException;
+    Instructor getInstructorById(String instructorId) throws InstructorNotFoundException;
     List<Instructor> getAllInstructors();
     List<Instructor> getInstructorsByName(String name);
-    List<GymClass> getGymClasses(String id) throws InstructorNotFoundException;
+    List<GymClass> getGymClasses(String instructorId) throws InstructorNotFoundException;
     int getNumberOfClassesForInstructor(Instructor instructor);
 }

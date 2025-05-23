@@ -15,9 +15,9 @@ public interface InstructorManagementService {
     void newInstructor(Instructor instructor);
     void editInstructor(Instructor changedInstructor);
     void deleteInstructor(Instructor deletedInstructor);
-    Instructor findInstructorById(String id);
+    Instructor findInstructorById(String instructorId);
     List<Instructor> getAllInstructors();
     List<Instructor> getInstructorsByName(String name);
-    List<GymClass> getGymClassesForInstructor(String id);
+    List<GymClass> getGymClassesForInstructor(String instructorId);
     int getNumberOfClassesForInstructor(Instructor instructor);
 }

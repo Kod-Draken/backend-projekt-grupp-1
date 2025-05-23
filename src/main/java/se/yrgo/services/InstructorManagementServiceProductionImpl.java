@@ -35,7 +35,7 @@ public class InstructorManagementServiceProductionImpl implements InstructorMana
 
     /**
      *
-     * @param changedInstructor will be modified
+     * @param changedInstructor will be the new values for the existing instructor
      */
     @Override
     public void editInstructor(Instructor changedInstructor) {
@@ -53,12 +53,12 @@ public class InstructorManagementServiceProductionImpl implements InstructorMana
 
     /**
      *
-     * @param id of the instructor
+     * @param instructorId of the instructor
      * @return the instructor with matching id
      */
     @Override
-    public Instructor findInstructorById(String id) {
-        return instructorDao.getInstructorById(id);
+    public Instructor findInstructorById(String instructorId) {
+        return instructorDao.getInstructorById(instructorId);
     }
 
     /**
@@ -82,12 +82,12 @@ public class InstructorManagementServiceProductionImpl implements InstructorMana
 
     /**
      *
-     * @param id of instructor
+     * @param instructorId of instructor
      * @return all gym classes for instructors with matching id
      */
     @Override
-    public List<GymClass> getGymClassesForInstructor(String id) {
-        return instructorDao.getGymClasses(id);
+    public List<GymClass> getGymClassesForInstructor(String instructorId) {
+        return instructorDao.getGymClasses(instructorId);
     }
 
     /**

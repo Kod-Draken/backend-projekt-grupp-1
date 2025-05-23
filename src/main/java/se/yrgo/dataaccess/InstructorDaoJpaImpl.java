@@ -35,7 +35,7 @@ public class InstructorDaoJpaImpl implements InstructorDao {
      */
     @Override
     public void modifyInstructor(Instructor changedInstructor) throws InstructorNotFoundException {
-        Instructor existing = em.find(Instructor.class, changedInstructor.getInstructorId());
+        Instructor existing = em.find(Instructor.class, changedInstructor.getId());
         if (existing == null) {
             throw new InstructorNotFoundException("Instructor not found");
         }
@@ -49,7 +49,7 @@ public class InstructorDaoJpaImpl implements InstructorDao {
      */
     @Override
     public void removeInstructor(Instructor deletedInstructor) throws InstructorNotFoundException {
-        Instructor instructor = em.find(Instructor.class, deletedInstructor.getInstructorId());
+        Instructor instructor = em.find(Instructor.class, deletedInstructor.getId());
         if (instructor == null) {
             throw new InstructorNotFoundException("Instructor not found");
         }
@@ -58,18 +58,18 @@ public class InstructorDaoJpaImpl implements InstructorDao {
 
     /**
      *
-     * @param id of the instructor to be found
+     * @param instructorId of the instructor to be found
      * @return the instructor as an object by asking a query from the database
      * @throws InstructorNotFoundException if the instructor cannot be found
      */
     @Override
-    public Instructor getInstructorById(String id) throws InstructorNotFoundException {
+    public Instructor getInstructorById(String instructorId) throws InstructorNotFoundException {
         try {
-            return em.createQuery("select i from Instructor as i where i.instructorId =:id", Instructor.class)
-                    .setParameter("id", id)
+            return em.createQuery("select i from Instructor i WHERE i.instructorId = :instructorId", Instructor.class)
+                    .setParameter("instructorId", instructorId)
                     .getSingleResult();
         } catch (NoResultException e) {
-            throw new InstructorNotFoundException("Instructor with id: " + id + " not found");
+            throw new InstructorNotFoundException("No instructor with instructorId: " + instructorId);
         }
     }
 
@@ -96,18 +96,18 @@ public class InstructorDaoJpaImpl implements InstructorDao {
 
     /**
      *
-     * @param id of the instructor to find corresponding gym classes for
+     * @param instructorId of the instructor to find corresponding gym classes for
      * @return all classes of matching instructor
      * @throws InstructorNotFoundException if the instructor has no classes
      */
     @Override
-    public List<GymClass> getGymClasses(String id) throws InstructorNotFoundException {
+    public List<GymClass> getGymClasses(String instructorId) throws InstructorNotFoundException {
         try {
-            return em.createQuery("select g from GymClass as g where g.instructor.instructorId =:id", GymClass.class)
-                    .setParameter("id", id)
+            return em.createQuery("select g from GymClass as g where g.instructor.instructorId =:instructorId", GymClass.class)
+                    .setParameter("instructorId", instructorId)
                     .getResultList();
         } catch (NoResultException e) {
-            throw new InstructorNotFoundException("Instructor with id: " + id + " has no gym classes booked");
+            throw new InstructorNotFoundException("Instructor with instructorId: " + instructorId + " has no gym classes booked");
         }
     }
 

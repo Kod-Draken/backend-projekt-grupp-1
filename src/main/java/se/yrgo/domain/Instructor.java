@@ -42,6 +42,10 @@ public class Instructor {
         this.gymClasses = new HashSet<>();
     }
 
+    public int getId() {
+        return id;
+    }
+
     /**
      *
      * @return the id of the instructor
@@ -88,6 +92,22 @@ public class Instructor {
      */
     public Set<GymClass> getInstructorGymClasses() {
         return Collections.unmodifiableSet(this.gymClasses);
+    }
+
+    /**
+     *
+     * @param name is the new name
+     */
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    /**
+     *
+     * @param phone is the new phonenumber
+     */
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
     @Override

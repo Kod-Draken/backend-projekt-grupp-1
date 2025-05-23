@@ -9,6 +9,7 @@ import se.yrgo.dataaccess.MemberDao;
 import se.yrgo.domain.GymClass;
 import se.yrgo.domain.Instructor;
 import se.yrgo.domain.Member;
+import se.yrgo.services.exceptions.GymClassFullException;
 
 /**
  * @author Alrik, Mattias, Najib

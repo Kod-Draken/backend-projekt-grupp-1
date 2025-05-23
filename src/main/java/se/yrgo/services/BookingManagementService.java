@@ -1,5 +1,7 @@
 package se.yrgo.services;
 
+import se.yrgo.services.exceptions.GymClassFullException;
+
 /**
  * @author Alrik, Mattias, Najib
  *

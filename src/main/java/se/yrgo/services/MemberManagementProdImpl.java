@@ -5,6 +5,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import se.yrgo.domain.Member;
 import se.yrgo.dataaccess.MemberDao;
+import se.yrgo.services.exceptions.MemberIdNotFoundException;
+
 import java.util.List;
 @Transactional
 @Service
@@ -29,7 +31,7 @@ public class MemberManagementProdImpl implements MemberManagementService{
         memDao.delete(deletedMember);
     }
     @Override
-    public Member findMemberById(String id) throws MemberIdNotFoundException{
+    public Member findMemberById(String id) throws MemberIdNotFoundException {
         return memDao.getById(id);
     }
     @Override

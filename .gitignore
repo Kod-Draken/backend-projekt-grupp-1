@@ -39,7 +39,11 @@ build/
 ### Mac OS ###
 .DS_Store
 
-### Database ###
+### Database files ###
 database.dat.log
 database.dat.properties
 database.dat.script
+
+databaseTESTING.dat.log
+databaseTESTING.dat.properties
+databaseTESTING.dat.script

@@ -11,6 +11,8 @@ import se.yrgo.services.InstructorManagementService;
 
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 
 /**
  * @author Najib
@@ -25,23 +27,24 @@ public class InstructorServiceTest {
     private InstructorManagementService is;
 
     @Test
-    public void testNewInstructor(Instructor instructor) {
+    public void testNewInstructor() {
+        Instructor test = new Instructor("IN1", "Bosse Bredsladd", "031-777444");
+        is.newInstructor(test);
+        assertEquals(1, is.getAllInstructors().size());
+    }
+
+    @Test
+    public void testEditInstructor() {
 
     }
 
     @Test
-    public void testEditInstructor(Instructor changedInstructor) {
+    public void testDeleteInstructor() {
 
     }
 
     @Test
-    public void testDeleteInstructor(Instructor deletedInstructor) {
-
-    }
-
-    @Test
-    public void testFindInstructorById(String id) {
-
+    public void testFindInstructorById() {
     }
 
     @Test
@@ -50,17 +53,17 @@ public class InstructorServiceTest {
     }
 
     @Test
-    public void testGetInstructorByName(String name) {
+    public void testGetInstructorByName() {
 
     }
 
     @Test
-    public void testGetGymClassesForInstructor(String id) {
+    public void testGetGymClassesForInstructor() {
 
     }
 
     @Test
-    public void testGetGymClassForInstructor(Instructor instructor) {
+    public void testGetGymClassForInstructor() {
 
     }
 }

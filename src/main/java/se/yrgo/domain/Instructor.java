@@ -42,6 +42,10 @@ public class Instructor {
         this.gymClasses = new HashSet<>();
     }
 
+    /**
+     *
+     * @return the instructors primary key (int)
+     */
     public int getId() {
         return id;
     }
@@ -104,7 +108,7 @@ public class Instructor {
 
     /**
      *
-     * @param phone is the new phonenumber
+     * @param phone is the new phone number
      */
     public void setPhone(String phone) {
         this.phone = phone;

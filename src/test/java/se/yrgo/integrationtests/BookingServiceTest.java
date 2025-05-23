@@ -15,24 +15,24 @@ import se.yrgo.services.exceptions.GymClassFullException;
  */
 @Transactional
 @ExtendWith(SpringExtension.class)
-@ContextConfiguration( {"/other-tiers.xml", "/datasource-test.xml" } )
+@ContextConfiguration( {"/other-tiers-test.xml", "/datasource-test.xml" } )
 public class BookingServiceTest {
 
     @Autowired
     private BookingManagementService bms;
 
     @Test
-    public void testAddAttendantToClass(int gymClassId, String attendantId) throws GymClassFullException {
+    public void testAddAttendantToClass() throws GymClassFullException {
 
     }
 
     @Test
-    public void testRemoveAttendantFromClass(int gymClassId, String attendantId) {
+    public void testRemoveAttendantFromClass() {
 
     }
 
     @Test
-    public void testUpdateClassInstructor(int gymClassId, String instructorId) {
+    public void testUpdateClassInstructor() {
 
     }
 

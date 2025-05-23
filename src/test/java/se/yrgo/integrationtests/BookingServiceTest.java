@@ -7,7 +7,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.transaction.annotation.Transactional;
 import se.yrgo.services.BookingManagementService;
-import se.yrgo.services.GymClassFullException;
+import se.yrgo.services.exceptions.GymClassFullException;
 
 /**
  * @author Alrik, Mattias, Najib

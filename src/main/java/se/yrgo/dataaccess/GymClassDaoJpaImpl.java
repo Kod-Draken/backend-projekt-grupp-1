@@ -1,9 +1,11 @@
 package se.yrgo.dataaccess;
 
 import org.springframework.stereotype.Repository;
+import se.yrgo.dataaccess.exceptions.GymClassNotFoundException;
 import se.yrgo.domain.GymClass;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import java.util.List;
 
@@ -19,20 +21,33 @@ public class GymClassDaoJpaImpl implements GymClassDao {
     }
 
     @Override
-    public void updateGymClass(GymClass gymClass) {
-        em.merge(gymClass);
+    public void updateGymClass(GymClass updatedGymClass) throws GymClassNotFoundException {
+        GymClass existing = em.find(GymClass.class, updatedGymClass.getClassId());
+        if(existing == null){
+            throw new GymClassNotFoundException("Gym class not found");
+        }
+        em.merge(updatedGymClass);
     }
 
     @Override
-    public void deleteGymClass(GymClass gymClass) {
-        em.remove(gymClass);
+    public void deleteGymClass(GymClass gymClassToDelete) throws GymClassNotFoundException {
+        GymClass existing = em.find(GymClass.class, gymClassToDelete.getClassId());
+        if(existing == null){
+            throw new GymClassNotFoundException("Gym class not found");
+        }
+        em.remove(gymClassToDelete);
     }
 
     @Override
-    public GymClass getGymClassById(String classId) {
-        return em.createQuery("select c from GymClass c where c.classId = :classId", GymClass.class)
-                .setParameter("classId", classId)
-                .getSingleResult();
+    public GymClass getGymClassById(String classId) throws GymClassNotFoundException {
+        try {
+            return em.createQuery("select c from GymClass c where c.classId = :classId", GymClass.class)
+                    .setParameter("classId", classId)
+                    .getSingleResult();
+        } catch (NoResultException e) {
+            throw new GymClassNotFoundException("Gym class not found");
+        }
+
     }
 
     @Override

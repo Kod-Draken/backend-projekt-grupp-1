@@ -1,6 +1,7 @@
 package se.yrgo.dataaccess;
 
 import org.springframework.stereotype.Repository;
+import se.yrgo.dataaccess.exceptions.MemberMissingException;
 import se.yrgo.domain.GymClass;
 import se.yrgo.domain.Member;
 

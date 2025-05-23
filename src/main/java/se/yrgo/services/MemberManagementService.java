@@ -1,6 +1,7 @@
 package se.yrgo.services;
 
 import se.yrgo.domain.Member;
+import se.yrgo.services.exceptions.MemberIdNotFoundException;
 
 import java.util.List;
 

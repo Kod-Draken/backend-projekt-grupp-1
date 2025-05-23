@@ -1,5 +1,6 @@
 package se.yrgo.dataaccess;
 
+import se.yrgo.dataaccess.exceptions.MemberMissingException;
 import se.yrgo.domain.Member;
 
 import java.util.List;

@@ -51,7 +51,7 @@ public class MemberDaoJpaImpl implements MemberDao{
     @Override
     public Member getById(String id) throws MemberMissingException{
         try {
-            return em.find(Member.class, id);
+            return em.createQuery("select m from Member m where m.memberId =:id ", Member.class).setParameter("id", id).getSingleResult();
         }catch(NoResultException e){
             System.out.println("Error: "+e.getMessage());
             return null;
@@ -75,7 +75,7 @@ public class MemberDaoJpaImpl implements MemberDao{
      */
     @Override
     public List<Member> getByName(String name){
-        return em.createQuery("select m from Member m where m.name = :name", Member.class).getResultList();
+        return em.createQuery("select m from Member m where m.name = :name", Member.class).setParameter("name",name).getResultList();
     }
 
     /**
@@ -85,7 +85,7 @@ public class MemberDaoJpaImpl implements MemberDao{
      */
     @Override
     public Member getFullDetail(String memberId){
-        return em.createQuery("select m from Member m where m.memberId = :memberId", Member.class).getSingleResult();
+        return em.createQuery("select m from Member m where m.memberId = :memberId", Member.class).setParameter("memberId", memberId).getSingleResult();
     }
 
     /**
@@ -96,8 +96,8 @@ public class MemberDaoJpaImpl implements MemberDao{
      */
     @Override
     public void addGymClass(String newGymClass, String memberId){
-        Member mem = em.createQuery("select m from Member m where m = :memberId", Member.class).getSingleResult();
-        mem.getAllBookedClasses().add(em.createQuery("select gc from GymClass gc where gc.name = :newGymClass", GymClass.class).getSingleResult());
+        Member mem = em.createQuery("select m from Member m where m.memberId = :memberId", Member.class).setParameter("memberId", memberId).getSingleResult();
+        mem.getAllBookedClasses().add(em.createQuery("select gc from GymClass gc where gc.name = :newGymClass", GymClass.class).setParameter("newGymClass", newGymClass).getSingleResult());
     }
 
     /**
@@ -108,7 +108,7 @@ public class MemberDaoJpaImpl implements MemberDao{
      */
     @Override
     public void deleteGymClass(String oldGymClass, String memberId){
-        Member mem = em.createQuery("select m from Member m where m = :memberId", Member.class).getSingleResult();
-        mem.getAllBookedClasses().remove(em.createQuery("select gc from GymClass gc where gc.name = :oldGymClass", GymClass.class).getSingleResult());
+        Member mem = em.createQuery("select m from Member m where m = :memberId", Member.class).setParameter("memberId", memberId).getSingleResult();
+        mem.getAllBookedClasses().remove(em.createQuery("select gc from GymClass gc where gc.name = :oldGymClass", GymClass.class).setParameter("oldGymClass", oldGymClass).getSingleResult());
     }
 }

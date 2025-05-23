@@ -9,6 +9,7 @@ import java.util.Set;
  * @author Mattias
  * Represents a class at a gym, a certain timestamp it happens, attendants, an instructor, etc.
  */
+@SuppressWarnings({"unused", "JpaDataSourceORMInspection"})
 @Entity
 public class GymClass {
     @Id

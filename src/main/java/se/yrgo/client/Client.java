@@ -41,9 +41,11 @@ public class Client {
 
     private static void menu() {
         try (Scanner scanner = new Scanner(System.in)) {
+            System.out.println("Enter a number");
             int choice = scanner.nextInt();
             switch (choice) {
                 case 1:
+                    System.out.println("choice made: " + choice);
             }
         } catch (RuntimeException e) {
             System.err.println(e.getMessage());

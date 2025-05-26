@@ -167,6 +167,11 @@ public class Client {
                     System.out.println("Returning to main menu");
                     return;
                 }
+                case "1": {
+                    readDataOptions(scanner);
+                    break;
+                }
+
                 case "2": {
                     addAttendantToClass(scanner);
                     break;
@@ -175,12 +180,51 @@ public class Client {
                     removeAttendantFromClass(scanner);
                     break;
                 }
-                case "3": {
+                case "4": {
                     changeInstructorForClass(scanner);
                     break;
                 }
                 default: {
                     System.out.println("Invalid choice, please enter a number between 0 and 2");
+                }
+            }
+        }
+    }
+
+    /**
+     * Select options for READING data from the database
+     * @author Mattias
+     * @param scanner reads input text from user
+     */
+    private static void readDataOptions(Scanner scanner) {
+        while (true) {
+            System.out.println("Choose from the following options");
+            System.out.println("\t" + "0. Press '0' to cancel");
+            System.out.println("\t" + "1. Press '1' see all members");
+            System.out.println("\t" + "2. Press '2' see all instructors");
+            System.out.println("\t" + "3. Press '3' see all classes");
+            String choice = scanner.nextLine();
+            switch (choice) {
+                case "0": {
+                    System.out.println("Returning to sysadmin options");
+                    return;
+                }
+                case "1": {
+                    for (Member member : mm.getAllMembers()) {
+                        System.out.println(member);
+                    }
+                    break;
+                }
+                case "2": {
+                    for (Instructor instructor : is.getAllInstructors()) {
+                        System.out.println(instructor);
+                    }
+                    break;
+                }
+                case "3": {
+                    for (GymClass gymClass : gm.getAllClasses()){
+                        System.out.println(gymClass);
+                    }
                 }
             }
         }

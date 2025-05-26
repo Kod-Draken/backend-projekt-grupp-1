@@ -241,6 +241,21 @@ public class Client {
     private static void removeAttendantFromClass(Scanner scanner) {
         while (true) {
 
+            Optional<Member> attendantToRemove = promptSelection(scanner, mm.getAllMembers(), "member");
+
+            if (attendantToRemove.isEmpty()) {
+                System.out.println("Cancelled.");
+                return;
+            }
+
+            Optional<GymClass> selectedClass = promptSelection(scanner, mm.bookingCheck(attendantToRemove.get().getMemberId()), "class");
+
+            if (selectedClass.isEmpty()) {
+                System.out.println("Cancelled.");
+                return;
+            }
+
+            bm.removeAttendantFromClass(selectedClass.get().getClassId(), attendantToRemove.get().getMemberId());
         }
     }
 

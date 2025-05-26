@@ -10,6 +10,7 @@ import se.yrgo.services.InstructorManagementService;
 import se.yrgo.services.MemberManagementService;
 import se.yrgo.services.exceptions.AlreadyBookedToGymClassException;
 import se.yrgo.services.exceptions.GymClassFullException;
+import se.yrgo.services.exceptions.LateCancelException;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -121,13 +122,19 @@ public class Client {
                     } catch (GymClassFullException e){
                         System.err.println("Class is full");
                     }
+                    break;
                 }
                 case "2": {
-                    System.out.println("Search name of Class to cancel");
-                    for(GymClass gC : mm.bookingCheck(memberId)){
-                        System.out.println(gC);
+                    Optional<GymClass> selectedClass = promptSelection(scanner, mm.bookingCheck(memberId), "class");
+                    if (selectedClass.isEmpty()){
+                        System.out.println("No class found");
+                        break;
                     }
-
+                    try {
+                        bm.removeAttendantFromClass(selectedClass.get().getClassId(),memberId);
+                    } catch (LateCancelException e) {
+                        System.err.println("error at: " + e.getMessage());
+                    }
                 }
                 default:{
                     System.out.println("Invalid choice, please enter a number between 0 and 2");

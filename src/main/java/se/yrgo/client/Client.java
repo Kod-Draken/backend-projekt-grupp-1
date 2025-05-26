@@ -18,21 +18,30 @@ import java.util.Scanner;
  */
 public class Client {
     private static final ClassPathXmlApplicationContext container = new ClassPathXmlApplicationContext("production-application.xml");
+    private static final InstructorManagementService is = container.getBean(InstructorManagementService.class);
+    private static final GymClassManagementService gm = container.getBean(GymClassManagementService.class);
+    private static final MemberManagementService mm = container.getBean(MemberManagementService.class);
+    private static final BookingManagementService bm = container.getBean(BookingManagementService.class);
 
     public static void main(String[] args) {
         setUpData();
-
-        InstructorManagementService is = container.getBean(InstructorManagementService.class);
-        GymClassManagementService gm = container.getBean(GymClassManagementService.class);
-        MemberManagementService mm = container.getBean(MemberManagementService.class);
-        BookingManagementService bm = container.getBean(BookingManagementService.class);
-
-        menu(is, gm, mm, bm);
+        menu();
 
         container.close();
     }
 
-    private static void menu(InstructorManagementService is, GymClassManagementService gm, MemberManagementService mm, BookingManagementService bm) {
+    /**
+     * Sets up the data with some instructors and gym classes to interact with
+     */
+    private static void setUpData() {
+        Instructor instructor = new Instructor("IN1", "Bosse Bredsladd", "031-777444");
+
+        is.newInstructor(instructor);
+        gm.addNewGymClass(new GymClass("BX0001","Boxning", "Lätt boxningspass fokus på hög puls och förbättrad koordination", "Sal 3", instructor, LocalDateTime.now(), 20));
+        mm.newMember(new Member("S001","Janne Björnsson","0758293153"));
+    }
+
+    private static void menu() {
         try (Scanner scanner = new Scanner(System.in)) {
             while (true) {
                 System.out.println("Choose from the following options: ");
@@ -48,11 +57,11 @@ public class Client {
                     }
                     case "1": {
                         System.out.println("You are a member");
-
                         break;
                     }
                     case "2": {
                         System.out.println("You are a sysadmin");
+                        sysadminOptions();
                         break;
                     }
                     default: {
@@ -65,18 +74,9 @@ public class Client {
         }
     }
 
-    /**
-     * Sets up the data with some instructors and gym classes to interact with
-     */
-    private static void setUpData() {
-        InstructorManagementService is = container.getBean(InstructorManagementService.class);
-        GymClassManagementService gm = container.getBean(GymClassManagementService.class);
-        MemberManagementService mm = container.getBean(MemberManagementService.class);
-
-        Instructor instructor = new Instructor("IN1", "Bosse Bredsladd", "031-777444");
-
-        is.newInstructor(instructor);
-        gm.addNewGymClass(new GymClass("BX0001","Boxning", "Lätt boxningspass fokus på hög puls och förbättrad koordination", "Sal 3", instructor, LocalDateTime.now(), 20));
-        mm.newMember(new Member("S001","Janne Björnsson","0758293153"));
+    private static void sysadminOptions() {
+        while (true) {
+            System.out.println("What would you like to do?: ");
+        }
     }
 }

@@ -45,6 +45,9 @@ public class BookingManagementServiceProdImpl implements BookingManagementServic
     @Override
     public void addAttendantToClass(String gymClassId, String attendantId) throws GymClassFullException, AlreadyBookedToGymClassException {
         GymClass gymClass = gymClassDao.getGymClassById(gymClassId);
+        Member newAttendant = memberDao.getById(attendantId);
+        newAttendant.addBookedClass(gymClass);
+        memberDao.update(newAttendant);
 
         if (gymClass.getAttendants().contains(memberDao.getById(attendantId))) {
             throw new AlreadyBookedToGymClassException("You're already booked to this class!");
@@ -53,10 +56,8 @@ public class BookingManagementServiceProdImpl implements BookingManagementServic
         if (gymClass.isFull()) {
             throw new GymClassFullException("Sorry, class is fully booked!");
         }
-        Member newAttendant = memberDao.getById(attendantId);
-        memberDao.addGymClass();
 
-        System.out.println("Successfully added attendant " + newAttendant.toString() + " to class " + gymClass.toString());
+        System.out.println("Successfully added attendant " + newAttendant.toString() + " to class " + gymClass);
     }
 
     /**

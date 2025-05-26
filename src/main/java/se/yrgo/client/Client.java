@@ -43,15 +43,30 @@ public class Client {
         Instructor instructor2 = new Instructor("IN2", "Lasse Långsladd", "031-999222");
         Instructor instructor3 = new Instructor("IN3", "Eva Johansson", "0754-222333");
 
-        is.newInstructor(instructor);
-        is.newInstructor(instructor2);
-        is.newInstructor(instructor3);
+        GymClass gymClass = new GymClass("BX0001","Boxning", "Lätt boxningspass fokus på hög puls och förbättrad koordination", "Sal 3", instructor, LocalDateTime.now(), 20);
+        instructor.addGymClassToInstructorSchedule(gymClass);
+        GymClass gymClass2 = new GymClass("PI0001","Pilates", "Lugnt och fint", "Sal 1", instructor, LocalDateTime.now(), 20);
+        instructor.addGymClassToInstructorSchedule(gymClass2);
 
-        gm.addNewGymClass(new GymClass("BX0001","Boxning", "Lätt boxningspass fokus på hög puls och förbättrad koordination", "Sal 3", instructor, LocalDateTime.now(), 20));
-        gm.addNewGymClass(new GymClass("PI0001","Pilates", "Lugnt och fint", "Sal 1", instructor, LocalDateTime.now(), 20));
-        gm.addNewGymClass(new GymClass("YO0001","Yoga", "Vinyasa Flow", "Hot-salen", instructor2, LocalDateTime.now(), 20));
-        gm.addNewGymClass(new GymClass("SP0001","Spinning", "30 min", "Spinning-salen", instructor3, LocalDateTime.now(), 20));
-        gm.addNewGymClass(new GymClass("BP0001","Body Pump", "60 min", "Sal 10", instructor3, LocalDateTime.now(), 20));
+        is.newInstructor(instructor);
+        gm.addNewGymClass(gymClass);
+        gm.addNewGymClass(gymClass2);
+
+        GymClass gymClass3 = new GymClass("YO0001","Yoga", "Vinyasa Flow", "Hot-salen", instructor2, LocalDateTime.now(), 20);
+        instructor2.addGymClassToInstructorSchedule(gymClass3);
+
+        is.newInstructor(instructor2);
+        gm.addNewGymClass(gymClass3);
+
+        GymClass gymClass4 = new GymClass("SP0001","Spinning", "30 min", "Spinning-salen", instructor3, LocalDateTime.now(), 20);
+        instructor3.addGymClassToInstructorSchedule(gymClass4);
+        GymClass gymClass5 = new GymClass("BP0001","Body Pump", "60 min", "Sal 10", instructor3, LocalDateTime.now(), 20);
+        instructor3.addGymClassToInstructorSchedule(gymClass5);
+
+        is.newInstructor(instructor3);
+        gm.addNewGymClass(gymClass4);
+        gm.addNewGymClass(gymClass5);
+
         mm.newMember(new Member("S001","Janne Björnsson","0758293153"));
         mm.newMember(new Member("S002","Doris Jönsson","0744356987"));
         mm.newMember(new Member("S003","Allan Borg","073863987"));
@@ -217,18 +232,21 @@ public class Client {
                     for (Member member : mm.getAllMembers()) {
                         System.out.println(member);
                     }
+                    System.out.println();
                     break;
                 }
                 case "2": {
                     for (Instructor instructor : is.getAllInstructors()) {
                         System.out.println(instructor);
                     }
+                    System.out.println();
                     break;
                 }
                 case "3": {
                     for (GymClass gymClass : gm.getAllClasses()){
                         System.out.println(gymClass);
                     }
+                    System.out.println();
                 }
             }
         }
@@ -324,7 +342,30 @@ public class Client {
 
     private static void changeInstructorForClass(Scanner scanner) {
         while (true) {
-            System.out.println("");
+            System.out.println("Which instructor would like to change?");
+            Optional<Instructor> selectedInstructor = promptSelection(scanner, is.getAllInstructors(), "instructor");
+            if (selectedInstructor.isEmpty()) {
+                System.out.println("Cancelled.");
+                return;
+            }
+
+            System.out.println("From which of the classes?");
+            Optional<GymClass> selectedGymClass = promptSelection(scanner, is.getGymClassesForInstructor(selectedInstructor.get().getInstructorId()), "gym class");
+            if (selectedGymClass.isEmpty()) {
+                System.out.println("Cancelled.");
+                return;
+            }
+
+            System.out.println("To which other instructor would like to change?");
+            Optional<Instructor> newSelectedInstructor = promptSelection(scanner, is.getAllInstructors(), "instructor");
+            if (newSelectedInstructor.isEmpty()) {
+                System.out.println("Cancelled.");
+                return;
+            }
+
+            bm.updateClassInstructor(selectedGymClass.get().getClassId(), newSelectedInstructor.get().getInstructorId());
+            System.out.println("Gymclass " + selectedGymClass.get().getName() + " now has instructor " + newSelectedInstructor.get().getName() + "\n");
+            return;
         }
     }
 

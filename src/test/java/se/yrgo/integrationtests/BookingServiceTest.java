@@ -63,7 +63,7 @@ public class BookingServiceTest {
         }
         assertEquals("Lars Andersson, ", str.toString());
 
-        assertThrows(AlreadyBookedToGymClassException.class,() -> bms.addAttendantToClass("GC1","ME1"));
+        assertThrows(AlreadyBookedToGymClassException.class, () -> bms.addAttendantToClass("GC1","ME1"));
     }
 
     @Test void testThrowsWhenClassIsFull() throws GymClassFullException {

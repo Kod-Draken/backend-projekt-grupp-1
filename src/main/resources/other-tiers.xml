@@ -42,16 +42,6 @@
           class="org.springframework.orm.jpa.JpaTransactionManager"
           autowire="byType"/>
 
-    <!-- Advice -->
-    <bean id="performanceTimingAdvice" class="se.yrgo.advice.PerformanceTimingAdvice" />
-    <aop:config>
-        <aop:aspect ref = "performanceTimingAdvice">
-            <aop:around method="performTimingMeasurement"
-                        pointcut = "execution (* se.yrgo.services..*.* (..))
-                        || execution (* se.yrgo.dataaccess.*.* (..) )"  />
-        </aop:aspect>
-    </aop:config>
-
     <!-- Transaction Configuration -->
     <tx:annotation-driven/>
 

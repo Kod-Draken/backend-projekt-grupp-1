@@ -9,13 +9,13 @@ import java.util.List;
  * @author Mattias
  */
 public interface GymClassDao {
-    public void createGymClass(GymClass gymClass);
-    public void updateGymClass(GymClass gymClass) throws GymClassNotFoundException;
-    public void deleteGymClass(GymClass gymClass) throws GymClassNotFoundException;
-    public GymClass getGymClassById(String id) throws GymClassNotFoundException;
-    public List<GymClass> getGymClassesByName(String name);
-    public List<GymClass> getGymClassesByInstructor(String instructorId);
-    public List<GymClass> getAllGymClasses();
+    void createGymClass(GymClass gymClass);
+    void updateGymClass(GymClass gymClass) throws GymClassNotFoundException;
+    void deleteGymClass(GymClass gymClass) throws GymClassNotFoundException;
+    GymClass getGymClassById(String id) throws GymClassNotFoundException;
+    List<GymClass> getGymClassesByName(String name);
+    List<GymClass> getGymClassesByInstructor(String instructorId);
+    List<GymClass> getAllGymClasses();
 
 
 }

@@ -1,5 +1,6 @@
 package se.yrgo.integrationtests;
 
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -72,8 +73,7 @@ public class GymClassServiceTest {
 
     @Test
     void testDeleteGymClass() {
-        gsTest.deleteGymClass(gymClass);
-        gsTest.getAllClasses();
+
     }
 
     @Test

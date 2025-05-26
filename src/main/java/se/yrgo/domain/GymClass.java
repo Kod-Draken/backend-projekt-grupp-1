@@ -40,7 +40,7 @@ public class GymClass {
     private int capacity;
 
     @ManyToMany(mappedBy = "bookedClasses")
-    private Set<Member> attendants = new HashSet<>();
+    private final Set<Member> attendants = new HashSet<>();
 
 
     public GymClass() {}

@@ -45,7 +45,7 @@ public class GymClassDaoJpaImpl implements GymClassDao {
                     .setParameter("classId", classId)
                     .getSingleResult();
         } catch (NoResultException e) {
-            throw new GymClassNotFoundException("Gym class not found");
+            throw new GymClassNotFoundException("Gym class with id: " + classId + " not found");
         }
 
     }

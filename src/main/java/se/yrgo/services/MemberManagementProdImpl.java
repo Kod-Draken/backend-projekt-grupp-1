@@ -30,7 +30,8 @@ public class MemberManagementProdImpl implements MemberManagementService{
     public void deleteMember(Member deletedMember){
         memDao.delete(deletedMember);
     }
-    @Override
+
+    @Override // Is this throw needed?
     public Member findMemberById(String id) throws MemberIdNotFoundException {
         return memDao.getById(id);
     }

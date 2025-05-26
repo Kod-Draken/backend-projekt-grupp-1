@@ -1,6 +1,8 @@
 package se.yrgo.services;
 
+import se.yrgo.services.exceptions.AlreadyBookedToGymClassException;
 import se.yrgo.services.exceptions.GymClassFullException;
+import se.yrgo.services.exceptions.LateCancelException;
 
 /**
  * @author Alrik, Mattias, Najib
@@ -9,7 +11,7 @@ import se.yrgo.services.exceptions.GymClassFullException;
  */
 @SuppressWarnings("unused")
 public interface BookingManagementService {
-    void addAttendantToClass(String gymClassId, String attendantId) throws GymClassFullException;
-    void removeAttendantFromClass(String gymClassId, String attendantId);
+    void addAttendantToClass(String gymClassId, String attendantId) throws GymClassFullException, AlreadyBookedToGymClassException;
+    void removeAttendantFromClass(String gymClassId, String attendantId) throws LateCancelException;
     void updateClassInstructor(String gymClassId, String instructorId);
 }

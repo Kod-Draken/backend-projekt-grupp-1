@@ -9,7 +9,9 @@ import se.yrgo.services.GymClassManagementService;
 import se.yrgo.services.InstructorManagementService;
 import se.yrgo.services.MemberManagementService;
 
+import java.io.IOException;
 import java.time.LocalDateTime;
+import java.util.Scanner;
 
 /**
  * This class is the Client in an application where you can book and manage gym classes
@@ -35,6 +37,17 @@ public class Client {
 
 
         container.close();
+    }
+
+    private static void menu() {
+        try (Scanner scanner = new Scanner(System.in)) {
+            int choice = scanner.nextInt();
+            switch (choice) {
+                case 1:
+            }
+        } catch (RuntimeException e) {
+            System.err.println(e.getMessage());
+        }
     }
 
     /**

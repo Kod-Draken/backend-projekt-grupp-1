@@ -9,7 +9,12 @@ import se.yrgo.dataaccess.MemberDao;
 import se.yrgo.domain.GymClass;
 import se.yrgo.domain.Instructor;
 import se.yrgo.domain.Member;
+import se.yrgo.services.exceptions.AlreadyBookedToGymClassException;
 import se.yrgo.services.exceptions.GymClassFullException;
+import se.yrgo.services.exceptions.LateCancelException;
+
+import java.time.Duration;
+import java.time.LocalDateTime;
 
 /**
  * @author Alrik, Mattias, Najib
@@ -34,17 +39,22 @@ public class BookingManagementServiceProdImpl implements BookingManagementServic
      * Adds an attendee to a class
      * @param gymClassId is the id of the gym class
      * @param attendantId is the id of the member that wants to attend
-     * @throws GymClassFullException is thrown if the class is full
+     * @throws AlreadyBookedToGymClassException if a member is already in the attendants list of the class.
+     * @throws GymClassFullException is thrown when trying to book to a full class
      */
     @Override
-    public void addAttendantToClass(String gymClassId, String attendantId) throws GymClassFullException {
+    public void addAttendantToClass(String gymClassId, String attendantId) throws GymClassFullException, AlreadyBookedToGymClassException {
         GymClass gymClass = gymClassDao.getGymClassById(gymClassId);
-        Member newAttendant = memberDao.getById(attendantId);
+
+        if (gymClass.getAttendants().contains(memberDao.getById(attendantId))) {
+            throw new AlreadyBookedToGymClassException("You're already booked to this class!");
+        }
 
         if (gymClass.isFull()) {
             throw new GymClassFullException("Sorry, class is fully booked!");
         }
 
+        Member newAttendant = memberDao.getById(attendantId);
         gymClass.addAttendant(newAttendant);
 
         System.out.println("Successfully added attendant " + newAttendant.toString());
@@ -54,10 +64,14 @@ public class BookingManagementServiceProdImpl implements BookingManagementServic
      * Removes an attendant from a gym class
      * @param gymClassId is the id of the gym class
      * @param attendantId is the id of the member that will be removed
+     * @throws LateCancelException if trying to cancel when class is due in less than 2hrs
      */
     @Override
-    public void removeAttendantFromClass(String gymClassId, String attendantId) {
+    public void removeAttendantFromClass(String gymClassId, String attendantId) throws LateCancelException {
         GymClass gymClass = gymClassDao.getGymClassById(gymClassId);
+        if (Duration.between(gymClass.getScheduledTime(), LocalDateTime.now()).toMinutes() < 120) {
+            throw new LateCancelException("Sorry, the class is due in less than 2 hours!");
+        }
         Member member = memberDao.getById(attendantId);
         gymClass.removeAttendant(member);
     }

@@ -12,9 +12,12 @@ import se.yrgo.services.exceptions.AlreadyBookedToGymClassException;
 import se.yrgo.services.exceptions.GymClassFullException;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
+
+import static java.util.Collections.addAll;
 
 /**
  * This class is the Client in an application where you can book and manage gym classes
@@ -110,7 +113,6 @@ public class Client {
                     Optional<GymClass> selectedClass = promptSelection(scanner, gm.getClassesByName(gymClassName), "class");
                     if (selectedClass.isEmpty()){
                         System.out.println("No class found");
-                        return;
                     }
                     try {
                         bm.addAttendantToClass(selectedClass.get().getClassId(),memberId);
@@ -119,10 +121,12 @@ public class Client {
                     } catch (GymClassFullException e){
                         System.err.println("Class is full");
                     }
-                    return;
                 }
                 case "2": {
                     System.out.println("Search name of Class to cancel");
+                    for(GymClass gC : mm.bookingCheck(memberId)){
+                        System.out.println(gC);
+                    }
 
                 }
                 default:{

@@ -1,5 +1,6 @@
 package se.yrgo.services;
 
+import se.yrgo.domain.GymClass;
 import se.yrgo.domain.Member;
 import se.yrgo.services.exceptions.MemberIdNotFoundException;
 
@@ -24,5 +25,7 @@ public interface MemberManagementService {
     public void bookGymClass(String bookingGymClassName, String memberId);
 
     public void cancelBooking(String bookingGymClassName, String memberId);
+
+    public List<GymClass> bookingCheck(String memberId);
 
 }

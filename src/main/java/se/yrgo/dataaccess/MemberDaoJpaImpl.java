@@ -9,6 +9,7 @@ import se.yrgo.domain.Member;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.NoResultException;
+import java.util.ArrayList;
 import java.util.List;
 
 @Repository
@@ -102,7 +103,7 @@ public class MemberDaoJpaImpl implements MemberDao{
     @Override
     public void addGymClass(String newGymClass, String memberId){
         Member mem = em.createQuery("select m from Member m where m.memberId = :memberId", Member.class).setParameter("memberId", memberId).getSingleResult();
-        mem.getAllBookedClasses().add(em.createQuery("select gc from GymClass gc where gc.gymClassId = :newGymClass", GymClass.class).setParameter("newGymClass", newGymClass).getSingleResult());
+        mem.getAllBookedClasses().add(em.createQuery("select gc from GymClass gc where gc.classId = :newGymClass", GymClass.class).setParameter("newGymClass", newGymClass).getSingleResult());
     }
 
     /**
@@ -114,6 +115,11 @@ public class MemberDaoJpaImpl implements MemberDao{
     @Override
     public void deleteGymClass(String oldGymClass, String memberId){
         Member mem = em.createQuery("select m from Member m where m = :memberId", Member.class).setParameter("memberId", memberId).getSingleResult();
-        mem.getAllBookedClasses().remove(em.createQuery("select gc from GymClass gc where gc.name = :oldGymClass", GymClass.class).setParameter("oldGymClass", oldGymClass).getSingleResult());
+        mem.getAllBookedClasses().remove(em.createQuery("select gc from GymClass gc where gc.classId = :oldGymClass", GymClass.class).setParameter("oldGymClass", oldGymClass).getSingleResult());
     }
+    @Override
+    public List<GymClass> addedClasses(String memberId){
+        return em.createQuery("select g from Member m join m.bookedClasses g where m.memberId = :memberId", GymClass.class).setParameter("memberId", memberId).getResultList();
+    }
+
 }

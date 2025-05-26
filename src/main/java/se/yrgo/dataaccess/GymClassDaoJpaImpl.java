@@ -31,7 +31,7 @@ public class GymClassDaoJpaImpl implements GymClassDao {
 
     @Override
     public void deleteGymClass(GymClass gymClassToDelete) throws GymClassNotFoundException {
-        GymClass existing = em.find(GymClass.class, gymClassToDelete.getClassId());
+        GymClass existing = em.find(GymClass.class, gymClassToDelete.getId());
         if(existing == null){
             throw new GymClassNotFoundException("Gym class not found");
         }

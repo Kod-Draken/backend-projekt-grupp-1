@@ -1,7 +1,5 @@
 package se.yrgo.integrationtests;
 
-
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -9,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.transaction.annotation.Transactional;
+import se.yrgo.dataaccess.exceptions.GymClassNotFoundException;
 import se.yrgo.domain.GymClass;
 import se.yrgo.domain.Instructor;
 import se.yrgo.services.GymClassManagementService;
@@ -16,8 +15,7 @@ import se.yrgo.services.InstructorManagementService;
 
 import java.time.LocalDateTime;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * @author Mattias
@@ -74,7 +72,8 @@ public class GymClassServiceTest {
 
     @Test
     void testDeleteGymClass() {
-
+        gsTest.deleteGymClass(gymClass);
+        gsTest.getAllClasses();
     }
 
     @Test

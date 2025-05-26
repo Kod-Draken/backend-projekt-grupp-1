@@ -57,6 +57,7 @@ public class Client {
                     }
                     case "1": {
                         System.out.println("You are a member");
+                        memberOptions(scanner);
                         break;
                     }
                     case "2": {
@@ -71,6 +72,13 @@ public class Client {
             }
         } catch (RuntimeException e) {
             System.err.println(e.getMessage());
+        }
+    }
+    private static void memberOptions(Scanner scanner) {
+        while(true){
+            try (Scanner scan = new Scanner(System.in)) {
+
+            }
         }
     }
 

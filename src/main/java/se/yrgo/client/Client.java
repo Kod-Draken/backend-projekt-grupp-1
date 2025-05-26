@@ -10,8 +10,10 @@ import se.yrgo.services.InstructorManagementService;
 import se.yrgo.services.MemberManagementService;
 import se.yrgo.services.exceptions.AlreadyBookedToGymClassException;
 import se.yrgo.services.exceptions.GymClassFullException;
+import se.yrgo.services.exceptions.LateCancelException;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
@@ -96,7 +98,7 @@ public class Client {
                             System.out.println("Search name of Class to book");
                             String gymClassName = scanner.nextLine();
                             Optional<GymClass> selectedClass = promptSelection(scanner, gm.getClassesByName(gymClassName), "class");
-                            if(selectedClass.isEmpty()){
+                            if (selectedClass.isEmpty()){
                                 System.out.println("No class found");
                                 return;
                             }
@@ -106,13 +108,21 @@ public class Client {
                                 System.err.println("error at: " + e.getMessage());
                             } catch (GymClassFullException e){
                                 System.err.println("Class is full");
-
                             }
 
                         }
                         case "2": {
-                            System.out.println("Please enter Class to cancel");
-
+                            List<GymClass> bookedClasses = new ArrayList<>(mm.findMemberById(choiceMember).getAllBookedClasses());
+                            Optional<GymClass> selectedBookedClass = promptSelection(scanner, bookedClasses, "class");
+                            if (selectedBookedClass.isEmpty()){
+                                System.out.println("No class found");
+                                return;
+                            }
+                            try {
+                                bm.removeAttendantFromClass(selectedBookedClass.get().getClassId(),choiceMember);
+                            } catch (LateCancelException e) {
+                                System.err.println("error at: " + e.getMessage());
+                            }
                         }
                         default:{
                             System.out.println("Invalid choice, please enter a number between 0 and 2");

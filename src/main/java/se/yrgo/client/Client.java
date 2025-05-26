@@ -39,22 +39,24 @@ public class Client {
 
     private static void menu() {
         try (Scanner scanner = new Scanner(System.in)) {
-            System.out.println("Choose from the following options: ");
-            System.out.println("\t" + "1. Press '1' if you are a member");
-            System.out.println("\t" + "2. Press '2' if you are a sysadmin");
-            System.out.println("Enter a number: ");
-            int choice = scanner.nextInt();
-            switch (choice) {
-                case 1: {
-                    System.out.println("You are a member");
-                    break;
-                }
-                case 2: {
-                    System.out.println("You are a sysadmin");
-                    break;
-                }
-                default: {
-                    System.out.println("Invalid choice");
+            while (true) {
+                System.out.println("Choose from the following options: ");
+                System.out.println("\t" + "1. Press '1' if you are a member");
+                System.out.println("\t" + "2. Press '2' if you are a sysadmin");
+                System.out.println("Enter a number: ");
+                String choice = scanner.nextLine();
+                switch (choice) {
+                    case "1": {
+                        System.out.println("You are a member");
+                        break;
+                    }
+                    case "2": {
+                        System.out.println("You are a sysadmin");
+                        break;
+                    }
+                    default: {
+                        System.out.println("Invalid choice");
+                    }
                 }
             }
         } catch (RuntimeException e) {

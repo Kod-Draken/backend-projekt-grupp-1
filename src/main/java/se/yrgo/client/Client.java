@@ -92,17 +92,21 @@ public class Client {
     }
     private static void memberOptions(Scanner scanner) {
         while(true){
-            System.out.println("\t" + "Enter your Member ID: ");
-            System.out.println("\t" + "Enter empty to cancel");
-            String choiceMember = scanner.nextLine();
-            if(mm.findMemberById(choiceMember) != null){
-                bookAndCancelClass(scanner, choiceMember);
+            String choiceMember = "";
+            try {
+                System.out.println("\t" + "Enter your Member ID: ");
+                System.out.println("\t" + "Enter empty to cancel");
+                choiceMember = scanner.nextLine();
+                if (mm.findMemberById(choiceMember) != null) {
+                    bookAndCancelClass(scanner, choiceMember);
+                } else {
+                    return;
+                }
+            } catch (RuntimeException e) {
+                System.err.println("Member not found!");
             }
-            else if(choiceMember.isEmpty()){
+            if (choiceMember.isEmpty()) {
                 return;
-            }
-            else {
-                System.out.println("Member not found!");
             }
         }
     }

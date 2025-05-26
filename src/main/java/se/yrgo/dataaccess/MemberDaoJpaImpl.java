@@ -58,8 +58,7 @@ public class MemberDaoJpaImpl implements MemberDao{
         try {
             return em.createQuery("select m from Member m where m.memberId =:id ", Member.class).setParameter("id", id).getSingleResult();
         }catch(NoResultException e){
-            System.out.println("Error: "+e.getMessage());
-            return null;
+            throw new MemberMissingException("Member not found");
         }
 
     }

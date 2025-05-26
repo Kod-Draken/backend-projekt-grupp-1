@@ -70,18 +70,17 @@ public class GymClassServiceTest {
         assertEquals("Another name", gsTest.getClassById("apa100").getName());
 
     }
+    @Test
+    void testGetAllGymClasses() {
+        assertEquals(1, gsTest.getAllClasses().size());
+    }
 
     @Test
     void testDeleteGymClass() {
-
+        gsTest.deleteGymClass(gymClass);
+        assertEquals(0, gsTest.getAllClasses().size());
     }
 
-    @Test
-    void testGetAllGymClasses() {
-
-
-        assertEquals(1, gsTest.getAllClasses().size());
-    }
 
 
 }

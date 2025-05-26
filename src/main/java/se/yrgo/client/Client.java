@@ -13,12 +13,9 @@ import se.yrgo.services.exceptions.GymClassFullException;
 import se.yrgo.services.exceptions.LateCancelException;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
-
-import static java.util.Collections.addAll;
 
 /**
  * This class is the Client in an application where you can book and manage gym classes
@@ -114,6 +111,7 @@ public class Client {
                     Optional<GymClass> selectedClass = promptSelection(scanner, gm.getClassesByName(gymClassName), "class");
                     if (selectedClass.isEmpty()){
                         System.out.println("No class found");
+                        break;
                     }
                     try {
                         bm.addAttendantToClass(selectedClass.get().getClassId(),memberId);

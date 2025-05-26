@@ -36,7 +36,7 @@ public class Client {
     }
 
     /**
-     * Sets up the data with some instructors and gym classes to interact with
+     * Sets up the data with some instructors, members and gym classes to interact with
      */
     private static void setUpData() {
         Instructor instructor = new Instructor("IN1", "Bosse Bredsladd", "031-777444");
@@ -57,6 +57,9 @@ public class Client {
         mm.newMember(new Member("S003","Allan Borg","073863987"));
     }
 
+    /**
+     * Base layer of the I/O, 2 roles, member and SysAdmin, different layers of interactivity.
+     */
     private static void menu() {
         try (Scanner scanner = new Scanner(System.in)) {
             while (true) {
@@ -90,6 +93,11 @@ public class Client {
             System.err.println(e.getMessage());
         }
     }
+
+    /**
+     * Operations that can be conducted by a member of the gym. Requires a member ID to access the next layer.
+     * @param scanner used for input from the user.
+     */
     private static void memberOptions(Scanner scanner) {
         while(true){
             String choiceMember = "";
@@ -110,6 +118,12 @@ public class Client {
             }
         }
     }
+
+    /**
+     * A member can book themselves to a class or unbook themselves
+     * @param scanner
+     * @param memberId required to use the method, user enters their id in the previous method
+     */
     private static void bookAndCancelClass(Scanner scanner, String memberId) {
         while(true){
             System.out.println("\t" + "0. Press '0' to return");
@@ -156,6 +170,10 @@ public class Client {
         }
     }
 
+    /**
+     * Options for a System Admin, they have a lot more tools at their disposal such as adding, removing, editing classes, new members, new instuctors.
+     * @param scanner used for user input.
+     */
     private static void sysadminOptions(Scanner scanner) {
         while (true) {
             System.out.println("What would you like to do?: ");
@@ -197,7 +215,6 @@ public class Client {
 
     /**
      * Select options for READING data from the database
-     * @author Mattias
      * @param scanner reads input text from user
      */
     private static void readDataOptions(Scanner scanner) {
@@ -234,6 +251,11 @@ public class Client {
         }
     }
 
+    /**
+     * Adds a member to a gymClass's attendant list, vice versa.
+     * Can do it both with an existing member, or register a new member.
+     * @param scanner used for user input.
+     */
     private static void addAttendantToClass(Scanner scanner) {
 
         while (true) {
@@ -301,6 +323,10 @@ public class Client {
         }
     }
 
+    /**
+     * Removes a member from a gymClass's attendants list.
+     * @param scanner  used for user input.
+     */
     private static void removeAttendantFromClass(Scanner scanner) {
         while (true) {
 
@@ -328,6 +354,14 @@ public class Client {
         }
     }
 
+    /**
+     * Helper method used to print out contents of a collection and register a selection from the user.
+     * @param scanner used for user input.
+     * @param list takes a list of anything and puts the elements in an ordered list in STDOUT.
+     * @param itemType clue to what kind of items the list contains
+     * @return one of two things, a list containing only the selected object OR null
+     * @param <T> An object
+     */
     private static <T> Optional<T> promptSelection(Scanner scanner, List<T> list, String itemType) {
         if (list.isEmpty()) {
             System.out.println("No " + itemType + "s available.");

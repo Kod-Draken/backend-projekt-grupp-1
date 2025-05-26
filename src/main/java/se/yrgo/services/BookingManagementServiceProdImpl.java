@@ -57,6 +57,7 @@ public class BookingManagementServiceProdImpl implements BookingManagementServic
             throw new GymClassFullException("Sorry, class is fully booked!");
         }
 
+
         System.out.println("Successfully added attendant " + newAttendant.toString() + " to class " + gymClass);
     }
 
@@ -74,6 +75,8 @@ public class BookingManagementServiceProdImpl implements BookingManagementServic
         }
         Member member = memberDao.getById(attendantId);
         gymClass.removeAttendant(member);
+        gymClassDao.updateGymClass(gymClass);
+        memberDao.update(member);
     }
 
     /**

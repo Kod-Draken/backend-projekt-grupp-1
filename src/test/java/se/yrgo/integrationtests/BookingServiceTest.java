@@ -60,6 +60,7 @@ public class BookingServiceTest {
         StringBuilder str = new StringBuilder();
         for (Member mem : testGymclass.getAttendants()) {
             str.append(mem.getName()).append(", ");
+
         }
         assertEquals("Lars Andersson, ", str.toString());
 
@@ -72,7 +73,9 @@ public class BookingServiceTest {
 
     @Test
     public void testRemoveAttendantFromClass() throws GymClassFullException, AlreadyBookedToGymClassException, LateCancelException {
-        bms.addAttendantToClass("GC1","ME1");
+        GymClass newGymClass = new GymClass("GC2", "Spinning", "30 min", "Rum 10", testInstructor, LocalDateTime.now().plusDays(10), 10);
+        bms.addAttendantToClass("GC2","ME1");
+
         bms.removeAttendantFromClass("GC1","ME1");
         assertNotEquals(1, testGymclass.getAttendants().size());
     }

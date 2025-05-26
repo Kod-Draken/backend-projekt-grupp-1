@@ -143,6 +143,14 @@ public class Client {
                 }
                 case "1": {
                     addAttendantToClass(scanner);
+                    break;
+                }
+                case "2": {
+                    removeAttendantFromClass(scanner);
+                    break;
+                }
+                default: {
+                    System.out.println("Invalid choice, please enter a number between 0 and 2");
                 }
             }
         }
@@ -212,6 +220,12 @@ public class Client {
                     }
                 }
             }
+        }
+    }
+
+    private static void removeAttendantFromClass(Scanner scanner) {
+        while (true) {
+
         }
     }
 

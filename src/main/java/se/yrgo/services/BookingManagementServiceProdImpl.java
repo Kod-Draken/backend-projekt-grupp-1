@@ -57,7 +57,7 @@ public class BookingManagementServiceProdImpl implements BookingManagementServic
             throw new GymClassFullException("Sorry, class is fully booked!");
         }
 
-        System.out.println("Successfully added attendant " + newAttendant.toString() + " to class " + gymClass);
+        System.out.println("Successfully added attendant " + newAttendant + " to class " + gymClass);
     }
 
     /**

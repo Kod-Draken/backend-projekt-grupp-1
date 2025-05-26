@@ -19,6 +19,7 @@ import java.util.Scanner;
 
 /**
  * This class is the Client in an application where you can book and manage gym classes
+ *
  * @author Alrik, Mattias, Najib
  */
 public class Client {
@@ -43,33 +44,33 @@ public class Client {
         Instructor instructor2 = new Instructor("IN2", "Lasse Långsladd", "031-999222");
         Instructor instructor3 = new Instructor("IN3", "Eva Johansson", "0754-222333");
 
-        GymClass gymClass = new GymClass("BX0001","Boxning", "Lätt boxningspass fokus på hög puls och förbättrad koordination", "Sal 3", instructor, LocalDateTime.now(), 20);
+        GymClass gymClass = new GymClass("BX0001", "Boxning", "Lätt boxningspass fokus på hög puls och förbättrad koordination", "Sal 3", instructor, LocalDateTime.now(), 20);
         instructor.addGymClassToInstructorSchedule(gymClass);
-        GymClass gymClass2 = new GymClass("PI0001","Pilates", "Lugnt och fint", "Sal 1", instructor, LocalDateTime.now(), 20);
+        GymClass gymClass2 = new GymClass("PI0001", "Pilates", "Lugnt och fint", "Sal 1", instructor, LocalDateTime.now(), 20);
         instructor.addGymClassToInstructorSchedule(gymClass2);
 
         is.newInstructor(instructor);
         gm.addNewGymClass(gymClass);
         gm.addNewGymClass(gymClass2);
 
-        GymClass gymClass3 = new GymClass("YO0001","Yoga", "Vinyasa Flow", "Hot-salen", instructor2, LocalDateTime.now(), 20);
+        GymClass gymClass3 = new GymClass("YO0001", "Yoga", "Vinyasa Flow", "Hot-salen", instructor2, LocalDateTime.now(), 20);
         instructor2.addGymClassToInstructorSchedule(gymClass3);
 
         is.newInstructor(instructor2);
         gm.addNewGymClass(gymClass3);
 
-        GymClass gymClass4 = new GymClass("SP0001","Spinning", "30 min", "Spinning-salen", instructor3, LocalDateTime.now(), 20);
+        GymClass gymClass4 = new GymClass("SP0001", "Spinning", "30 min", "Spinning-salen", instructor3, LocalDateTime.now(), 20);
         instructor3.addGymClassToInstructorSchedule(gymClass4);
-        GymClass gymClass5 = new GymClass("BP0001","Body Pump", "60 min", "Sal 10", instructor3, LocalDateTime.now(), 20);
+        GymClass gymClass5 = new GymClass("BP0001", "Body Pump", "60 min", "Sal 10", instructor3, LocalDateTime.now(), 20);
         instructor3.addGymClassToInstructorSchedule(gymClass5);
 
         is.newInstructor(instructor3);
         gm.addNewGymClass(gymClass4);
         gm.addNewGymClass(gymClass5);
 
-        mm.newMember(new Member("S001","Janne Björnsson","0758293153"));
-        mm.newMember(new Member("S002","Doris Jönsson","0744356987"));
-        mm.newMember(new Member("S003","Allan Borg","073863987"));
+        mm.newMember(new Member("S001", "Janne Björnsson", "0758293153"));
+        mm.newMember(new Member("S002", "Doris Jönsson", "0744356987"));
+        mm.newMember(new Member("S003", "Allan Borg", "073863987"));
     }
 
     /**
@@ -111,10 +112,11 @@ public class Client {
 
     /**
      * Operations that can be conducted by a member of the gym. Requires a member ID to access the next layer.
+     *
      * @param scanner used for input from the user.
      */
     private static void memberOptions(Scanner scanner) {
-        while(true){
+        while (true) {
             String choiceMember = "";
             try {
                 System.out.println("\t" + "Enter your Member ID: ");
@@ -135,17 +137,18 @@ public class Client {
     }
 
     /**
-     * A member can book themselves to a class or unbook themselves
-     * @param scanner
+     * A member can book themselves to a class or cancel the class
+     *
+     * @param scanner is for user input
      * @param memberId required to use the method, user enters their id in the previous method
      */
     private static void bookAndCancelClass(Scanner scanner, String memberId) {
-        while(true){
+        while (true) {
             System.out.println("\t" + "0. Press '0' to return");
             System.out.println("\t" + "1. Press '1' if you want to book class");
             System.out.println("\t" + "2. Press '2' if you want to cancel class");
             String choiceMember2 = scanner.nextLine();
-            switch (choiceMember2){
+            switch (choiceMember2) {
                 case "0": {
                     return;
                 }
@@ -153,32 +156,32 @@ public class Client {
                     System.out.println("Search name of Class to book");
                     String gymClassName = scanner.nextLine();
                     Optional<GymClass> selectedClass = promptSelection(scanner, gm.getClassesByName(gymClassName), "class");
-                    if (selectedClass.isEmpty()){
+                    if (selectedClass.isEmpty()) {
                         System.out.println("No class found");
                         break;
                     }
                     try {
-                        bm.addAttendantToClass(selectedClass.get().getClassId(),memberId);
+                        bm.addAttendantToClass(selectedClass.get().getClassId(), memberId);
                     } catch (AlreadyBookedToGymClassException e) {
                         System.err.println("error at: " + e.getMessage());
-                    } catch (GymClassFullException e){
+                    } catch (GymClassFullException e) {
                         System.err.println("Class is full");
                     }
                     break;
                 }
                 case "2": {
                     Optional<GymClass> selectedClass = promptSelection(scanner, mm.bookingCheck(memberId), "class");
-                    if (selectedClass.isEmpty()){
+                    if (selectedClass.isEmpty()) {
                         System.out.println("No class found");
                         break;
                     }
                     try {
-                        bm.removeAttendantFromClass(selectedClass.get().getClassId(),memberId);
+                        bm.removeAttendantFromClass(selectedClass.get().getClassId(), memberId);
                     } catch (LateCancelException e) {
                         System.err.println("error at: " + e.getMessage());
                     }
                 }
-                default:{
+                default: {
                     System.out.println("Invalid choice, please enter a number between 0 and 2");
                 }
             }
@@ -186,7 +189,8 @@ public class Client {
     }
 
     /**
-     * Options for a System Admin, they have a lot more tools at their disposal such as adding, removing, editing classes, new members, new instuctors.
+     * Options for a System Admin, they have a lot more tools at their disposal such as adding, removing, editing classes, new members, new instructors.
+     *
      * @param scanner used for user input.
      */
     private static void sysadminOptions(Scanner scanner) {
@@ -230,6 +234,7 @@ public class Client {
 
     /**
      * Select options for READING data from the database
+     *
      * @param scanner reads input text from user
      */
     private static void readDataOptions(Scanner scanner) {
@@ -260,7 +265,7 @@ public class Client {
                     break;
                 }
                 case "3": {
-                    for (GymClass gymClass : gm.getAllClasses()){
+                    for (GymClass gymClass : gm.getAllClasses()) {
                         System.out.println(gymClass);
                     }
                     System.out.println();
@@ -272,6 +277,7 @@ public class Client {
     /**
      * Adds a member to a gymClass's attendant list, vice versa.
      * Can do it both with an existing member, or register a new member.
+     *
      * @param scanner used for user input.
      */
     private static void addAttendantToClass(Scanner scanner) {
@@ -343,7 +349,8 @@ public class Client {
 
     /**
      * Removes a member from a gymClass's attendants list.
-     * @param scanner  used for user input.
+     *
+     * @param scanner used for user input.
      */
     private static void removeAttendantFromClass(Scanner scanner) {
         while (true) {
@@ -366,42 +373,44 @@ public class Client {
         }
     }
 
+    /**
+     * Changes the instructor for a class by selecting instructor, from which class and a replacer
+     * @param scanner is for user input
+     */
     private static void changeInstructorForClass(Scanner scanner) {
-        while (true) {
-            System.out.println("Which instructor would like to change?");
-            Optional<Instructor> selectedInstructor = promptSelection(scanner, is.getAllInstructors(), "instructor");
-            if (selectedInstructor.isEmpty()) {
-                System.out.println("Cancelled.");
-                return;
-            }
-
-            System.out.println("From which of the classes?");
-            Optional<GymClass> selectedGymClass = promptSelection(scanner, is.getGymClassesForInstructor(selectedInstructor.get().getInstructorId()), "gym class");
-            if (selectedGymClass.isEmpty()) {
-                System.out.println("Cancelled.");
-                return;
-            }
-
-            System.out.println("To which other instructor would like to change?");
-            Optional<Instructor> newSelectedInstructor = promptSelection(scanner, is.getAllInstructors(), "instructor");
-            if (newSelectedInstructor.isEmpty()) {
-                System.out.println("Cancelled.");
-                return;
-            }
-
-            bm.updateClassInstructor(selectedGymClass.get().getClassId(), newSelectedInstructor.get().getInstructorId());
-            System.out.println("Gymclass " + selectedGymClass.get().getName() + " now has instructor " + newSelectedInstructor.get().getName() + "\n");
+        System.out.println("Which instructor would like to change?");
+        Optional<Instructor> selectedInstructor = promptSelection(scanner, is.getAllInstructors(), "instructor");
+        if (selectedInstructor.isEmpty()) {
+            System.out.println("Cancelled.");
             return;
         }
+
+        System.out.println("From which of the classes?");
+        Optional<GymClass> selectedGymClass = promptSelection(scanner, is.getGymClassesForInstructor(selectedInstructor.get().getInstructorId()), "gym class");
+        if (selectedGymClass.isEmpty()) {
+            System.out.println("Cancelled.");
+            return;
+        }
+
+        System.out.println("To which other instructor would like to change?");
+        Optional<Instructor> newSelectedInstructor = promptSelection(scanner, is.getAllInstructors(), "instructor");
+        if (newSelectedInstructor.isEmpty()) {
+            System.out.println("Cancelled.");
+            return;
+        }
+
+        bm.updateClassInstructor(selectedGymClass.get().getClassId(), newSelectedInstructor.get().getInstructorId());
+        System.out.println("Gym class " + selectedGymClass.get().getName() + " now has instructor " + newSelectedInstructor.get().getName() + "\n");
     }
 
     /**
      * Helper method used to print out contents of a collection and register a selection from the user.
-     * @param scanner used for user input.
-     * @param list takes a list of anything and puts the elements in an ordered list in STDOUT.
+     *
+     * @param scanner  used for user input.
+     * @param list     takes a list of anything and puts the elements in an ordered list in STDOUT.
      * @param itemType clue to what kind of items the list contains
+     * @param <T>      An object
      * @return one of two things, a list containing only the selected object OR null
-     * @param <T> An object
      */
     private static <T> Optional<T> promptSelection(Scanner scanner, List<T> list, String itemType) {
         if (list.isEmpty()) {

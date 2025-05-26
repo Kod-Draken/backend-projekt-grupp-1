@@ -69,7 +69,7 @@ public class BookingManagementServiceProdImpl implements BookingManagementServic
     @Override
     public void removeAttendantFromClass(String gymClassId, String attendantId) throws LateCancelException {
         GymClass gymClass = gymClassDao.getGymClassById(gymClassId);
-        if (Duration.between(gymClass.getScheduledTime(), LocalDateTime.now()).toMinutes() < 120) {
+        if (Duration.between(LocalDateTime.now(), gymClass.getScheduledTime()).toMinutes() < 120) {
             throw new LateCancelException("Sorry, the class is due in less than 2 hours!");
         }
         Member member = memberDao.getById(attendantId);

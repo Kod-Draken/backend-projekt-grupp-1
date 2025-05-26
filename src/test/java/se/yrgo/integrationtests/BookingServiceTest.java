@@ -14,7 +14,10 @@ import se.yrgo.services.BookingManagementService;
 import se.yrgo.services.GymClassManagementService;
 import se.yrgo.services.InstructorManagementService;
 import se.yrgo.services.MemberManagementService;
+import se.yrgo.services.exceptions.AlreadyBookedToGymClassException;
 import se.yrgo.services.exceptions.GymClassFullException;
+import se.yrgo.services.exceptions.LateCancelException;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
@@ -42,7 +45,7 @@ public class BookingServiceTest {
     private MemberManagementService mms;
 
     private Instructor testInstructor = new Instructor("IN1", "Bosse Bredsladd", "031-777444");
-    private GymClass testGymclass = new GymClass("GC1", "Yoga", "Vinyasa Flow", "Rum 14", testInstructor, LocalDateTime.now(), 10);
+    private GymClass testGymclass = new GymClass("GC1", "Yoga", "Vinyasa Flow", "Rum 14", testInstructor, LocalDateTime.now().plusDays(10), 10);
     private Member testMember = new Member("ME1", "Lars Andersson", "0771-444333");
 
     @BeforeEach
@@ -53,7 +56,7 @@ public class BookingServiceTest {
     }
 
     @Test
-    public void testAddAttendantToClass() throws GymClassFullException {
+    public void testAddAttendantToClass() throws GymClassFullException, AlreadyBookedToGymClassException {
         bms.addAttendantToClass("GC1","ME1");
         StringBuilder str = new StringBuilder();
         for (Member mem : testGymclass.getAttendants()) {
@@ -67,7 +70,7 @@ public class BookingServiceTest {
     }
 
     @Test
-    public void testRemoveAttendantFromClass() {
+    public void testRemoveAttendantFromClass() throws GymClassFullException, AlreadyBookedToGymClassException, LateCancelException {
         bms.addAttendantToClass("GC1","ME1");
         bms.removeAttendantFromClass("GC1","ME1");
         assertNotEquals(1, testGymclass.getAttendants().size());

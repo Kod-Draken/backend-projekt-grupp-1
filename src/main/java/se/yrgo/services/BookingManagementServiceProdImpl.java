@@ -57,7 +57,7 @@ public class BookingManagementServiceProdImpl implements BookingManagementServic
         Member newAttendant = memberDao.getById(attendantId);
         gymClass.addAttendant(newAttendant);
 
-        System.out.println("Successfully added attendant " + newAttendant.toString());
+        System.out.println("Successfully added attendant " + newAttendant.toString() + " to class " + gymClass.toString());
     }
 
     /**

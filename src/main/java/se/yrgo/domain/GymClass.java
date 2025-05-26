@@ -55,15 +55,15 @@ public class GymClass {
         this.capacity = capacity;
     }
 
+    @Override
     public String toString() {
-        return "GymClass \n Name = "
-                + name
-                + "\nDescription = "
-                + description
-                + "\nInstructor = "
-                + instructor.getName()
-                + "\nScheduled At = "
-                + scheduledAt.format(formatter);
+        return String.format(
+                "Name: %s\tDescription: %s\tInstructor: %s\tScheduled At: %s",
+                name,
+                description,
+                instructor.getName(),
+                scheduledAt.format(formatter)
+        );
     }
 
     public int getId() {

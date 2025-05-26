@@ -29,6 +29,10 @@ public class Member {
     }
     public Member() {}
 
+    /*
+    TODO: make find name unspecific
+     */
+
     public String toString(){
         return this.memberId + ": " + this.name + " " + this.phone;
     }

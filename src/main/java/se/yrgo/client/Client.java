@@ -8,8 +8,12 @@ import se.yrgo.services.BookingManagementService;
 import se.yrgo.services.GymClassManagementService;
 import se.yrgo.services.InstructorManagementService;
 import se.yrgo.services.MemberManagementService;
+import se.yrgo.services.exceptions.AlreadyBookedToGymClassException;
+import se.yrgo.services.exceptions.GymClassFullException;
 
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Optional;
 import java.util.Scanner;
 
 /**
@@ -76,8 +80,39 @@ public class Client {
     }
     private static void memberOptions(Scanner scanner) {
         while(true){
-            try (Scanner scan = new Scanner(System.in)) {
+            try (scanner) {
+                System.out.println("Enter your Member ID: ");
+                String choiceMember = scanner.nextLine();
+                if(mm.findMemberById(choiceMember) != null){
+                    System.out.println("\t" + "0. Press '0' to return");
+                    System.out.println("\t" + "1. Press '1' if you want to book class");
+                    System.out.println("\t" + "2. Press '2' if you want to cancel class");
+                    String choiceMember2 = scanner.nextLine();
+                    switch (choiceMember2){
+                        case "0": {
+                            return;
+                        }
+                        case "1": {
+                            System.out.println("Please enter name of available Class to book");
+                            StringBuilder str = new StringBuilder();
+                            for (Member mem : testGymclass.getAttendants()) {
+                                str.append(mem.getName()).append(", ");
+                            }
+                            String gymClassName = scanner.nextLine();
+                            mm.bookGymClass(g);
 
+                        }
+                        default:{
+                            System.out.println("Invalid choice, please enter a number between 0 and 2");
+                        }
+                    }
+                }
+                else if(mm.findMemberById(choiceMember) != null){
+                    break;
+                }
+                else {
+                    System.out.println("Member not found!");
+                }
             }
         }
     }
@@ -97,13 +132,101 @@ public class Client {
                     return;
                 }
                 case "1": {
-                    addAttendantToClass();
+                    addAttendantToClass(scanner);
                 }
             }
         }
     }
 
     private static void addAttendantToClass(Scanner scanner) {
-        while (true) {}
+
+        while (true) {
+            System.out.println("Choose from the following options");
+            System.out.println("\t" + "0. Press '0' to cancel");
+            System.out.println("\t" + "1. Press '1' add an existing member to class");
+            System.out.println("\t" + "2. Press '2' add a new member to class");
+            String choice = scanner.nextLine();
+            switch (choice) {
+                case "0": {
+                    System.out.println("Returning to sysadmin options");
+                    return;
+                }
+                case "1": {
+                    Optional<Member> selectedMember = promptSelection(scanner, mm.getAllMembers(), "member");
+                    if (selectedMember.isEmpty()) {
+                        System.out.println("Cancelled.");
+                        return;
+                    }
+
+                    Optional<GymClass> selectedClass = promptSelection(scanner, gm.getAllClasses(), "class");
+                    if (selectedClass.isEmpty()) {
+                        System.out.println("Cancelled.");
+                        return;
+                    }
+
+                    try {
+                        bm.addAttendantToClass(selectedClass.get().getClassId(), selectedMember.get().getMemberId());
+                    } catch (GymClassFullException e) {
+                        System.err.println(e.getMessage());
+                    } catch (AlreadyBookedToGymClassException e) {
+                        System.err.println("You are already booked to this class");
+                    }
+
+                    break;
+                }
+                case "2": {
+                    System.out.println("Enter member ID: ");
+                    String memberId = scanner.nextLine();
+
+                    System.out.println("Enter member name: ");
+                    String memberName = scanner.nextLine();
+
+                    System.out.println("Enter member phone number: ");
+                    String memberPhone = scanner.nextLine();
+
+                    Member member = new Member(memberId, memberName, memberPhone);
+                    mm.newMember(member);
+
+                    Optional<GymClass> selectedClass = promptSelection(scanner, gm.getAllClasses(), "class");
+                    if (selectedClass.isEmpty()) {
+                        System.out.println("Cancelled.");
+                        return;
+                    }
+
+                    try {
+                        bm.addAttendantToClass(selectedClass.get().getClassId(), member.getMemberId());
+                    } catch (GymClassFullException e) {
+                        System.err.println(e.getMessage());
+                    } catch (AlreadyBookedToGymClassException e) {
+                        System.err.println("You are already booked to this class");
+                    }
+                }
+            }
+        }
+    }
+
+    private static <T> Optional<T> promptSelection(Scanner scanner, List<T> list, String itemType) {
+        if (list.isEmpty()) {
+            System.out.println("No " + itemType + "s available.");
+            return Optional.empty();
+        }
+
+        for (int i = 0; i < list.size(); i++) {
+            System.out.println((i + 1) + ". " + list.get(i));
+        }
+        System.out.println("Select a " + itemType + " by number or 0 to cancel:");
+
+        while (true) {
+            try {
+                int choice = Integer.parseInt(scanner.nextLine());
+                if (choice == 0) return Optional.empty();
+                if (choice >= 1 && choice <= list.size()) {
+                    return Optional.of(list.get(choice - 1));
+                }
+                System.out.println("Invalid number. Try again.");
+            } catch (NumberFormatException e) {
+                System.out.println("Please enter a valid number.");
+            }
+        }
     }
 }

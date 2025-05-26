@@ -18,10 +18,9 @@ import se.yrgo.services.exceptions.AlreadyBookedToGymClassException;
 import se.yrgo.services.exceptions.GymClassFullException;
 import se.yrgo.services.exceptions.LateCancelException;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
-
 import java.time.LocalDateTime;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * @author Alrik, Mattias, Najib
@@ -63,6 +62,8 @@ public class BookingServiceTest {
             str.append(mem.getName()).append(", ");
         }
         assertEquals("Lars Andersson, ", str.toString());
+
+        assertThrows(AlreadyBookedToGymClassException.class, bms.addAttendantToClass("GC1","ME1"));
     }
 
     @Test void testThrowsWhenClassIsFull() throws GymClassFullException {

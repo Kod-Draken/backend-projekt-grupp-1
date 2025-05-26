@@ -93,13 +93,25 @@ public class Client {
                             return;
                         }
                         case "1": {
-                            System.out.println("Please enter name of available Class to book");
-                            StringBuilder str = new StringBuilder();
-                            for (Member mem : testGymclass.getAttendants()) {
-                                str.append(mem.getName()).append(", ");
-                            }
+                            System.out.println("Search name of Class to book");
                             String gymClassName = scanner.nextLine();
-                            mm.bookGymClass(g);
+                            Optional<GymClass> selectedClass = promptSelection(scanner, gm.getClassesByName(gymClassName), "class");
+                            if(selectedClass.isEmpty()){
+                                System.out.println("No class found");
+                                return;
+                            }
+                            try {
+                                bm.addAttendantToClass(selectedClass.get().getClassId(),choiceMember);
+                            } catch (AlreadyBookedToGymClassException e) {
+                                System.err.println("error at: " + e.getMessage());
+                            } catch (GymClassFullException e){
+                                System.err.println("Class is full");
+
+                            }
+
+                        }
+                        case "2": {
+                            System.out.println("Please enter Class to cancel");
 
                         }
                         default:{

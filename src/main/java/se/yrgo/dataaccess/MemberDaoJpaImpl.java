@@ -57,7 +57,7 @@ public class MemberDaoJpaImpl implements MemberDao{
     public Member getById(String id) throws MemberMissingException{
         try {
             return em.createQuery("select m from Member m where m.memberId =:id ", Member.class).setParameter("id", id).getSingleResult();
-        }catch(NoResultException e){
+        } catch (NoResultException e){
             throw new MemberMissingException("Member not found");
         }
 

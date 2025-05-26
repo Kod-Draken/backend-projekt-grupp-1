@@ -95,8 +95,8 @@ public class Client {
                         case "1": {
                             System.out.println("Please enter name of available Class to book");
                             StringBuilder str = new StringBuilder();
-                            for (Member mem : testGymclass.getAttendants()) {
-                                str.append(mem.getName()).append(", ");
+                            for (GymClass gym : gm.getAllClasses()) {
+                                str.append(gym.getName()).append(", ");
                             }
                             String gymClassName = scanner.nextLine();
                             mm.bookGymClass(g);

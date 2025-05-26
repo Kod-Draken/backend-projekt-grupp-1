@@ -2,6 +2,7 @@ package se.yrgo.domain;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -34,6 +35,8 @@ public class GymClass {
 
     private LocalDateTime scheduledAt;
 
+    private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM HH:mm");
+
     private int capacity;
 
     @ManyToMany(mappedBy = "bookedClasses")
@@ -60,7 +63,7 @@ public class GymClass {
                 + "\nInstructor = "
                 + instructor.getName()
                 + "\nScheduled At = "
-                + scheduledAt;
+                + scheduledAt.format(formatter);
     }
 
     public int getId() {

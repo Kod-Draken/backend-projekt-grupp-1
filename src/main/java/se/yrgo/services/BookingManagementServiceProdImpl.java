@@ -57,7 +57,6 @@ public class BookingManagementServiceProdImpl implements BookingManagementServic
             throw new GymClassFullException("Sorry, class is fully booked!");
         }
 
-
         System.out.println("Successfully added attendant " + newAttendant.toString() + " to class " + gymClass);
     }
 
@@ -73,10 +72,12 @@ public class BookingManagementServiceProdImpl implements BookingManagementServic
         if (Duration.between(LocalDateTime.now(), gymClass.getScheduledTime()).toMinutes() < 120) {
             throw new LateCancelException("Sorry, the class is due in less than 2 hours!");
         }
-        Member member = memberDao.getById(attendantId);
-        gymClass.removeAttendant(member);
+        Member attendantToRemove = memberDao.getById(attendantId);
+        gymClass.removeAttendant(attendantToRemove);
         gymClassDao.updateGymClass(gymClass);
-        memberDao.update(member);
+        memberDao.update(attendantToRemove);
+
+        System.out.println("Successfully removed attendant " + attendantToRemove.toString() + " from class " + gymClass);
     }
 
     /**

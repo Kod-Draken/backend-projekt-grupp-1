@@ -160,9 +160,10 @@ public class Client {
         while (true) {
             System.out.println("What would you like to do?: ");
             System.out.println("\t" + "0. Press '0' to return to main menu");
-            System.out.println("\t" + "1. Press '1' add attendant to class");
-            System.out.println("\t" + "2. Press '2' remove attendant from class");
-            System.out.println("\t" + "3. Press '3' change instructor for class");
+            System.out.println("\t" + "1. Press '1' to see members, classes and instructors");
+            System.out.println("\t" + "1. Press '2' add attendant to class");
+            System.out.println("\t" + "2. Press '3' remove attendant from class");
+            System.out.println("\t" + "3. Press '4' change instructor for class");
             System.out.println("Enter a number: ");
             String choice = scanner.nextLine();
             switch (choice) {
@@ -171,19 +172,63 @@ public class Client {
                     return;
                 }
                 case "1": {
+                    readDataOptions(scanner);
+                    break;
+                }
+
+                case "2": {
                     addAttendantToClass(scanner);
                     break;
                 }
-                case "2": {
+                case "3": {
                     removeAttendantFromClass(scanner);
                     break;
                 }
-                case "3": {
+                case "4": {
                     changeInstructorForClass(scanner);
                     break;
                 }
                 default: {
                     System.out.println("Invalid choice, please enter a number between 0 and 2");
+                }
+            }
+        }
+    }
+
+    /**
+     * Select options for READING data from the database
+     * @author Mattias
+     * @param scanner reads input text from user
+     */
+    private static void readDataOptions(Scanner scanner) {
+        while (true) {
+            System.out.println("Choose from the following options");
+            System.out.println("\t" + "0. Press '0' to cancel");
+            System.out.println("\t" + "1. Press '1' see all members");
+            System.out.println("\t" + "2. Press '2' see all instructors");
+            System.out.println("\t" + "3. Press '3' see all classes");
+            String choice = scanner.nextLine();
+            switch (choice) {
+                case "0": {
+                    System.out.println("Returning to sysadmin options");
+                    return;
+                }
+                case "1": {
+                    for (Member member : mm.getAllMembers()) {
+                        System.out.println(member);
+                    }
+                    break;
+                }
+                case "2": {
+                    for (Instructor instructor : is.getAllInstructors()) {
+                        System.out.println(instructor);
+                    }
+                    break;
+                }
+                case "3": {
+                    for (GymClass gymClass : gm.getAllClasses()){
+                        System.out.println(gymClass);
+                    }
                 }
             }
         }
@@ -259,6 +304,21 @@ public class Client {
     private static void removeAttendantFromClass(Scanner scanner) {
         while (true) {
 
+            Optional<Member> attendantToRemove = promptSelection(scanner, mm.getAllMembers(), "member");
+
+            if (attendantToRemove.isEmpty()) {
+                System.out.println("Cancelled.");
+                return;
+            }
+
+            Optional<GymClass> selectedClass = promptSelection(scanner, mm.bookingCheck(attendantToRemove.get().getMemberId()), "class");
+
+            if (selectedClass.isEmpty()) {
+                System.out.println("Cancelled.");
+                return;
+            }
+
+            bm.removeAttendantFromClass(selectedClass.get().getClassId(), attendantToRemove.get().getMemberId());
         }
     }
 

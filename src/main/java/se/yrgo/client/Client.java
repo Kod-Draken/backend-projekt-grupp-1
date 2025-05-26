@@ -9,7 +9,6 @@ import se.yrgo.services.GymClassManagementService;
 import se.yrgo.services.InstructorManagementService;
 import se.yrgo.services.MemberManagementService;
 
-import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.Scanner;
 
@@ -28,26 +27,28 @@ public class Client {
         MemberManagementService mm = container.getBean(MemberManagementService.class);
         BookingManagementService bm = container.getBean(BookingManagementService.class);
 
-        menu();
-
-
-
-
+        menu(is, gm, mm, bm);
 
         container.close();
     }
 
-    private static void menu() {
+    private static void menu(InstructorManagementService is, GymClassManagementService gm, MemberManagementService mm, BookingManagementService bm) {
         try (Scanner scanner = new Scanner(System.in)) {
             while (true) {
                 System.out.println("Choose from the following options: ");
+                System.out.println("\t" + "0. Press '0' to quit");
                 System.out.println("\t" + "1. Press '1' if you are a member");
                 System.out.println("\t" + "2. Press '2' if you are a sysadmin");
                 System.out.println("Enter a number: ");
                 String choice = scanner.nextLine();
                 switch (choice) {
+                    case "0": {
+                        System.out.println("Shutting down...");
+                        return;
+                    }
                     case "1": {
                         System.out.println("You are a member");
+
                         break;
                     }
                     case "2": {
@@ -55,7 +56,7 @@ public class Client {
                         break;
                     }
                     default: {
-                        System.out.println("Invalid choice");
+                        System.out.println("Invalid choice, please enter a number between 0 and 2");
                     }
                 }
             }

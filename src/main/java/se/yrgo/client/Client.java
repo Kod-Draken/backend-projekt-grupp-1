@@ -40,10 +40,21 @@ public class Client {
      */
     private static void setUpData() {
         Instructor instructor = new Instructor("IN1", "Bosse Bredsladd", "031-777444");
+        Instructor instructor2 = new Instructor("IN2", "Lasse Långsladd", "031-999222");
+        Instructor instructor3 = new Instructor("IN3", "Eva Johansson", "0754-222333");
 
         is.newInstructor(instructor);
+        is.newInstructor(instructor2);
+        is.newInstructor(instructor3);
+
         gm.addNewGymClass(new GymClass("BX0001","Boxning", "Lätt boxningspass fokus på hög puls och förbättrad koordination", "Sal 3", instructor, LocalDateTime.now(), 20));
+        gm.addNewGymClass(new GymClass("PI0001","Pilates", "Lugnt och fint", "Sal 1", instructor, LocalDateTime.now(), 20));
+        gm.addNewGymClass(new GymClass("YO0001","Yoga", "Vinyasa Flow", "Hot-salen", instructor2, LocalDateTime.now(), 20));
+        gm.addNewGymClass(new GymClass("SP0001","Spinning", "30 min", "Spinning-salen", instructor3, LocalDateTime.now(), 20));
+        gm.addNewGymClass(new GymClass("BP0001","Body Pump", "60 min", "Sal 10", instructor3, LocalDateTime.now(), 20));
         mm.newMember(new Member("S001","Janne Björnsson","0758293153"));
+        mm.newMember(new Member("S002","Doris Jönsson","0744356987"));
+        mm.newMember(new Member("S003","Allan Borg","073863987"));
     }
 
     private static void menu() {
@@ -141,7 +152,6 @@ public class Client {
         }
     }
 
-
     private static void sysadminOptions(Scanner scanner) {
         while (true) {
             System.out.println("What would you like to do?: ");
@@ -162,6 +172,10 @@ public class Client {
                 }
                 case "2": {
                     removeAttendantFromClass(scanner);
+                    break;
+                }
+                case "3": {
+                    changeInstructorForClass(scanner);
                     break;
                 }
                 default: {
@@ -241,6 +255,12 @@ public class Client {
     private static void removeAttendantFromClass(Scanner scanner) {
         while (true) {
 
+        }
+    }
+
+    private static void changeInstructorForClass(Scanner scanner) {
+        while (true) {
+            System.out.println("");
         }
     }
 

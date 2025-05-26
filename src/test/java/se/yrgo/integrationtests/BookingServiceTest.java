@@ -74,6 +74,7 @@ public class BookingServiceTest {
     @Test
     public void testRemoveAttendantFromClass() throws GymClassFullException, AlreadyBookedToGymClassException, LateCancelException {
         GymClass newGymClass = new GymClass("GC2", "Spinning", "30 min", "Rum 10", testInstructor, LocalDateTime.now().plusDays(10), 10);
+        gcm.addNewGymClass(newGymClass);
         bms.addAttendantToClass("GC2","ME1");
 
         bms.removeAttendantFromClass("GC1","ME1");

@@ -1,6 +1,7 @@
 package se.yrgo.dataaccess;
 
 import org.springframework.stereotype.Repository;
+import se.yrgo.dataaccess.exceptions.GymClassNotFoundException;
 import se.yrgo.dataaccess.exceptions.MemberMissingException;
 import se.yrgo.domain.GymClass;
 import se.yrgo.domain.Member;
@@ -30,6 +31,10 @@ public class MemberDaoJpaImpl implements MemberDao{
      */
     @Override
     public void update(Member updateMember){
+        Member existing = em.find(Member.class, updateMember.getId());
+        if(existing == null){
+            throw new GymClassNotFoundException("Gym class not found");
+        }
         em.merge(updateMember);
     }
 

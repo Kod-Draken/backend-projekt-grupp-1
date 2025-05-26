@@ -44,9 +44,9 @@ public class BookingServiceTest {
     @Autowired
     private MemberManagementService mms;
 
-    private Instructor testInstructor = new Instructor("IN1", "Bosse Bredsladd", "031-777444");
-    private GymClass testGymclass = new GymClass("GC1", "Yoga", "Vinyasa Flow", "Rum 14", testInstructor, LocalDateTime.now().plusDays(10), 10);
-    private Member testMember = new Member("ME1", "Lars Andersson", "0771-444333");
+    private final Instructor testInstructor = new Instructor("IN1", "Bosse Bredsladd", "031-777444");
+    private final GymClass testGymclass = new GymClass("GC1", "Yoga", "Vinyasa Flow", "Rum 14", testInstructor, LocalDateTime.now().plusDays(10), 10);
+    private final Member testMember = new Member("ME1", "Lars Andersson", "0771-444333");
 
     @BeforeEach
     public void setUp() {

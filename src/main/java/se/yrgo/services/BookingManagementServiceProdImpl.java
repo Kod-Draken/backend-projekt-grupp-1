@@ -53,9 +53,8 @@ public class BookingManagementServiceProdImpl implements BookingManagementServic
         if (gymClass.isFull()) {
             throw new GymClassFullException("Sorry, class is fully booked!");
         }
-
         Member newAttendant = memberDao.getById(attendantId);
-        gymClass.addAttendant(newAttendant);
+        memberDao.addGymClass();
 
         System.out.println("Successfully added attendant " + newAttendant.toString() + " to class " + gymClass.toString());
     }

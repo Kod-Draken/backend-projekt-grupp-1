@@ -82,58 +82,53 @@ public class Client {
     }
     private static void memberOptions(Scanner scanner) {
         while(true){
-            try (scanner) {
-                System.out.println("Enter your Member ID: ");
-                String choiceMember = scanner.nextLine();
-                if(mm.findMemberById(choiceMember) != null){
-                    System.out.println("\t" + "0. Press '0' to return");
-                    System.out.println("\t" + "1. Press '1' if you want to book class");
-                    System.out.println("\t" + "2. Press '2' if you want to cancel class");
-                    String choiceMember2 = scanner.nextLine();
-                    switch (choiceMember2){
-                        case "0": {
-                            return;
-                        }
-                        case "1": {
-                            System.out.println("Search name of Class to book");
-                            String gymClassName = scanner.nextLine();
-                            Optional<GymClass> selectedClass = promptSelection(scanner, gm.getClassesByName(gymClassName), "class");
-                            if (selectedClass.isEmpty()){
-                                System.out.println("No class found");
-                                return;
-                            }
-                            try {
-                                bm.addAttendantToClass(selectedClass.get().getClassId(),choiceMember);
-                            } catch (AlreadyBookedToGymClassException e) {
-                                System.err.println("error at: " + e.getMessage());
-                            } catch (GymClassFullException e){
-                                System.err.println("Class is full");
-                            }
-
-                        }
-                        case "2": {
-                            List<GymClass> bookedClasses = new ArrayList<>(mm.findMemberById(choiceMember).getAllBookedClasses());
-                            Optional<GymClass> selectedBookedClass = promptSelection(scanner, bookedClasses, "class");
-                            if (selectedBookedClass.isEmpty()){
-                                System.out.println("No class found");
-                                return;
-                            }
-                            try {
-                                bm.removeAttendantFromClass(selectedBookedClass.get().getClassId(),choiceMember);
-                            } catch (LateCancelException e) {
-                                System.err.println("error at: " + e.getMessage());
-                            }
-                        }
-                        default:{
-                            System.out.println("Invalid choice, please enter a number between 0 and 2");
-                        }
+            System.out.println("\t" + "Enter your Member ID: ");
+            System.out.println("\t" + "Enter empty to cancel");
+            String choiceMember = scanner.nextLine();
+            if(mm.findMemberById(choiceMember) != null){
+                bookAndCancelClass(scanner, choiceMember);
+            }
+            else if(choiceMember.isEmpty()){
+                return;
+            }
+            else {
+                System.out.println("Member not found!");
+            }
+        }
+    }
+    private static void bookAndCancelClass(Scanner scanner, String memberId) {
+        while(true){
+            System.out.println("\t" + "0. Press '0' to return");
+            System.out.println("\t" + "1. Press '1' if you want to book class");
+            System.out.println("\t" + "2. Press '2' if you want to cancel class");
+            String choiceMember2 = scanner.nextLine();
+            switch (choiceMember2){
+                case "0": {
+                    return;
+                }
+                case "1": {
+                    System.out.println("Search name of Class to book");
+                    String gymClassName = scanner.nextLine();
+                    Optional<GymClass> selectedClass = promptSelection(scanner, gm.getClassesByName(gymClassName), "class");
+                    if (selectedClass.isEmpty()){
+                        System.out.println("No class found");
+                        return;
                     }
+                    try {
+                        bm.addAttendantToClass(selectedClass.get().getClassId(),memberId);
+                    } catch (AlreadyBookedToGymClassException e) {
+                        System.err.println("error at: " + e.getMessage());
+                    } catch (GymClassFullException e){
+                        System.err.println("Class is full");
+                    }
+                    return;
                 }
-                else if(mm.findMemberById(choiceMember) != null){
-                    break;
+                case "2": {
+                    System.out.println("Search name of Class to cancel");
+
                 }
-                else {
-                    System.out.println("Member not found!");
+                default:{
+                    System.out.println("Invalid choice, please enter a number between 0 and 2");
                 }
             }
         }

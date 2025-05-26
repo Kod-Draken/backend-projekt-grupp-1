@@ -146,9 +146,10 @@ public class Client {
         while (true) {
             System.out.println("What would you like to do?: ");
             System.out.println("\t" + "0. Press '0' to return to main menu");
-            System.out.println("\t" + "1. Press '1' add attendant to class");
-            System.out.println("\t" + "2. Press '2' remove attendant from class");
-            System.out.println("\t" + "3. Press '3' change instructor for class");
+            System.out.println("\t" + "1. Press '1' to see members, classes and instructors");
+            System.out.println("\t" + "1. Press '2' add attendant to class");
+            System.out.println("\t" + "2. Press '3' remove attendant from class");
+            System.out.println("\t" + "3. Press '4' change instructor for class");
             System.out.println("Enter a number: ");
             String choice = scanner.nextLine();
             switch (choice) {
@@ -156,11 +157,11 @@ public class Client {
                     System.out.println("Returning to main menu");
                     return;
                 }
-                case "1": {
+                case "2": {
                     addAttendantToClass(scanner);
                     break;
                 }
-                case "2": {
+                case "3": {
                     removeAttendantFromClass(scanner);
                     break;
                 }

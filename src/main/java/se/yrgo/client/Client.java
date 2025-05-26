@@ -106,9 +106,7 @@ public class Client {
                                 System.err.println("error at: " + e.getMessage());
                             } catch (GymClassFullException e){
                                 System.err.println("Class is full");
-
                             }
-
                         }
                         case "2": {
                             System.out.println("Please enter Class to cancel");

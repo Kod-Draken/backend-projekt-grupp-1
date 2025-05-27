@@ -269,6 +269,7 @@ public class Client {
                         System.out.println(gymClass);
                     }
                     System.out.println();
+                    break;
                 }
             }
         }
@@ -308,10 +309,8 @@ public class Client {
 
                     try {
                         bm.addAttendantToClass(selectedClass.get().getClassId(), selectedMember.get().getMemberId());
-                    } catch (GymClassFullException e) {
+                    } catch (GymClassFullException | AlreadyBookedToGymClassException e) {
                         System.err.println(e.getMessage());
-                    } catch (AlreadyBookedToGymClassException e) {
-                        System.err.println("You are already booked to this class");
                     }
 
                     break;
@@ -342,6 +341,7 @@ public class Client {
                     } catch (AlreadyBookedToGymClassException e) {
                         System.err.println("You are already booked to this class");
                     }
+                    break;
                 }
             }
         }

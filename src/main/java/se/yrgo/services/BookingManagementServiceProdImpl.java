@@ -49,7 +49,8 @@ public class BookingManagementServiceProdImpl implements BookingManagementServic
         newAttendant.addBookedClass(gymClass);
         memberDao.update(newAttendant);
 
-        if (gymClass.getAttendants().contains(memberDao.getById(attendantId))) {
+        var att = gymClass.getAttendants();
+        if (att.contains(memberDao.getById(attendantId))) {
             throw new AlreadyBookedToGymClassException("You're already booked to this class!");
         }
 

@@ -19,6 +19,7 @@ import se.yrgo.services.exceptions.GymClassFullException;
 import se.yrgo.services.exceptions.LateCancelException;
 
 import java.time.LocalDateTime;
+import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -55,15 +56,31 @@ public class BookingServiceTest {
     }
 
     @Test
-    public void testAddAttendantToClass() throws GymClassFullException, AlreadyBookedToGymClassException {
+    public void testAddAttendantToClass() throws GymClassFullException, AlreadyBookedToGymClassException  {
         bms.addAttendantToClass("GC1","ME1");
+
+        Set<Member> expected = gcm.getClassById("GC1").getAttendants();
+
+        assertTrue(expected.contains(testMember));
+
+        Member nonExistantMember = new Member("NO11", "not here", "0");
+
+        assertFalse(expected.contains(nonExistantMember));
+
+
         StringBuilder str = new StringBuilder();
         for (Member mem : testGymclass.getAttendants()) {
             str.append(mem.getName()).append(", ");
         }
         assertEquals("Lars Andersson, ", str.toString());
 
+    }
+
+    @Test
+    public void testAddDuplicateAttendantToClass() throws GymClassFullException, AlreadyBookedToGymClassException{
+        bms.addAttendantToClass("GC1","ME1");
         assertThrows(AlreadyBookedToGymClassException.class, () -> bms.addAttendantToClass("GC1","ME1"));
+
     }
 
     @Test void testThrowsWhenClassIsFull() throws GymClassFullException {

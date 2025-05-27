@@ -11,7 +11,7 @@ public class Member {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
-    @Column(length = 20)
+    @Column(length = 20, unique = true, nullable = false)
     private String memberId;
     @Column(length = 20)
     private String name;
@@ -21,45 +21,66 @@ public class Member {
     @ManyToMany
     private Set<GymClass> bookedClasses;
 
-    public Member(String memberId, String name, String phone){
+    public Member(String memberId, String name, String phone) {
         this.memberId = memberId;
         this.name = name;
         this.phone = phone;
         this.bookedClasses = new HashSet<GymClass>();
     }
-    public Member() {}
+
+    public Member() {
+    }
 
     /*
     TODO: make find name unspecific
      */
 
-    public String toString(){
+    public String toString() {
         return this.memberId + ": " + this.name + " " + this.phone;
     }
-    public int getId() {return this.id;}
-    public String getMemberId(){
+
+    public int getId() {
+        return this.id;
+    }
+
+    public String getMemberId() {
         return this.memberId;
     }
-    public String getName(){
+
+    public String getName() {
         return this.name;
     }
-    public String getPhone(){
+
+    public String getPhone() {
         return this.phone;
     }
-    public Set<GymClass> getAllBookedClasses(){return this.bookedClasses;}
-    public void setBookedClasses(Set<GymClass> bookedClasses){this.bookedClasses = bookedClasses;}
-    public void setName(String newName){this.name = newName;}
-    public void setPhone(String newPhone){this.phone = newPhone;}
+
+    public Set<GymClass> getAllBookedClasses() {
+        return this.bookedClasses;
+    }
+
+    public void setBookedClasses(Set<GymClass> bookedClasses) {
+        this.bookedClasses = bookedClasses;
+    }
+
+    public void setName(String newName) {
+        this.name = newName;
+    }
+
+    public void setPhone(String newPhone) {
+        this.phone = newPhone;
+    }
 
     @Override
     public boolean equals(Object o) {
+        if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Member member = (Member) o;
-        return id == member.id && Objects.equals(memberId, member.memberId) && Objects.equals(name, member.name) && Objects.equals(phone, member.phone) && Objects.equals(bookedClasses, member.bookedClasses);
+        return Objects.equals(memberId, member.memberId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, memberId, name, phone, bookedClasses);
+        return Objects.hashCode(memberId);
     }
 }

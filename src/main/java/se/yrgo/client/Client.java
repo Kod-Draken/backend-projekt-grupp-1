@@ -112,10 +112,11 @@ public class Client {
                         }
                         case "2": {
                             System.out.println("Please enter Class to cancel");
-
+                            break;
                         }
                         default:{
                             System.out.println("Invalid choice, please enter a number between 0 and 2");
+                            break;
                         }
                     }
                 }
@@ -145,6 +146,7 @@ public class Client {
                 }
                 case "1": {
                     addAttendantToClass(scanner);
+                    break;
                 }
             }
         }
@@ -178,10 +180,8 @@ public class Client {
 
                     try {
                         bm.addAttendantToClass(selectedClass.get().getClassId(), selectedMember.get().getMemberId());
-                    } catch (GymClassFullException e) {
+                    } catch (GymClassFullException | AlreadyBookedToGymClassException e) {
                         System.err.println(e.getMessage());
-                    } catch (AlreadyBookedToGymClassException e) {
-                        System.err.println("You are already booked to this class");
                     }
 
                     break;
@@ -212,6 +212,7 @@ public class Client {
                     } catch (AlreadyBookedToGymClassException e) {
                         System.err.println("You are already booked to this class");
                     }
+                    break;
                 }
             }
         }

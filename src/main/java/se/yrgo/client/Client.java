@@ -12,6 +12,8 @@ import se.yrgo.services.exceptions.AlreadyBookedToGymClassException;
 import se.yrgo.services.exceptions.GymClassFullException;
 import se.yrgo.services.exceptions.LateCancelException;
 
+import java.lang.reflect.Array;
+import java.sql.SQLOutput;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -198,9 +200,10 @@ public class Client {
             System.out.println("What would you like to do?: ");
             System.out.println("\t" + "0. Press '0' to return to main menu");
             System.out.println("\t" + "1. Press '1' to see members, classes and instructors");
-            System.out.println("\t" + "1. Press '2' add attendant to class");
-            System.out.println("\t" + "2. Press '3' remove attendant from class");
-            System.out.println("\t" + "3. Press '4' change instructor for class");
+            System.out.println("\t" + "2. Press '2' add attendant to class");
+            System.out.println("\t" + "3. Press '3' remove attendant from class");
+            System.out.println("\t" + "4. Press '4' change instructor for class");
+            System.out.println("\t" + "5. Press '5' to delete member, class or instructor");
             System.out.println("Enter a number: ");
             String choice = scanner.nextLine();
             switch (choice) {
@@ -223,6 +226,10 @@ public class Client {
                 }
                 case "4": {
                     changeInstructorForClass(scanner);
+                    break;
+                }
+                case "5": {
+                    deleteEntityOptions(scanner);
                     break;
                 }
                 default: {
@@ -401,6 +408,85 @@ public class Client {
 
         bm.updateClassInstructor(selectedGymClass.get().getClassId(), newSelectedInstructor.get().getInstructorId());
         System.out.println("Gym class " + selectedGymClass.get().getName() + " now has instructor " + newSelectedInstructor.get().getName() + "\n");
+    }
+
+
+    private static void deleteEntityOptions(Scanner scanner) {
+        String[] options = {"Delete a member", "Delete an instructor", "Delete a class"};
+        int i = 0;
+        System.out.println("Choose an option");
+        for (String option : options) {
+            i++;
+            System.out.println(i + ". " + option);
+        }
+        String choice = scanner.nextLine();
+        switch (choice) {
+            case "0": {
+                System.out.println("Returning to SysAdmin menu");
+                return;
+            }
+            case "1": {
+                deleteAMember(scanner);
+                break;
+            }
+            case "2": {
+                deleteAnInstructor(scanner);
+                break;
+            }
+            case "3": {
+                deleteAClass(scanner);
+                break;
+            }
+
+        }
+    }
+
+    private static void deleteAMember(Scanner scanner) {
+        Optional<Member> selectedMember = promptSelection(scanner, mm.getAllMembers(), "member");
+        if (selectedMember.isEmpty()) {
+            System.out.println("Cancelled.");
+            return;
+        }
+        try {
+            Member memberToDelete = mm.findMemberById(selectedMember.get().getMemberId());
+            mm.deleteMember(memberToDelete);
+            System.out.println("Deleted " + memberToDelete.getName() + " from the database");
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+        }
+    }
+    private static void deleteAnInstructor(Scanner scanner) {
+        Optional<Instructor> selectedInstructor = promptSelection(scanner, is.getAllInstructors(), "instructor");
+        if (selectedInstructor.isEmpty()) {
+            System.out.println("Cancelled.");
+            return;
+        }
+        if (is.getNumberOfClassesForInstructor(selectedInstructor.get()) > 0) {
+            System.out.println("Failed to delete instructor, they are booked to lead classes");
+            return;
+        }
+        try {
+            Instructor instructorToDelete = is.findInstructorById(selectedInstructor.get().getInstructorId());
+            is.deleteInstructor(instructorToDelete);
+            System.out.println("Deleted " + instructorToDelete.getName() + " from the database");
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+        }
+    }
+   private static void deleteAClass(Scanner scanner) {
+        Optional<GymClass> selectedClass = promptSelection(scanner, gm.getAllClasses(), "gym class");
+        if (selectedClass.isEmpty()) {
+            System.out.println("Cancelled.");
+            return;
+        }
+        try {
+            GymClass gymClassToDelete = gm.getClassById(selectedClass.get().getClassId());
+            gm.deleteGymClass(gymClassToDelete);
+            System.out.println("Deleted " + gymClassToDelete.getName() + " from the database");
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+            e.printStackTrace();
+        }
     }
 
     /**

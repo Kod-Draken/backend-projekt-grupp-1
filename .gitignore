@@ -43,6 +43,7 @@ build/
 database.dat.log
 database.dat.properties
 database.dat.script
+database.dat.script.new
 
 databaseTESTING.dat.log
 databaseTESTING.dat.properties

@@ -15,6 +15,7 @@ import se.yrgo.services.exceptions.LateCancelException;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
+import java.util.List;
 
 /**
  * @author Alrik, Mattias, Najib
@@ -96,5 +97,10 @@ public class BookingManagementServiceProdImpl implements BookingManagementServic
         gymClass.setInstructor(newInstructor);
 
         gymClassDao.updateGymClass(gymClass);
+    }
+
+    @Override
+    public List<GymClass> bookingCheck(String memberId){
+        return memberDao.addedClasses(memberId);
     }
 }

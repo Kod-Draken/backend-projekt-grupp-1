@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import se.yrgo.domain.Member;
 import se.yrgo.services.exceptions.MemberIdNotFoundException;
 import se.yrgo.services.MemberManagementService;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,6 +26,7 @@ public class MemberServiceTest{
     public MemberServiceTest() {
         this.mb = new Member("S001", "Janne Björnsson", "0758293153");
     }
+
     @Test
     public void testNewMember() throws MemberIdNotFoundException {
         mms.newMember(mb);

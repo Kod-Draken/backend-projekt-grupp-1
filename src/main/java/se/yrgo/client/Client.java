@@ -59,7 +59,7 @@ public class Client {
         is.newInstructor(instructor2);
         gm.addNewGymClass(gymClass3);
 
-        GymClass gymClass4 = new GymClass("SP0001", "Spinning", "30 min", "Spinning-salen", instructor3, LocalDateTime.now(), 20);
+        GymClass gymClass4 = new GymClass("SP0001", "Spinning", "30 min", "Spinning-salen", instructor3, LocalDateTime.now().plusDays(+5), 20);
         instructor3.addGymClassToInstructorSchedule(gymClass4);
         GymClass gymClass5 = new GymClass("BP0001", "Body Pump", "60 min", "Sal 10", instructor3, LocalDateTime.now(), 20);
         instructor3.addGymClassToInstructorSchedule(gymClass5);
@@ -170,7 +170,7 @@ public class Client {
                     break;
                 }
                 case "2": {
-                    Optional<GymClass> selectedClass = promptSelection(scanner, mm.bookingCheck(memberId), "class");
+                    Optional<GymClass> selectedClass = promptSelection(scanner, bm.bookingCheck(memberId), "class");
                     if (selectedClass.isEmpty()) {
                         System.out.println("No class found");
                         break;
@@ -362,7 +362,7 @@ public class Client {
                 return;
             }
 
-            Optional<GymClass> selectedClass = promptSelection(scanner, mm.bookingCheck(attendantToRemove.get().getMemberId()), "class");
+            Optional<GymClass> selectedClass = promptSelection(scanner, bm.bookingCheck(attendantToRemove.get().getMemberId()), "class");
 
             if (selectedClass.isEmpty()) {
                 System.out.println("Cancelled.");

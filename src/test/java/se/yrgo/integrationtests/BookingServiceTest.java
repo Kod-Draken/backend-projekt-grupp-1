@@ -100,4 +100,11 @@ public class BookingServiceTest {
 
         assertEquals("Anna Svantesson", gcm.getClassById("GC1").getInstructor().getName());
     }
+
+    @Test
+    public void testGetBookedClasses(){
+        testMember.getAllBookedClasses().add(testGymclass);
+        mms.editMember(testMember);
+        assertEquals(testGymclass, bms.bookingCheck(testMember.getMemberId()).getFirst());
+    }
 }

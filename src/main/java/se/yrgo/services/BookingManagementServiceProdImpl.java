@@ -12,6 +12,7 @@ import se.yrgo.domain.Member;
 import se.yrgo.services.exceptions.AlreadyBookedToGymClassException;
 import se.yrgo.services.exceptions.GymClassFullException;
 import se.yrgo.services.exceptions.LateCancelException;
+import se.yrgo.services.exceptions.NoBookedClassesFound;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
@@ -77,6 +78,7 @@ public class BookingManagementServiceProdImpl implements BookingManagementServic
             throw new LateCancelException("Sorry, the class is due in less than 2 hours!");
         }
         Member attendantToRemove = memberDao.getById(attendantId);
+        attendantToRemove.removeBookedClass(gymClass);
         gymClass.removeAttendant(attendantToRemove);
         gymClassDao.updateGymClass(gymClass);
         memberDao.update(attendantToRemove);
@@ -102,9 +104,13 @@ public class BookingManagementServiceProdImpl implements BookingManagementServic
      *
      * @param memberId select member by memberId
      * @return selected member's booked classes
+     * throws NoBookedClassesFound if no class found
      */
     @Override
-    public List<GymClass> bookingCheck(String memberId){
+    public List<GymClass> bookingCheck(String memberId)  throws NoBookedClassesFound {
+        if(memberDao.addedClasses(memberId).isEmpty()) {
+            throw new NoBookedClassesFound("No class found");
+        }
         return memberDao.addedClasses(memberId);
     }
 }

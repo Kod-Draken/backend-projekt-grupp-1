@@ -2,7 +2,9 @@ package se.yrgo.dataaccess;
 
 import org.springframework.stereotype.Repository;
 import se.yrgo.dataaccess.exceptions.GymClassNotFoundException;
+import se.yrgo.dataaccess.exceptions.InstructorNotFoundException;
 import se.yrgo.domain.GymClass;
+import se.yrgo.domain.Member;
 
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
@@ -35,7 +37,7 @@ public class GymClassDaoJpaImpl implements GymClassDao {
     @Override
     public void updateGymClass(GymClass updatedGymClass) throws GymClassNotFoundException {
         GymClass existing = em.find(GymClass.class, updatedGymClass.getId());
-        if(existing == null){
+        if (existing == null) {
             throw new GymClassNotFoundException("Gym class not found");
         }
         em.merge(updatedGymClass);
@@ -49,7 +51,7 @@ public class GymClassDaoJpaImpl implements GymClassDao {
     @Override
     public void deleteGymClass(GymClass gymClassToDelete) throws GymClassNotFoundException {
         GymClass existing = em.find(GymClass.class, gymClassToDelete.getId());
-        if(existing == null){
+        if (existing == null) {
             throw new GymClassNotFoundException("Gym class not found");
         }
         em.remove(existing);
@@ -104,4 +106,13 @@ public class GymClassDaoJpaImpl implements GymClassDao {
     public List<GymClass> getAllGymClasses() {
         return em.createQuery("select c from GymClass c", GymClass.class).getResultList();
     }
+
+    @Override
+    public List<Member> getAllAttendants(String gymClassId) {
+        return em.createQuery(
+                        "select m from Member m join m.bookedClasses g WHERE g.classId = :gymClassId", Member.class)
+                .setParameter("gymClassId", gymClassId)
+                .getResultList();
+    }
 }
+

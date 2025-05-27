@@ -1,7 +1,6 @@
 package se.yrgo.services;
 
 import se.yrgo.domain.Member;
-import se.yrgo.services.exceptions.MemberIdNotFoundException;
 import java.util.List;
 
 public interface MemberManagementService {
@@ -12,7 +11,7 @@ public interface MemberManagementService {
 
     void deleteMember(Member deletedMember);
 
-    Member findMemberById(String id) throws MemberIdNotFoundException;
+    Member findMemberById(String id);
 
     List<Member> getAllMembers();
 

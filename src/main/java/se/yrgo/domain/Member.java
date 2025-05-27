@@ -5,6 +5,9 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+/**
+ * @author Alrik
+ */
 @Entity
 public class Member {
 
@@ -19,41 +22,30 @@ public class Member {
     private String phone;
 
     @ManyToMany
-    @JoinTable(
-            name = "memberGymClass", // The name of the join table in the DB
-            joinColumns = @JoinColumn(name = "member_id"), // FK column to the owning entity (Member)
-            inverseJoinColumns = @JoinColumn(name = "gym_class_id"))
+    @JoinTable
     private Set<GymClass> bookedClasses;
 
     public Member(String memberId, String name, String phone){
         this.memberId = memberId;
         this.name = name;
         this.phone = phone;
-        this.bookedClasses = new HashSet<GymClass>();
+        this.bookedClasses = new HashSet<>();
     }
     public Member() {}
-
-    /*
-    TODO: make find name unspecific
-     */
 
     public String toString(){
         return this.memberId + ": " + this.name + " " + this.phone;
     }
     public int getId() {return this.id;}
-    public String getMemberId(){
-        return this.memberId;
-    }
-    public String getName(){
-        return this.name;
-    }
-    public String getPhone(){
-        return this.phone;
-    }
+    public String getMemberId(){return this.memberId;}
+    public String getName(){return this.name;}
+    public String getPhone(){return this.phone;}
     public Set<GymClass> getAllBookedClasses(){return this.bookedClasses;}
-    public void setBookedClasses(Set<GymClass> bookedClasses){this.bookedClasses = bookedClasses;}
     public void addBookedClass(GymClass gymClass){
         this.bookedClasses.add(gymClass);
+    }
+    public void removeBookedClass(GymClass gymClass){
+        this.bookedClasses.remove(gymClass);
     }
     public void setName(String newName){this.name = newName;}
     public void setPhone(String newPhone){this.phone = newPhone;}

@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import se.yrgo.dataaccess.GymClassDao;
 import se.yrgo.domain.GymClass;
+import se.yrgo.domain.Member;
 import se.yrgo.services.exceptions.AlreadyBookedToGymClassException;
 import se.yrgo.services.exceptions.GymClassFullException;
 
@@ -77,5 +78,15 @@ public class GymClassManagementProdImpl implements GymClassManagementService{
     @Override
     public List<GymClass> getAllClasses() {
         return gymClassDao.getAllGymClasses();
+    }
+
+    /**
+     * Gets all members for a gym class
+     * @param gymClassId is the id of the class
+     * @return a list of members for a class
+     */
+    @Override
+    public List<Member> getMembersByGymClass(String gymClassId) {
+        return gymClassDao.getAllAttendants(gymClassId);
     }
 }

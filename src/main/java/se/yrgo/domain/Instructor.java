@@ -83,12 +83,21 @@ public class Instructor {
     }
 
     /**
-     * Adds gym classes to the instructors schedule
+     * Adds gym class to the instructors schedule and increases number of classes
      * @param gymClass is the class that will be added
      */
     public void addGymClassToInstructorSchedule(GymClass gymClass) {
         this.gymClasses.add(gymClass);
         this.numberOfClasses++;
+    }
+
+    /**
+     * Removes a gym class from the instructor's schedule and decreases the number of classes
+     * @param gymClass is the class that will be removed
+     */
+    public void removeGymClassFromInstructorSchedule(GymClass gymClass) {
+        this.gymClasses.remove(gymClass);
+        this.numberOfClasses--;
     }
 
     /**

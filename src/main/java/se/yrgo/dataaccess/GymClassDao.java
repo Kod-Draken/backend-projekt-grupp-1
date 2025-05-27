@@ -2,6 +2,7 @@ package se.yrgo.dataaccess;
 
 import se.yrgo.dataaccess.exceptions.GymClassNotFoundException;
 import se.yrgo.domain.GymClass;
+import se.yrgo.domain.Member;
 
 import java.util.List;
 
@@ -16,6 +17,5 @@ public interface GymClassDao {
     List<GymClass> getGymClassesByName(String name);
     List<GymClass> getGymClassesByInstructor(String instructorId);
     List<GymClass> getAllGymClasses();
-
-
+    List<Member> getAllAttendants(String gymClassId);
 }

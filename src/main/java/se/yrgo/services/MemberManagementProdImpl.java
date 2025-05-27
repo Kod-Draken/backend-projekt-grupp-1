@@ -3,6 +3,7 @@ package se.yrgo.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import se.yrgo.domain.GymClass;
 import se.yrgo.domain.Member;
 import se.yrgo.dataaccess.MemberDao;
 import se.yrgo.services.exceptions.MemberIdNotFoundException;
@@ -54,5 +55,9 @@ public class MemberManagementProdImpl implements MemberManagementService{
     @Override
     public void cancelBooking(String bookingGymClassName, String memberId){
         memDao.deleteGymClass(bookingGymClassName, memberId);
+    }
+    @Override
+    public List<GymClass> bookingCheck(String memberId){
+        return memDao.addedClasses(memberId);
     }
 }

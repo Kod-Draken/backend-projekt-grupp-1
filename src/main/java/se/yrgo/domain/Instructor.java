@@ -88,6 +88,7 @@ public class Instructor {
      */
     public void addGymClassToInstructorSchedule(GymClass gymClass) {
         this.gymClasses.add(gymClass);
+        this.numberOfClasses++;
     }
 
     /**

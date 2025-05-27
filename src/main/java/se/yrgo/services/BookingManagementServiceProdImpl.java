@@ -45,6 +45,9 @@ public class BookingManagementServiceProdImpl implements BookingManagementServic
     @Override
     public void addAttendantToClass(String gymClassId, String attendantId) throws GymClassFullException, AlreadyBookedToGymClassException {
         GymClass gymClass = gymClassDao.getGymClassById(gymClassId);
+        Member newAttendant = memberDao.getById(attendantId);
+        newAttendant.addBookedClass(gymClass);
+        memberDao.update(newAttendant);
 
         var att = gymClass.getAttendants();
         if (att.contains(memberDao.getById(attendantId))) {
@@ -55,10 +58,7 @@ public class BookingManagementServiceProdImpl implements BookingManagementServic
             throw new GymClassFullException("Sorry, class is fully booked!");
         }
 
-        Member newAttendant = memberDao.getById(attendantId);
-        gymClass.addAttendant(newAttendant);
-
-        System.out.println("Successfully added attendant " + newAttendant.toString() + " to class " + gymClass.toString());
+        System.out.println("Successfully added attendant " + newAttendant + " to class " + gymClass);
     }
 
     /**
@@ -73,8 +73,12 @@ public class BookingManagementServiceProdImpl implements BookingManagementServic
         if (Duration.between(LocalDateTime.now(), gymClass.getScheduledTime()).toMinutes() < 120) {
             throw new LateCancelException("Sorry, the class is due in less than 2 hours!");
         }
-        Member member = memberDao.getById(attendantId);
-        gymClass.removeAttendant(member);
+        Member attendantToRemove = memberDao.getById(attendantId);
+        gymClass.removeAttendant(attendantToRemove);
+        gymClassDao.updateGymClass(gymClass);
+        memberDao.update(attendantToRemove);
+
+        System.out.println("Successfully removed attendant " + attendantToRemove.toString() + " from class " + gymClass);
     }
 
     /**

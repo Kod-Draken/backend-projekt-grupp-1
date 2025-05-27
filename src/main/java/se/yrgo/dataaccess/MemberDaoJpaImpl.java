@@ -1,6 +1,7 @@
 package se.yrgo.dataaccess;
 
 import org.springframework.stereotype.Repository;
+import se.yrgo.dataaccess.exceptions.GymClassNotFoundException;
 import se.yrgo.dataaccess.exceptions.MemberMissingException;
 import se.yrgo.domain.GymClass;
 import se.yrgo.domain.Member;
@@ -30,6 +31,10 @@ public class MemberDaoJpaImpl implements MemberDao{
      */
     @Override
     public void update(Member updateMember){
+        Member existing = em.find(Member.class, updateMember.getId());
+        if(existing == null){
+            throw new GymClassNotFoundException("Gym class not found");
+        }
         em.merge(updateMember);
     }
 
@@ -52,9 +57,8 @@ public class MemberDaoJpaImpl implements MemberDao{
     public Member getById(String id) throws MemberMissingException{
         try {
             return em.createQuery("select m from Member m where m.memberId =:id ", Member.class).setParameter("id", id).getSingleResult();
-        }catch(NoResultException e){
-            System.out.println("Error: "+e.getMessage());
-            return null;
+        } catch (NoResultException e){
+            throw new MemberMissingException("Member not found");
         }
 
     }
@@ -97,7 +101,7 @@ public class MemberDaoJpaImpl implements MemberDao{
     @Override
     public void addGymClass(String newGymClass, String memberId){
         Member mem = em.createQuery("select m from Member m where m.memberId = :memberId", Member.class).setParameter("memberId", memberId).getSingleResult();
-        mem.getAllBookedClasses().add(em.createQuery("select gc from GymClass gc where gc.name = :newGymClass", GymClass.class).setParameter("newGymClass", newGymClass).getSingleResult());
+        mem.getAllBookedClasses().add(em.createQuery("select gc from GymClass gc where gc.classId = :newGymClass", GymClass.class).setParameter("newGymClass", newGymClass).getSingleResult());
     }
 
     /**
@@ -109,6 +113,11 @@ public class MemberDaoJpaImpl implements MemberDao{
     @Override
     public void deleteGymClass(String oldGymClass, String memberId){
         Member mem = em.createQuery("select m from Member m where m = :memberId", Member.class).setParameter("memberId", memberId).getSingleResult();
-        mem.getAllBookedClasses().remove(em.createQuery("select gc from GymClass gc where gc.name = :oldGymClass", GymClass.class).setParameter("oldGymClass", oldGymClass).getSingleResult());
+        mem.getAllBookedClasses().remove(em.createQuery("select gc from GymClass gc where gc.classId = :oldGymClass", GymClass.class).setParameter("oldGymClass", oldGymClass).getSingleResult());
     }
+    @Override
+    public List<GymClass> addedClasses(String memberId){
+        return em.createQuery("select g from Member m join m.bookedClasses g where m.memberId = :memberId", GymClass.class).setParameter("memberId", memberId).getResultList();
+    }
+
 }

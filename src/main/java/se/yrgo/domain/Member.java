@@ -41,7 +41,6 @@ public class Member {
     public String getName(){return this.name;}
     public String getPhone(){return this.phone;}
     public Set<GymClass> getAllBookedClasses(){return this.bookedClasses;}
-    public void setBookedClasses(Set<GymClass> bookedClasses){this.bookedClasses = bookedClasses;}
     public void addBookedClass(GymClass gymClass){
         this.bookedClasses.add(gymClass);
     }

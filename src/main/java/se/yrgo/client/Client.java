@@ -11,6 +11,7 @@ import se.yrgo.services.MemberManagementService;
 import se.yrgo.services.exceptions.AlreadyBookedToGymClassException;
 import se.yrgo.services.exceptions.GymClassFullException;
 import se.yrgo.services.exceptions.LateCancelException;
+import se.yrgo.services.exceptions.NoBookedClassesFound;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -126,6 +127,7 @@ public class Client {
                 if (mm.findMemberById(choiceMember) != null) {
                     bookAndCancelClass(scanner, choiceMember);
                 }
+                return;
             } catch (RuntimeException e) {
                 if(!choiceMember.isEmpty()) {
                     System.err.println("Member not found!");
@@ -171,14 +173,19 @@ public class Client {
                     break;
                 }
                 case "2": {
-                    Optional<GymClass> selectedClass = promptSelection(scanner, bm.bookingCheck(memberId), "class");
-                    if (selectedClass.isEmpty()) {
-                        break;
-                    }
                     try {
-                        bm.removeAttendantFromClass(selectedClass.get().getClassId(), memberId);
-                    } catch (LateCancelException e) {
-                        System.err.println("error at: " + e.getMessage());
+                        Optional<GymClass> selectedClass = promptSelection(scanner, bm.bookingCheck(memberId), "class");
+                        if (selectedClass.isEmpty()) {
+                            break;
+                        }
+                        try {
+                            bm.removeAttendantFromClass(selectedClass.get().getClassId(), memberId);
+                        } catch (LateCancelException e) {
+                            System.err.println("error at: " + e.getMessage());
+                        }
+                        break;
+                    } catch (NoBookedClassesFound e){
+                        System.err.println(e.getMessage());
                     }
                     break;
                 }

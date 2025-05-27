@@ -38,6 +38,9 @@ public class GymClassServiceTest {
     private MemberManagementService msTest;
     private static GymClass gymClass;
 
+    /**
+     * Sets up data to use in the tests
+     */
     @BeforeEach
     void setUp() {
         Instructor instructor = new Instructor("ERIAND76", "Erik Anderzon", "0748951122");

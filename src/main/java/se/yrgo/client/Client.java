@@ -348,9 +348,9 @@ public class Client {
                     } catch (GymClassFullException e) {
                         System.err.println(e.getMessage());
                     } catch (AlreadyBookedToGymClassException e) {
-                        System.err.println("You are already booked to this class");
+                        System.err.println("You are already booked to this class" + "\n");
                     }
-                    break;
+                    return;
                 }
             }
         }

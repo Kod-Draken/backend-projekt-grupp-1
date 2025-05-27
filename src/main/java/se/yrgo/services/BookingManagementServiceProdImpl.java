@@ -88,7 +88,7 @@ public class BookingManagementServiceProdImpl implements BookingManagementServic
 
     /**
      * Updates which instructor a class will have
-     * @param gymClassId is the is of the gym class
+     * @param gymClassId is the id of the gym class
      * @param newInstructorId is the id of the new instructor
      */
     @Override
@@ -96,6 +96,9 @@ public class BookingManagementServiceProdImpl implements BookingManagementServic
         GymClass gymClass = gymClassDao.getGymClassById(gymClassId);
         Instructor newInstructor = instructorDao.getInstructorById(newInstructorId);
 
+        Instructor oldInstructor = gymClass.getInstructor();
+        oldInstructor.removeGymClassFromInstructorSchedule(gymClass);
+        newInstructor.addGymClassToInstructorSchedule(gymClass);
         gymClass.setInstructor(newInstructor);
 
         gymClassDao.updateGymClass(gymClass);

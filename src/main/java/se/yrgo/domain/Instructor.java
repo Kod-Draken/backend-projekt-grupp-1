@@ -1,7 +1,6 @@
 package se.yrgo.domain;
 
 import javax.persistence.*;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -79,7 +78,7 @@ public class Instructor {
      * @return the number of classes the instructor has
      */
     public int getNumberOfClasses() {
-        return this.gymClasses.size();
+        return this.numberOfClasses;
     }
 
     /**
@@ -105,7 +104,7 @@ public class Instructor {
      * @return the classes for the instructor
      */
     public Set<GymClass> getInstructorGymClasses() {
-        return Collections.unmodifiableSet(this.gymClasses);
+        return this.gymClasses;
     }
 
     /**

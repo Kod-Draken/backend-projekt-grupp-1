@@ -18,7 +18,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 
 /**
- * @author Najib
+ * @author Najib Bardash
  * Does integration tests for the gym class bookings relating to an instructor
  */
 @Transactional

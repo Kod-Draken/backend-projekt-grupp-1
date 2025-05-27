@@ -1,5 +1,5 @@
 # Java 24 Backendprogrammering Grupp 1
-#### Contributors: Alrik M, Najib B, Mattias D
+#### Contributors: Alrik B, Najib B, Mattias D
 
 ## How to build?
 1. Navigate to the project catalogue 

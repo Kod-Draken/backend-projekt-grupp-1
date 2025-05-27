@@ -88,7 +88,7 @@ public class GymClassDaoJpaImpl implements GymClassDao {
     }
 
     /**
-     * Find a GymClasses connected to a specific Instructor
+     * Find gym classes connected to a specific Instructor
      * @param instructorId is a unique String identifier for an Instructor
      * @return the GymClasses lead by the specified Instructor.
      */

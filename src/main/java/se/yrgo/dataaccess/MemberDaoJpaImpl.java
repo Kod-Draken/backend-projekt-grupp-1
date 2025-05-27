@@ -119,5 +119,4 @@ public class MemberDaoJpaImpl implements MemberDao{
     public List<GymClass> addedClasses(String memberId){
         return em.createQuery("select g from Member m join m.bookedClasses g where m.memberId = :memberId", GymClass.class).setParameter("memberId", memberId).getResultList();
     }
-
 }

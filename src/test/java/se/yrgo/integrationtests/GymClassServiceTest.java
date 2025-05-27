@@ -68,6 +68,10 @@ public class GymClassServiceTest {
         assertEquals(gymClass, gsTest.getClassById("apa100"));
     }
 
+    /**
+     * Sets a new name for testClass and saves to DB, then checks if the name was updated in the DB
+     * @throws AlreadyBookedToGymClassException
+     */
     @Test
     void testEditGymClass() throws AlreadyBookedToGymClassException {
         gymClass.setName("Another name");
@@ -75,13 +79,19 @@ public class GymClassServiceTest {
         gsTest.editGymClass(gymClass);
 
         assertEquals("Another name", gsTest.getClassById("apa100").getName());
-
     }
+
+    /**
+     * The DB contains 1 class so we expect 1 as result
+     */
     @Test
     void testGetAllGymClasses() {
         assertEquals(1, gsTest.getAllClasses().size());
     }
 
+    /**
+     * Delete the test class and make sure that the database has 0 classes
+     */
     @Test
     void testDeleteGymClass() {
         gsTest.deleteGymClass(gymClass);

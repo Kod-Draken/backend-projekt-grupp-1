@@ -45,6 +45,9 @@ public class Member {
     public void addBookedClass(GymClass gymClass){
         this.bookedClasses.add(gymClass);
     }
+    public void removeBookedClass(GymClass gymClass){
+        this.bookedClasses.remove(gymClass);
+    }
     public void setName(String newName){this.name = newName;}
     public void setPhone(String newPhone){this.phone = newPhone;}
 

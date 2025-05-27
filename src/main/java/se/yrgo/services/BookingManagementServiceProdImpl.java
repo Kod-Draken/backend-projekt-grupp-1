@@ -78,6 +78,7 @@ public class BookingManagementServiceProdImpl implements BookingManagementServic
             throw new LateCancelException("Sorry, the class is due in less than 2 hours!");
         }
         Member attendantToRemove = memberDao.getById(attendantId);
+        attendantToRemove.removeBookedClass(gymClass);
         gymClass.removeAttendant(attendantToRemove);
         gymClassDao.updateGymClass(gymClass);
         memberDao.update(attendantToRemove);

@@ -19,7 +19,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * @author Najib
- * Does integration tests for the gym class bookings
+ * Does integration tests for the gym class bookings relating to an instructor
  */
 @Transactional
 @ExtendWith(SpringExtension.class)

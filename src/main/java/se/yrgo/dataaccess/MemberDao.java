@@ -11,23 +11,23 @@ import java.util.List;
  * @author Alrik-Mark Brillantes
  */
 public interface MemberDao {
-    public void create(Member member);
+    void create(Member member);
 
-    public void update(Member updateMember);
+    void update(Member updateMember);
 
-    public void delete(Member deleteMember);
+    void delete(Member deleteMember);
 
-    public Member getById(String id) throws MemberMissingException;
+    Member getById(String id) throws MemberMissingException;
 
-    public List<Member> getAll();
+    List<Member> getAll();
 
-    public List<Member> getByName(String name);
+    List<Member> getByName(String name);
 
-    public Member getFullDetail(String memberId);
+    Member getFullDetail(String memberId);
 
-    public void addGymClass(String gymClass, String memberId);
+    void addGymClass(String gymClass, String memberId);
 
-    public void deleteGymClass(String oldGymClass, String memberId);
+    void deleteGymClass(String oldGymClass, String memberId);
 
-    public List<GymClass> addedClasses(String memberId);
+    List<GymClass> addedClasses(String memberId);
 }

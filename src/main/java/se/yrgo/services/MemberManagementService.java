@@ -19,9 +19,4 @@ public interface MemberManagementService {
     List<Member> getMembersByName(String name);
 
     Member getFullMemberDetail(String memberId);
-
-    void bookGymClass(String bookingGymClassName, String memberId);
-
-    void cancelBooking(String bookingGymClassName, String memberId);
-
 }

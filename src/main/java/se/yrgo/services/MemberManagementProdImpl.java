@@ -47,12 +47,4 @@ public class MemberManagementProdImpl implements MemberManagementService{
     public Member getFullMemberDetail(String memberId){
         return memDao.getFullDetail(memberId);
     }
-    @Override
-    public void bookGymClass(String bookingGymClassName, String memberId){
-        memDao.addGymClass(bookingGymClassName, memberId);
-    }
-    @Override
-    public void cancelBooking(String bookingGymClassName, String memberId){
-        memDao.deleteGymClass(bookingGymClassName, memberId);
-    }
 }

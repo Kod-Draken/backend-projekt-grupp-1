@@ -98,7 +98,11 @@ public class BookingManagementServiceProdImpl implements BookingManagementServic
 
         gymClassDao.updateGymClass(gymClass);
     }
-
+    /**
+     *
+     * @param memberId select member by memberId
+     * @return selected member's booked classes
+     */
     @Override
     public List<GymClass> bookingCheck(String memberId){
         return memberDao.addedClasses(memberId);

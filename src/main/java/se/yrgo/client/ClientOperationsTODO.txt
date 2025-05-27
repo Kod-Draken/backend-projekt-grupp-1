@@ -1,31 +1,11 @@
 Sysadmin
-Se allt
 
-Skapa ny medlemskap
 Skapa ny instruktör
-Skapa pass
 
 Uppdatera medlem, instruktör, pass
-
-Boka medlem till ett pass
-Avboka medlem från ett pass
-
-Boka instruktör till ett pass
-Boka instruktör till fler pass?
 
 Ta bort medlem
 Ta bort instruktör
 Ta bort pass
 
------------------
 
-Medlem
-Se alla pass, dock inte vilka som deltar!
-
-Boka medlem till pass
-Avboka medlem till pass
-
-------------------
-
-Instruktör
-Uppdatera pass

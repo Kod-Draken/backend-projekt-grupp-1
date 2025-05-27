@@ -13,6 +13,8 @@ import java.util.List;
 
 /**
  * @author Mattias
+ * Implementation of GymClassManagementService, uses an instance of a gymClassDao to send data
+ * from the entity-class to the database.
  */
 @Transactional
 @Service

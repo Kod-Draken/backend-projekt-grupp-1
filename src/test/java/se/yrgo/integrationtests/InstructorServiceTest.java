@@ -41,11 +41,19 @@ public class InstructorServiceTest {
         is.newInstructor(testInstructor);
     }
 
+    /**
+     * This test checks if the list of instructors only is one (because only one has been added)
+     * and that we have the correct instructor
+     */
     @Test
     public void testNewInstructor() {
         assertEquals(1, is.getAllInstructors().size()); // We expect only one instructor in the database
+        assertEquals("Bosse Bredsladd", is.getAllInstructors().getFirst().getName());
     }
 
+    /**
+     * Tests if an existing instructor changes the name and that the change was saved in the database
+     */
     @Test
     public void testEditInstructor() {
         Instructor existing = is.findInstructorById("IN1");
@@ -55,6 +63,9 @@ public class InstructorServiceTest {
         assertEquals("Other name", is.findInstructorById("IN1").getName());
     }
 
+    /**
+     *
+     */
     @Test
     public void testDeleteInstructor() {
         Instructor existing = is.findInstructorById("IN1");

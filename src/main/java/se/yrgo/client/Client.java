@@ -420,6 +420,8 @@ public class Client {
         }
 
         bm.updateClassInstructor(selectedGymClass.get().getClassId(), newSelectedInstructor.get().getInstructorId());
+        selectedInstructor.get().removeGymClassFromInstructorSchedule(selectedGymClass.get());
+        newSelectedInstructor.get().addGymClassToInstructorSchedule(selectedGymClass.get());
         System.out.println("Gym class " + selectedGymClass.get().getName() + " now has instructor " + newSelectedInstructor.get().getName() + "\n");
     }
 

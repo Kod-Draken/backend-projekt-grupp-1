@@ -22,17 +22,14 @@ public class Member {
     private String phone;
 
     @ManyToMany
-    @JoinTable(
-            name = "memberGymClass", // The name of the join table in the DB
-            joinColumns = @JoinColumn(name = "member_id"), // FK column to the owning entity (Member)
-            inverseJoinColumns = @JoinColumn(name = "gym_class_id"))
+    @JoinTable
     private Set<GymClass> bookedClasses;
 
     public Member(String memberId, String name, String phone){
         this.memberId = memberId;
         this.name = name;
         this.phone = phone;
-        this.bookedClasses = new HashSet<GymClass>();
+        this.bookedClasses = new HashSet<>();
     }
     public Member() {}
 

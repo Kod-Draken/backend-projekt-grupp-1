@@ -5,8 +5,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import se.yrgo.domain.Member;
 import se.yrgo.dataaccess.MemberDao;
-import se.yrgo.services.exceptions.NoBookedClassesFound;
-
 import java.util.List;
 
 /**

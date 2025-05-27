@@ -29,11 +29,18 @@ public class MemberServiceTest{
         this.mb = new Member("S001", "Janne Björnsson", "0758293153");
     }
 
+    /**
+     * Create new member entry into database, check if created with Id
+     */
     @Test
     public void testNewMember(){
         mms.newMember(mb);
         assertEquals("S001", mms.findMemberById("S001").getMemberId());
     }
+
+    /**
+     * new entry, change name with setter, jpa merge to update member in table database
+     */
     @Test
     public void testUpdateMember(){
         mms.newMember(mb);
@@ -41,6 +48,10 @@ public class MemberServiceTest{
         mms.editMember(mb);
         assertEquals("Doris Zelmerlöv", mms.findMemberById(mb.getMemberId()).getName());
     }
+
+    /**
+     * new member, check if added, remove member from db, check if removed
+     */
     @Test
     public void testDeleteMember(){
         mms.newMember(mb);
@@ -49,17 +60,28 @@ public class MemberServiceTest{
         mms.deleteMember(mb);
         assertEquals(0, mms.getAllMembers().size());
     }
+
+    /**
+     * new member, check if possible to access database with memberId getter
+     */
     @Test
     public void testFindMemberById(){
         mms.newMember(mb);
         assertEquals("S001", mms.findMemberById("S001").getMemberId());
     }
+
+    /**
+     * new member, check if get all member function access table db
+     */
     @Test
     public void testGetAllMembers(){
         mms.newMember(mb);
         assertEquals(1, mms.getAllMembers().size());
     }
 
+    /**
+     * new member, checks if getter for list of similar name access table db
+     */
     @Test
     public void testGetMembersByName(){
         mms.newMember(mb);
@@ -67,6 +89,10 @@ public class MemberServiceTest{
         members.add(mb);
         assertEquals(members, mms.getMembersByName(mb.getName()));
     }
+
+    /**
+     * new member, checks if access to full information of member Object in table db
+     */
     @Test
     public void testGetFullMemberDetails(){
         mms.newMember(mb);

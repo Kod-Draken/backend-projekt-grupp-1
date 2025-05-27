@@ -11,17 +11,29 @@ import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import java.util.List;
 
+/**
+ * @author Mattias
+ * This is a DAO for GymClass objects, lets us do CRUD operations with the DB.
+ */
 @Repository
 public class GymClassDaoJpaImpl implements GymClassDao {
     @PersistenceContext
     private EntityManager em;
 
-
+    /**
+     * Saves a GymClass to the DB
+     * @param gymClass a new instance of GymClass to be saved to the DB
+     */
     @Override
     public void createGymClass(GymClass gymClass) {
         em.persist(gymClass);
     }
 
+    /**
+     * Update an existing GymClass.
+     * @param updatedGymClass that exists but has been edited.
+     * @throws GymClassNotFoundException the specified GymClass could not be found.
+     */
     @Override
     public void updateGymClass(GymClass updatedGymClass) throws GymClassNotFoundException {
         GymClass existing = em.find(GymClass.class, updatedGymClass.getId());
@@ -31,15 +43,26 @@ public class GymClassDaoJpaImpl implements GymClassDao {
         em.merge(updatedGymClass);
     }
 
+    /**
+     * Identifies an existing GymClass in the DB and deletes it
+     * @param gymClassToDelete a disconnected GymClass, used to find its counterpart in the DB
+     * @throws GymClassNotFoundException a matching GymClass in the DB was not found
+     */
     @Override
     public void deleteGymClass(GymClass gymClassToDelete) throws GymClassNotFoundException {
         GymClass existing = em.find(GymClass.class, gymClassToDelete.getId());
         if (existing == null) {
             throw new GymClassNotFoundException("Gym class not found");
         }
-        em.remove(gymClassToDelete);
+        em.remove(existing);
     }
 
+    /**
+     * Find a GymClass by its id
+     * @param classId a String ID unique to the GymClass
+     * @return a matching GymClass from the database
+     * @throws GymClassNotFoundException a GymClass with the provided ID doesn't exist in the DB
+     */
     @Override
     public GymClass getGymClassById(String classId) throws GymClassNotFoundException {
         try {
@@ -52,6 +75,11 @@ public class GymClassDaoJpaImpl implements GymClassDao {
 
     }
 
+    /**
+     * Find databases by a string and match it with GymClasses by name.
+     * @param name a String to search by in the DB
+     * @return a List of matching GymClasses
+     */
     @Override
     public List<GymClass> getGymClassesByName(String name) {
         return em.createQuery("select c from GymClass c where c.name like :name", GymClass.class)
@@ -59,6 +87,11 @@ public class GymClassDaoJpaImpl implements GymClassDao {
                 .getResultList();
     }
 
+    /**
+     * Find a GymClasses connected to a specific Instructor
+     * @param instructorId is a unique String identifier for an Instructor
+     * @return the GymClasses lead by the specified Instructor.
+     */
     @Override
     public List<GymClass> getGymClassesByInstructor(String instructorId) {
         return em.createQuery("select c from GymClass c where c.instructor.id = :instructorId", GymClass.class)
@@ -66,6 +99,9 @@ public class GymClassDaoJpaImpl implements GymClassDao {
                 .getResultList();
     }
 
+    /**
+     * @return every GymClass in the database as a List
+     */
     @Override
     public List<GymClass> getAllGymClasses() {
         return em.createQuery("select c from GymClass c", GymClass.class).getResultList();

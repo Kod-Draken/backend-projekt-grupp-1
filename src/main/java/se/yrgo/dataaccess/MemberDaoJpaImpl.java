@@ -44,7 +44,11 @@ public class MemberDaoJpaImpl implements MemberDao{
      */
     @Override
     public void delete(Member deleteMember){
-        em.remove(deleteMember);
+        Member existing = em.find(Member.class, deleteMember.getId());
+        if (existing == null) {
+            throw new MemberMissingException("Member could not be found");
+        }
+        em.remove(existing);
     }
 
     /**

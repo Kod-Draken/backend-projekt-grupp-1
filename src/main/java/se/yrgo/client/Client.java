@@ -139,7 +139,7 @@ public class Client {
     /**
      * A member can book themselves to a class or cancel the class
      *
-     * @param scanner is for user input
+     * @param scanner  is for user input
      * @param memberId required to use the method, user enters their id in the previous method
      */
     private static void bookAndCancelClass(Scanner scanner, String memberId) {
@@ -368,13 +368,18 @@ public class Client {
                 System.out.println("Cancelled.");
                 return;
             }
-
-            bm.removeAttendantFromClass(selectedClass.get().getClassId(), attendantToRemove.get().getMemberId());
+            try {
+                bm.removeAttendantFromClass(selectedClass.get().getClassId(), attendantToRemove.get().getMemberId());
+            } catch (LateCancelException e) {
+                System.err.println(e.getMessage() + "\n");
+                return;
+            }
         }
     }
 
     /**
      * Changes the instructor for a class by selecting instructor, from which class and a replacer
+     *
      * @param scanner is for user input
      */
     private static void changeInstructorForClass(Scanner scanner) {

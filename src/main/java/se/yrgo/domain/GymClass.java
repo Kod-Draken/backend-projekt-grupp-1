@@ -128,5 +128,4 @@ public class GymClass {
     public Boolean isFull(){
         return attendants.size() >= capacity;
     }
-
 }

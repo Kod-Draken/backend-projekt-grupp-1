@@ -1,6 +1,8 @@
 package se.yrgo.services;
 
 import se.yrgo.domain.GymClass;
+import se.yrgo.services.exceptions.AlreadyBookedToGymClassException;
+import se.yrgo.services.exceptions.GymClassFullException;
 
 import java.util.List;
 
@@ -15,7 +17,7 @@ public interface GymClassManagementService {
 
     public GymClass getClassById(String gymClassId);
 
-    public void editGymClass(GymClass changedClass);
+    public void editGymClass(GymClass changedClass) throws AlreadyBookedToGymClassException, GymClassFullException;
 
     public void deleteGymClass(GymClass gymClass);
 

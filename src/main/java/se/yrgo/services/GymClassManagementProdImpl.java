@@ -5,6 +5,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import se.yrgo.dataaccess.GymClassDao;
 import se.yrgo.domain.GymClass;
+import se.yrgo.services.exceptions.AlreadyBookedToGymClassException;
+import se.yrgo.services.exceptions.GymClassFullException;
 
 import java.util.List;
 
@@ -55,7 +57,7 @@ public class GymClassManagementProdImpl implements GymClassManagementService{
      * @param updatedClass A gymClass that has been modified
      */
     @Override
-    public void editGymClass(GymClass updatedClass) {
+    public void editGymClass(GymClass updatedClass) throws AlreadyBookedToGymClassException, GymClassFullException {
         gymClassDao.updateGymClass(updatedClass);
     }
 

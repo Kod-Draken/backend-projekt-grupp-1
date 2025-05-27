@@ -13,6 +13,7 @@ import se.yrgo.domain.GymClass;
 import se.yrgo.domain.Instructor;
 import se.yrgo.services.GymClassManagementService;
 import se.yrgo.services.InstructorManagementService;
+import se.yrgo.services.exceptions.AlreadyBookedToGymClassException;
 
 import java.time.LocalDateTime;
 
@@ -45,7 +46,6 @@ public class GymClassServiceTest {
         gsTest.addNewGymClass(gymClass);
     }
 
-
     @Test
     void testAddNewGymClass() {
         assertEquals(1, gsTest.getAllClasses().size());
@@ -62,7 +62,7 @@ public class GymClassServiceTest {
     }
 
     @Test
-    void testEditGymClass() {
+    void testEditGymClass() throws AlreadyBookedToGymClassException {
         gymClass.setName("Another name");
 
         gsTest.editGymClass(gymClass);
@@ -80,7 +80,4 @@ public class GymClassServiceTest {
         gsTest.deleteGymClass(gymClass);
         assertEquals(0, gsTest.getAllClasses().size());
     }
-
-
-
 }

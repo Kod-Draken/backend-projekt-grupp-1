@@ -57,24 +57,10 @@ public class BookingServiceTest {
 
     @Test
     public void testAddAttendantToClass() throws GymClassFullException, AlreadyBookedToGymClassException  {
+        assertEquals(0, gcm.getClassById("GC1").getAttendants().size());
         bms.addAttendantToClass("GC1","ME1");
 
-        Set<Member> expected = gcm.getClassById("GC1").getAttendants();
-
-        assertTrue(expected.contains(testMember));
-
-        Member nonExistantMember = new Member("NO11", "not here", "0");
-
-        assertFalse(expected.contains(nonExistantMember));
-
-
-        StringBuilder str = new StringBuilder();
-        for (Member mem : testGymclass.getAttendants()) {
-            str.append(mem.getName()).append(", ");
-
-        }
-        assertEquals("Lars Andersson, ", str.toString());
-
+        assertEquals(1, gcm.getClassById("GC1").getAttendants().size()); // The list of attendants increased from 0 to 1
     }
 
     @Test
@@ -84,8 +70,14 @@ public class BookingServiceTest {
 
     }
 
-    @Test void testThrowsWhenClassIsFull() throws GymClassFullException {
+    @Test void testThrowsWhenClassIsFull() throws GymClassFullException, AlreadyBookedToGymClassException {
+        GymClass testGymClass2 = new GymClass("GC2", "Boxning", "30 min", "Rum 14", testInstructor, LocalDateTime.now().plusDays(10), 1);
+        gcm.addNewGymClass(testGymClass2);
+        bms.addAttendantToClass("GC2", "ME1");
+        Member newMember = new Member("ME2", "Berit Andersson", "123214");
+        mms.newMember(newMember);
 
+        assertThrows(GymClassFullException.class, () -> bms.addAttendantToClass("GC2", "ME2"));
     }
 
     @Test

@@ -107,6 +107,11 @@ public class GymClassDaoJpaImpl implements GymClassDao {
         return em.createQuery("select c from GymClass c", GymClass.class).getResultList();
     }
 
+    /**
+     * Get all attendants signed up for a GymClass
+     * @param gymClassId the id of the class we're looking for
+     * @return a list of Members signed up to the specified GymClass
+     */
     @Override
     public List<Member> getAllAttendants(String gymClassId) {
         return em.createQuery(

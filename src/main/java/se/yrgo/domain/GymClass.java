@@ -55,6 +55,10 @@ public class GymClass {
         this.capacity = capacity;
     }
 
+    /**
+     * A simple yet good-looking Stringification of the object
+     * @return
+     */
     @Override
     public String toString() {
         return String.format(
@@ -66,28 +70,53 @@ public class GymClass {
         );
     }
 
+    /**
+     * @return the database primary key
+     */
     public int getId() {
         return id;
     }
 
+    /**
+     * @return the unique identifier of the entity, not PK!
+     */
     public String getClassId() {
         return classId;
     }
 
+    /**
+     * @return the name
+     */
     public String getName() {
         return name;
     }
+
+    /**
+     * Set the name
+     * @param name the new name
+     */
     public void setName(String name) {
         this.name = name;
     }
 
+    /**
+     * @return a short string describing the class
+     */
     public String getDescription() {
         return description;
     }
+
+    /**
+     * Set a new description
+     * @param description the new description
+     */
     public void setDescription(String description) {
         this.description = description;
     }
 
+    /**
+     * @return the room where the class takes place
+     */
     public String getRoomName() {
         return roomName;
     }
@@ -113,6 +142,9 @@ public class GymClass {
         return attendants;
     }
 
+    /**
+     * @return the total capacity, the amount of people who can be booked to the class
+     */
     public int getCapacity() {
         return capacity;
     }
@@ -125,6 +157,10 @@ public class GymClass {
         attendants.remove(attendant);
     }
 
+    /**
+     * Checks if a class's total attendants is equal to its capacity
+     * @return true if so is the case, otherwise false.
+     */
     public Boolean isFull(){
         return attendants.size() >= capacity;
     }

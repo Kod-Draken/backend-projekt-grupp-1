@@ -83,7 +83,7 @@ public class BookingManagementServiceProdImpl implements BookingManagementServic
         gymClassDao.updateGymClass(gymClass);
         memberDao.update(attendantToRemove);
 
-        System.out.println("Successfully removed attendant " + attendantToRemove.toString() + " from class " + gymClass);
+        System.out.println("Successfully removed attendant " + attendantToRemove + " from class " + gymClass);
     }
 
     /**

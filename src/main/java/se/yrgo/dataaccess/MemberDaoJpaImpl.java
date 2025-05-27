@@ -115,6 +115,12 @@ public class MemberDaoJpaImpl implements MemberDao{
         Member mem = em.createQuery("select m from Member m where m = :memberId", Member.class).setParameter("memberId", memberId).getSingleResult();
         mem.getAllBookedClasses().remove(em.createQuery("select gc from GymClass gc where gc.classId = :oldGymClass", GymClass.class).setParameter("oldGymClass", oldGymClass).getSingleResult());
     }
+
+    /**
+     *
+     * @param memberId searching for chosen member
+     * @return member's booked classes
+     */
     @Override
     public List<GymClass> addedClasses(String memberId){
         return em.createQuery("select g from Member m join m.bookedClasses g where m.memberId = :memberId", GymClass.class).setParameter("memberId", memberId).getResultList();

@@ -6,9 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.transaction.annotation.Transactional;
+import se.yrgo.domain.GymClass;
+import se.yrgo.domain.Instructor;
 import se.yrgo.domain.Member;
 import se.yrgo.services.exceptions.MemberIdNotFoundException;
 import se.yrgo.services.MemberManagementService;
+
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,6 +29,7 @@ public class MemberServiceTest{
     public MemberServiceTest() {
         this.mb = new Member("S001", "Janne Björnsson", "0758293153");
     }
+
     @Test
     public void testNewMember() throws MemberIdNotFoundException {
         mms.newMember(mb);

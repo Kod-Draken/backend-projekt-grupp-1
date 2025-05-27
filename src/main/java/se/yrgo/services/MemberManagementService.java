@@ -26,6 +26,4 @@ public interface MemberManagementService {
 
     public void cancelBooking(String bookingGymClassName, String memberId);
 
-    public List<GymClass> bookingCheck(String memberId);
-
 }

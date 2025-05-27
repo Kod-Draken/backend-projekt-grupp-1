@@ -56,8 +56,4 @@ public class MemberManagementProdImpl implements MemberManagementService{
     public void cancelBooking(String bookingGymClassName, String memberId){
         memDao.deleteGymClass(bookingGymClassName, memberId);
     }
-    @Override
-    public List<GymClass> bookingCheck(String memberId){
-        return memDao.addedClasses(memberId);
-    }
 }

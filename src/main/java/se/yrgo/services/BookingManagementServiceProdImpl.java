@@ -103,6 +103,7 @@ public class BookingManagementServiceProdImpl implements BookingManagementServic
      *
      * @param memberId select member by memberId
      * @return selected member's booked classes
+     * throws NoBookedClassesFound if no class found
      */
     @Override
     public List<GymClass> bookingCheck(String memberId)  throws NoBookedClassesFound {

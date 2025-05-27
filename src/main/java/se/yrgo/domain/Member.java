@@ -6,7 +6,7 @@ import java.util.Objects;
 import java.util.Set;
 
 /**
- * corresponding entity for a member in a gym
+ * @author Alrik
  */
 @Entity
 public class Member {

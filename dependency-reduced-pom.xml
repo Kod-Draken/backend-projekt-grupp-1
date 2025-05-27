@@ -5,6 +5,7 @@
   <artifactId>projekt-backend-grupp-1</artifactId>
   <version>1.0-SNAPSHOT</version>
   <build>
+    <finalName>GymBookingApp</finalName>
     <plugins>
       <plugin>
         <artifactId>maven-surefire-plugin</artifactId>

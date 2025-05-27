@@ -13,8 +13,6 @@ import se.yrgo.services.exceptions.GymClassFullException;
 import se.yrgo.services.exceptions.LateCancelException;
 import se.yrgo.services.exceptions.NoBookedClassesFound;
 
-import java.lang.reflect.Array;
-import java.sql.SQLOutput;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -142,7 +140,7 @@ public class Client {
     }
 
     /**
-     * A member can book themselves to a class or cancel the class
+     * A member can book themselves to a class, cancel or edit the class
      *
      * @param scanner  is for user input
      * @param memberId required to use the method, user enters their id in the previous method
@@ -179,6 +177,12 @@ public class Client {
         }
     }
 
+    /**
+     * Previews available classes for member to book
+     *
+     * @param scanner used as user interface
+     * @param memberId id of member user
+     */
     private static void bookClass(Scanner scanner, String memberId) {
         try{
             System.out.println("Search name of Class to book");
@@ -206,6 +210,13 @@ public class Client {
             System.err.println(e.getMessage());
         }
     }
+
+    /**
+     * Previews booked classes of member that can be canceled if not due in 2h
+     *
+     * @param scanner for user interface
+     * @param memberId id of user member
+     */
     private static void cancelClass(Scanner scanner, String memberId) {
         try {
             Optional<GymClass> selectedClass = promptSelection(scanner, bm.bookingCheck(memberId), "class");
@@ -222,6 +233,12 @@ public class Client {
         }
     }
 
+    /**
+     * Lets member choose available data to edit
+     *
+     * @param scanner for user interface
+     * @param mem object of member user
+     */
     private static void editMember(Scanner scanner, Member mem) {
         while (true) {
             System.out.println("\t" + "0. Press '0' if you want to return");
@@ -492,11 +509,8 @@ public class Client {
         }
 
         bm.updateClassInstructor(selectedGymClass.get().getClassId(), newSelectedInstructor.get().getInstructorId());
-        selectedInstructor.get().removeGymClassFromInstructorSchedule(selectedGymClass.get());
-        newSelectedInstructor.get().addGymClassToInstructorSchedule(selectedGymClass.get());
         System.out.println("Gym class " + selectedGymClass.get().getName() + " now has instructor " + newSelectedInstructor.get().getName() + "\n");
     }
-
 
     private static void deleteEntityOptions(Scanner scanner) {
         String[] options = {"Delete a member", "Delete an instructor", "Delete a class"};

@@ -11,8 +11,10 @@ import org.springframework.transaction.annotation.Transactional;
 import se.yrgo.dataaccess.exceptions.GymClassNotFoundException;
 import se.yrgo.domain.GymClass;
 import se.yrgo.domain.Instructor;
+import se.yrgo.domain.Member;
 import se.yrgo.services.GymClassManagementService;
 import se.yrgo.services.InstructorManagementService;
+import se.yrgo.services.MemberManagementService;
 import se.yrgo.services.exceptions.AlreadyBookedToGymClassException;
 
 import java.time.LocalDateTime;
@@ -32,6 +34,8 @@ public class GymClassServiceTest {
     private GymClassManagementService gsTest;
     @Autowired
     private InstructorManagementService isTest;
+    @Autowired
+    private MemberManagementService msTest;
     private static GymClass gymClass;
 
     @BeforeEach
@@ -79,5 +83,21 @@ public class GymClassServiceTest {
     void testDeleteGymClass() {
         gsTest.deleteGymClass(gymClass);
         assertEquals(0, gsTest.getAllClasses().size());
+    }
+
+    /**
+     * Tests if a member was added to the class by testing the size of the members and if the id's match
+     * @throws AlreadyBookedToGymClassException if a double booking is attempted
+     */
+    @Test
+    void testGetMembersByGymClass() throws AlreadyBookedToGymClassException {
+        Member newMember = new Member("M01", "Allan Vall", "031-742356");
+        gymClass.addAttendant(newMember);
+        newMember.addBookedClass(gymClass);
+        msTest.newMember(newMember);
+        gsTest.editGymClass(gymClass);
+
+        assertEquals(1, gsTest.getMembersByGymClass("apa100").size());
+        assertEquals("M01", gsTest.getMembersByGymClass("apa100").getFirst().getMemberId());
     }
 }

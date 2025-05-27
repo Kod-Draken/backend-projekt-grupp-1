@@ -5,9 +5,13 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import se.yrgo.domain.Member;
 import se.yrgo.dataaccess.MemberDao;
-import se.yrgo.services.exceptions.MemberIdNotFoundException;
+import se.yrgo.services.exceptions.NoBookedClassesFound;
 
 import java.util.List;
+
+/**
+ * Funktioner följer efter respective DAO
+ */
 @Transactional
 @Service
 public class MemberManagementProdImpl implements MemberManagementService{
@@ -31,8 +35,8 @@ public class MemberManagementProdImpl implements MemberManagementService{
         memDao.delete(deletedMember);
     }
 
-    @Override // Is this throw needed?
-    public Member findMemberById(String id) throws MemberIdNotFoundException {
+    @Override
+    public Member findMemberById(String id){
         return memDao.getById(id);
     }
     @Override

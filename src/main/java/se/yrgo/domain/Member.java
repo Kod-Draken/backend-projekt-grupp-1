@@ -5,6 +5,9 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+/**
+ * corresponding entity for a member in a gym
+ */
 @Entity
 public class Member {
 
@@ -33,23 +36,13 @@ public class Member {
     }
     public Member() {}
 
-    /*
-    TODO: make find name unspecific
-     */
-
     public String toString(){
         return this.memberId + ": " + this.name + " " + this.phone;
     }
     public int getId() {return this.id;}
-    public String getMemberId(){
-        return this.memberId;
-    }
-    public String getName(){
-        return this.name;
-    }
-    public String getPhone(){
-        return this.phone;
-    }
+    public String getMemberId(){return this.memberId;}
+    public String getName(){return this.name;}
+    public String getPhone(){return this.phone;}
     public Set<GymClass> getAllBookedClasses(){return this.bookedClasses;}
     public void setBookedClasses(Set<GymClass> bookedClasses){this.bookedClasses = bookedClasses;}
     public void addBookedClass(GymClass gymClass){

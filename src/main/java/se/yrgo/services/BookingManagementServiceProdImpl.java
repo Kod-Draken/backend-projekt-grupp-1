@@ -12,6 +12,7 @@ import se.yrgo.domain.Member;
 import se.yrgo.services.exceptions.AlreadyBookedToGymClassException;
 import se.yrgo.services.exceptions.GymClassFullException;
 import se.yrgo.services.exceptions.LateCancelException;
+import se.yrgo.services.exceptions.NoBookedClassesFound;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
@@ -104,7 +105,10 @@ public class BookingManagementServiceProdImpl implements BookingManagementServic
      * @return selected member's booked classes
      */
     @Override
-    public List<GymClass> bookingCheck(String memberId){
+    public List<GymClass> bookingCheck(String memberId)  throws NoBookedClassesFound {
+        if(memberDao.addedClasses(memberId).isEmpty()) {
+            throw new NoBookedClassesFound("No class found");
+        }
         return memberDao.addedClasses(memberId);
     }
 }

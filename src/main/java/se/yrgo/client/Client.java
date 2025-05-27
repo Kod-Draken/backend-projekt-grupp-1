@@ -102,6 +102,7 @@ public class Client {
                     }
                     default: {
                         System.out.println("Invalid choice, please enter a number between 0 and 2");
+                        break;
                     }
                 }
             }
@@ -124,11 +125,11 @@ public class Client {
                 choiceMember = scanner.nextLine();
                 if (mm.findMemberById(choiceMember) != null) {
                     bookAndCancelClass(scanner, choiceMember);
-                } else {
-                    return;
                 }
             } catch (RuntimeException e) {
-                System.err.println("Member not found!");
+                if(!choiceMember.isEmpty()) {
+                    System.err.println("Member not found!");
+                }
             }
             if (choiceMember.isEmpty()) {
                 return;
@@ -155,7 +156,7 @@ public class Client {
                 case "1": {
                     System.out.println("Search name of Class to book");
                     String gymClassName = scanner.nextLine();
-                    Optional<GymClass> selectedClass = promptSelection(scanner, gm.getClassesByName(gymClassName), "class");
+                    Optional<GymClass> selectedClass = promptSelection(scanner, gm.getClassesByName(gymClassName.substring(0,1).toUpperCase() + gymClassName.substring(1)), "class");
                     if (selectedClass.isEmpty()) {
                         System.out.println("No class found");
                         break;
@@ -172,7 +173,6 @@ public class Client {
                 case "2": {
                     Optional<GymClass> selectedClass = promptSelection(scanner, bm.bookingCheck(memberId), "class");
                     if (selectedClass.isEmpty()) {
-                        System.out.println("No class found");
                         break;
                     }
                     try {
@@ -180,9 +180,11 @@ public class Client {
                     } catch (LateCancelException e) {
                         System.err.println("error at: " + e.getMessage());
                     }
+                    break;
                 }
                 default: {
                     System.out.println("Invalid choice, please enter a number between 0 and 2");
+                    break;
                 }
             }
         }

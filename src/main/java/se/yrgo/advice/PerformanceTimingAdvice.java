@@ -2,6 +2,10 @@ package se.yrgo.advice;
 
 import org.aspectj.lang.ProceedingJoinPoint;
 
+/**
+ * This class is an AspectJ-tool for clocking method-times during operation
+ * @author Alrik, Mattias, Najib
+ */
 public class PerformanceTimingAdvice {
 
     public Object performTimingMeasurement(ProceedingJoinPoint method) throws Throwable {

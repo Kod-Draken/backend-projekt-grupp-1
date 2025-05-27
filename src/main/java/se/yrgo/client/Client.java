@@ -129,7 +129,7 @@ public class Client {
                 }
                 return;
             } catch (RuntimeException e) {
-                if(!choiceMember.isEmpty()) {
+                if (!choiceMember.isEmpty()) {
                     System.err.println("Member not found!");
                 }
             }
@@ -158,7 +158,7 @@ public class Client {
                 case "1": {
                     System.out.println("Search name of Class to book");
                     String gymClassName = scanner.nextLine();
-                    Optional<GymClass> selectedClass = promptSelection(scanner, gm.getClassesByName(gymClassName.substring(0,1).toUpperCase() + gymClassName.substring(1)), "class");
+                    Optional<GymClass> selectedClass = promptSelection(scanner, gm.getClassesByName(gymClassName.substring(0, 1).toUpperCase() + gymClassName.substring(1)), "class");
                     if (selectedClass.isEmpty()) {
                         System.out.println("No class found");
                         break;
@@ -184,7 +184,7 @@ public class Client {
                             System.err.println("error at: " + e.getMessage());
                         }
                         break;
-                    } catch (NoBookedClassesFound e){
+                    } catch (NoBookedClassesFound e) {
                         System.err.println(e.getMessage());
                     }
                     break;
@@ -348,9 +348,9 @@ public class Client {
                     } catch (GymClassFullException e) {
                         System.err.println(e.getMessage());
                     } catch (AlreadyBookedToGymClassException e) {
-                        System.err.println("You are already booked to this class" + "\n");
+                        System.err.println("You are already booked to this class");
+                        return;
                     }
-                    return;
                 }
             }
         }
@@ -364,22 +364,28 @@ public class Client {
     private static void removeAttendantFromClass(Scanner scanner) {
         while (true) {
 
-            Optional<Member> attendantToRemove = promptSelection(scanner, mm.getAllMembers(), "member");
-
-            if (attendantToRemove.isEmpty()) {
-                System.out.println("Cancelled.");
-                return;
-            }
-
-            Optional<GymClass> selectedClass = promptSelection(scanner, bm.bookingCheck(attendantToRemove.get().getMemberId()), "class");
-
-            if (selectedClass.isEmpty()) {
-                System.out.println("Cancelled.");
-                return;
-            }
             try {
-                bm.removeAttendantFromClass(selectedClass.get().getClassId(), attendantToRemove.get().getMemberId());
-            } catch (LateCancelException e) {
+
+                Optional<Member> attendantToRemove = promptSelection(scanner, mm.getAllMembers(), "member");
+
+                if (attendantToRemove.isEmpty()) {
+                    System.out.println("Cancelled.");
+                    return;
+                }
+
+                Optional<GymClass> selectedClass = promptSelection(scanner, bm.bookingCheck(attendantToRemove.get().getMemberId()), "class");
+
+                if (selectedClass.isEmpty()) {
+                    System.out.println("Cancelled.");
+                    return;
+                }
+                try {
+                    bm.removeAttendantFromClass(selectedClass.get().getClassId(), attendantToRemove.get().getMemberId());
+                } catch (LateCancelException e) {
+                    System.err.println(e.getMessage() + "\n");
+                    return;
+                }
+            } catch (NoBookedClassesFound e) {
                 System.err.println(e.getMessage() + "\n");
                 return;
             }
